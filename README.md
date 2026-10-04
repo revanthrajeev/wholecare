@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Whole Care — MVP
+
+Cross-border healthcare case coordination platform: patient case flow, hospital portal, verified directory, cost calculator, and AI-assisted case coordination.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Deploying to Netlify
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This repo includes `netlify.toml` (build command `npm run build`, `@netlify/plugin-nextjs`). Connect the repo in Netlify and it should deploy with no extra config.
 
-## Learn More
+Two things behave differently in production vs. local dev:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Data storage.** Locally, case/hospital/quotation data is stored in `data/db.json` (gitignored, seeded from `data/seed.json`) so it survives dev-server restarts. On Netlify, serverless functions can't write to the deployed project directory — `src/lib/db.js` detects this (`NETLIFY` / `AWS_LAMBDA_FUNCTION_NAME` env vars, which Netlify sets automatically) and falls back to `/tmp`. That keeps the demo functional, but data resets whenever the function container recycles — fine for a demo, not for anything that needs to persist.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **AI features.** The AI Case Summary and "Ask the Doctor" question organizer call a local [Ollama](https://ollama.com) instance at `OLLAMA_URL` (default `http://localhost:11434`, model `qwen3:8b` via `OLLAMA_MODEL`). Netlify's servers can't reach your laptop's Ollama — those two features will show "AI assistant is unavailable" in production unless you point `OLLAMA_URL` (set as a Netlify environment variable) at a publicly reachable Ollama instance, or swap `src/lib/ai.js` for a hosted model API. Nothing else on the site depends on them.
