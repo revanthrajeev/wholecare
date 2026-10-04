@@ -2,6 +2,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import { Stethoscope, FileSearch, Building2, ScrollText, Plane, HeartPulse } from "lucide-react";
 import Nav from "@/components/Nav";
 
 const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
@@ -62,7 +63,7 @@ export default function Home() {
           >
             <Link
               href="/case/new"
-              className="bg-white text-[#0a1c30] px-7 py-3.5 rounded-full font-bold hover:bg-[#8fd6cc] transition"
+              className="btn-grad px-7 py-3.5 rounded-full font-bold"
             >
               Start a Case
             </Link>
@@ -289,38 +290,167 @@ export default function Home() {
         </p>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="how" className="px-10 py-28 max-w-6xl mx-auto border-t border-white/5 pb-32">
+      {/* TRUST / TRACTION BAND */}
+      <section className="relative px-10 py-20 overflow-hidden border-y border-white/10 bg-[#0d1b2c]">
+        <div className="pointer-events-none absolute left-1/4 top-0 h-[300px] w-[500px] -translate-x-1/2 rounded-full bg-[#8fd6cc]/10 blur-[110px]" />
+        <div className="relative max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
+          {[
+            { value: "15", label: "architecture levels mapped, P0 build live" },
+            { value: "6", label: "working product surfaces in this MVP" },
+            { value: "70–80%", label: "lower cost vs. US/UAE for comparable care" },
+            { value: "$0", label: "raised from a thinly-funded competitive field" },
+          ].map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              transition={{ delay: i * 0.08 }}
+            >
+              <p className="font-display text-4xl md:text-5xl text-grad">{s.value}</p>
+              <p className="text-[#9db3c4] text-sm mt-2 leading-relaxed">{s.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* PIPELINE — how a case moves, light section for rhythm */}
+      <section id="how" className="bg-[#F7FAF9] text-[#0E2A47] py-28">
+        <div className="px-10 max-w-6xl mx-auto">
+          <motion.p
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-[#2E7D78] font-eyebrow uppercase text-xs tracking-widest mb-3"
+          >
+            How a case moves
+          </motion.p>
+          <motion.h2
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="font-display text-4xl md:text-5xl mb-6 max-w-3xl"
+          >
+            One case, one thread, from first message to full recovery.
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-[#4B5D6B] max-w-2xl mb-16"
+          >
+            Every stage hands off cleanly to the next — nothing gets re-explained over WhatsApp, and the hospital, the patient and the care coordinator are always looking at the same record.
+          </motion.p>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {[
+              { icon: Stethoscope, step: "01", title: "Describe the need", body: "Patient submits condition, existing diagnosis, budget and timeline — a Case ID is created." },
+              { icon: FileSearch, step: "02", title: "Review & route", body: "Care team reviews the case, AI organizes it into a structured summary, and it's sent to matched hospitals." },
+              { icon: Building2, step: "03", title: "Hospital responds", body: "Hospitals accept the case in their portal and submit a structured quotation — procedure, doctor, stay, cost." },
+              { icon: ScrollText, step: "04", title: "Compare & decide", body: "Patient compares quotations side by side on cost, stay length, and provider — not a single opaque number." },
+              { icon: Plane, step: "05", title: "Coordinate travel", body: "Visa, flights, hotel and hospital transport line up around the confirmed treatment date." },
+              { icon: HeartPulse, step: "06", title: "Treat & follow up", body: "Treatment, discharge and a structured recovery plan — the relationship continues past the hospital stay." },
+            ].map((s, i) => (
+              <motion.div
+                key={s.step}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                transition={{ delay: i * 0.07 }}
+                className="rounded-2xl bg-white border border-[#e3eceb] p-6"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl wc-gradient flex items-center justify-center">
+                    <s.icon size={18} className="text-[#06120f]" />
+                  </div>
+                  <span className="font-eyebrow text-xs text-[#9db3c4]">{s.step}</span>
+                </div>
+                <h3 className="font-bold mb-1.5">{s.title}</h3>
+                <p className="text-[#4B5D6B] text-sm leading-relaxed">{s.body}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {["Submitted", "Under Review", "Sent to Hospitals", "Quotation Received", "Confirmed", "Completed"].map(
+              (s, i, arr) => (
+                <motion.div
+                  key={s}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.06 }}
+                  className="flex items-center gap-3"
+                >
+                  <span className="px-5 py-2.5 rounded-full bg-[#E8F4F2] text-[#2E7D78] text-sm font-semibold">
+                    {s}
+                  </span>
+                  {i < arr.length - 1 && <span className="text-[#9db3c4]">&rarr;</span>}
+                </motion.div>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="relative px-10 py-32 overflow-hidden text-center">
+        <div className="pointer-events-none absolute inset-0 bg-grid-faint [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_50%,black,transparent_70%)]" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2E7D78]/20 blur-[130px]" />
+        <motion.h2
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="relative font-display text-4xl md:text-6xl max-w-3xl mx-auto mb-6"
+        >
+          Built to <span className="text-grad italic">launch</span>, not just to pitch.
+        </motion.h2>
         <motion.p
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-[#8fd6cc] font-bold tracking-wide uppercase text-sm mb-3"
+          transition={{ delay: 0.1 }}
+          className="relative text-[#9db3c4] max-w-xl mx-auto mb-10"
         >
-          How a case moves
+          Every flow on this site is a working MVP, not a mockup. Try the patient case flow or the hospital portal yourself.
         </motion.p>
-        <div className="flex flex-wrap gap-3 mt-10">
-          {["Submitted", "Under Review", "Sent to Hospitals", "Quotation Received", "Confirmed", "Completed"].map(
-            (s, i, arr) => (
-              <motion.div
-                key={s}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                transition={{ delay: i * 0.06 }}
-                className="flex items-center gap-3"
-              >
-                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm font-semibold">
-                  {s}
-                </span>
-                {i < arr.length - 1 && <span className="text-[#4B5D6B]">&rarr;</span>}
-              </motion.div>
-            )
-          )}
-        </div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          transition={{ delay: 0.2 }}
+          className="relative flex flex-wrap gap-4 justify-center"
+        >
+          <Link href="/case/new" className="btn-grad px-7 py-3.5 rounded-full font-bold">
+            Start a Case
+          </Link>
+          <Link href="/hospital" className="border border-white/30 px-7 py-3.5 rounded-full font-bold hover:bg-white/10 transition">
+            Hospital Portal demo
+          </Link>
+        </motion.div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 px-10 py-10">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-6 h-6 rounded-md wc-gradient" />
+            <span className="font-bold text-sm tracking-wide">WHOLE CARE</span>
+          </div>
+          <p className="text-[#4B5D6B] text-xs text-center">
+            MVP build &middot; NSRCEL AccUbate 2026 &middot; Figures labeled illustrative/indicative are planning estimates, not audited or forecast numbers.
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

@@ -62,6 +62,30 @@ body {
   transform: translateY(-2px);
 }
 
+/* Brand gradient: teal -> mint -> gold. Used sparingly as the one vivid
+   accent against the neutral navy/cream base, instead of flooding every
+   element with the same flat teal. */
+.wc-gradient {
+  background: linear-gradient(120deg, #2e7d78 0%, #8fd6cc 50%, #c9a66b 100%);
+}
+.text-grad {
+  background: linear-gradient(120deg, #8fd6cc 0%, #5ce1c4 45%, #c9a66b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.btn-grad {
+  background: linear-gradient(120deg, #2e7d78 0%, #8fd6cc 50%, #c9a66b 100%);
+  color: #06120f;
+  box-shadow: 0 8px 30px -10px rgba(143, 214, 204, 0.5);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+}
+.btn-grad:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 40px -8px rgba(143, 214, 204, 0.7);
+  transform: translateY(-1px);
+}
+
 .noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
