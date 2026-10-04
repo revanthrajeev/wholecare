@@ -37,10 +37,10 @@ export default function Directory() {
   const card = "rounded-2xl p-6 wc-card wc-card-hover";
 
   return (
-    <main className="min-h-screen bg-[#05090d] text-white">
+    <main className="min-h-screen bg-white text-[#10243E]">
       <Nav />
       <div className="max-w-5xl mx-auto px-6 pt-32 pb-20">
-        <p className="text-[#8fd6cc] font-bold tracking-wide uppercase text-sm mb-2">Directory</p>
+        <p className="text-[#2F6FED] font-bold tracking-wide uppercase text-sm mb-2">Directory</p>
         <h1 className="text-4xl font-extrabold mb-10">Verified hospitals &amp; specialists</h1>
 
         <div className="flex gap-3 mb-6">
@@ -49,7 +49,7 @@ export default function Directory() {
               key={t}
               onClick={() => setTab(t)}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold capitalize transition ${
-                tab === t ? "bg-[#8fd6cc] text-[#0a1c30]" : "bg-white/5 text-[#9db3c4] hover:bg-white/10"
+                tab === t ? "wc-gradient text-white" : "bg-[#F7FAFD] text-[#5B7184] hover:bg-[#F3F7FC]"
               }`}
             >
               {t}
@@ -62,15 +62,15 @@ export default function Directory() {
             placeholder={tab === "hospitals" ? "Search hospitals or cities..." : "Search doctors..."}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#4B5D6B] focus:outline-none focus:ring-2 focus:ring-[#8fd6cc]"
+            className="flex-1 bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] placeholder:text-[#9AADBD] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
           />
           <select
             value={specialty}
             onChange={(e) => setSpecialty(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#8fd6cc]"
+            className="bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
           >
             {specialties.map((s) => (
-              <option key={s} value={s} className="bg-[#0a1626]">{s}</option>
+              <option key={s} value={s} className="bg-white">{s}</option>
             ))}
           </select>
         </div>
@@ -81,15 +81,15 @@ export default function Directory() {
               <motion.div key={h.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className={card}>
                 <div className="flex justify-between items-start mb-2">
                   <p className="font-bold text-lg">{h.name}</p>
-                  {h.verified && <span className="text-xs bg-[#8fd6cc]/15 text-[#8fd6cc] px-2.5 py-1 rounded-full font-semibold">Verified</span>}
+                  {h.verified && <span className="text-xs bg-[#2F6FED]/10 text-[#2F6FED] px-2.5 py-1 rounded-full font-semibold">Verified</span>}
                 </div>
-                <p className="text-[#9db3c4] text-sm mb-3">{h.city}, {h.country} &middot; {h.accreditation}</p>
+                <p className="text-[#5B7184] text-sm mb-3">{h.city}, {h.country} &middot; {h.accreditation}</p>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {h.specialties.map((s) => (
-                    <span key={s} className="text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-full text-[#cfe0e8]">{s}</span>
+                    <span key={s} className="text-xs bg-[#F7FAFD] border border-[#E3EAF2] px-2.5 py-1 rounded-full text-[#344A61]">{s}</span>
                   ))}
                 </div>
-                <p className="text-[#4B5D6B] text-xs">Languages: {h.languages.join(", ")} &middot; Last verified {h.lastVerified}</p>
+                <p className="text-[#5B7184] text-xs">Languages: {h.languages.join(", ")} &middot; Last verified {h.lastVerified}</p>
               </motion.div>
             ))}
           </div>
@@ -100,14 +100,14 @@ export default function Directory() {
               return (
                 <motion.div key={d.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className={card}>
                   <p className="font-bold text-lg">{d.name}</p>
-                  <p className="text-[#8fd6cc] text-sm font-semibold mt-1">{d.specialty}</p>
-                  <p className="text-[#9db3c4] text-sm mt-1">{h?.name} &middot; {d.experience}</p>
+                  <p className="text-[#2F6FED] text-sm font-semibold mt-1">{d.specialty}</p>
+                  <p className="text-[#5B7184] text-sm mt-1">{h?.name} &middot; {d.experience}</p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {d.procedures.map((p) => (
-                      <span key={p} className="text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-full text-[#cfe0e8]">{p}</span>
+                      <span key={p} className="text-xs bg-[#F7FAFD] border border-[#E3EAF2] px-2.5 py-1 rounded-full text-[#344A61]">{p}</span>
                     ))}
                   </div>
-                  <p className="text-[#4B5D6B] text-xs mt-3">Languages: {d.languages.join(", ")}</p>
+                  <p className="text-[#5B7184] text-xs mt-3">Languages: {d.languages.join(", ")}</p>
                 </motion.div>
               );
             })}

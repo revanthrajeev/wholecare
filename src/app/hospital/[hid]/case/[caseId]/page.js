@@ -21,7 +21,7 @@ export default function HospitalCaseView() {
     fetch(`/api/cases/${caseId}`).then((r) => r.json()).then(setData);
   }, [caseId]);
 
-  if (!data) return <main className="min-h-screen bg-[#05090d] text-white flex items-center justify-center">Loading&hellip;</main>;
+  if (!data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
   const { case: c } = data;
 
   function update(key, value) {
@@ -40,24 +40,24 @@ export default function HospitalCaseView() {
   }
 
   const inputClass =
-    "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#4B5D6B] focus:outline-none focus:ring-2 focus:ring-[#8fd6cc] focus:border-transparent transition";
-  const labelClass = "text-sm font-semibold text-[#9db3c4] mb-2 block";
+    "w-full bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] placeholder:text-[#9AADBD] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] focus:border-transparent transition";
+  const labelClass = "text-sm font-semibold text-[#5B7184] mb-2 block";
   const card = "rounded-2xl p-6 wc-card wc-card-hover";
 
   return (
-    <main className="min-h-screen bg-[#05090d] text-white">
+    <main className="min-h-screen bg-white text-[#10243E]">
       <Nav />
       <div className="max-w-3xl mx-auto px-6 pt-32 pb-20">
-        <p className="text-[#8fd6cc] font-bold tracking-wide uppercase text-sm mb-1">Case {c.id}</p>
+        <p className="text-[#2F6FED] font-bold tracking-wide uppercase text-sm mb-1">Case {c.id}</p>
         <h1 className="text-3xl font-extrabold mb-6">{c.patientName}</h1>
 
         <div className={`${card} mb-8 text-sm space-y-2`}>
-          <p><span className="text-[#9db3c4]">Condition:</span> {c.condition}</p>
-          <p><span className="text-[#9db3c4]">Existing treatment/diagnosis:</span> {c.existingTreatment || "—"}</p>
-          <p><span className="text-[#9db3c4]">From:</span> {c.countryOfResidence}</p>
-          <p><span className="text-[#9db3c4]">Budget shared:</span> {c.budgetRange || "not shared"}</p>
-          <p><span className="text-[#9db3c4]">Timeline:</span> {c.timeline || "—"}</p>
-          <p><span className="text-[#9db3c4]">Documents:</span> {c.documents.join(", ")}</p>
+          <p><span className="text-[#5B7184]">Condition:</span> {c.condition}</p>
+          <p><span className="text-[#5B7184]">Existing treatment/diagnosis:</span> {c.existingTreatment || "—"}</p>
+          <p><span className="text-[#5B7184]">From:</span> {c.countryOfResidence}</p>
+          <p><span className="text-[#5B7184]">Budget shared:</span> {c.budgetRange || "not shared"}</p>
+          <p><span className="text-[#5B7184]">Timeline:</span> {c.timeline || "—"}</p>
+          <p><span className="text-[#5B7184]">Documents:</span> {c.documents.join(", ")}</p>
         </div>
 
         <h2 className="font-bold text-lg mb-4">Submit Quotation</h2>
@@ -93,7 +93,7 @@ export default function HospitalCaseView() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-[#8fd6cc] text-[#0a1c30] py-3.5 rounded-xl font-bold hover:bg-white transition disabled:opacity-50"
+            className="w-full btn-grad py-3.5 rounded-xl font-bold disabled:opacity-50"
           >
             {submitting ? "Submitting..." : "Submit Quotation"}
           </button>

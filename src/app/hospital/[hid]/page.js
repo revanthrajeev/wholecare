@@ -24,17 +24,17 @@ export default function HospitalDashboard() {
   }, [hid]);
 
   const hospital = hospitals.find((h) => h.id === hid);
-  if (!data) return <main className="min-h-screen bg-[#05090d] text-white flex items-center justify-center">Loading&hellip;</main>;
+  if (!data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
 
   const newCases = data.cases.filter((c) => !data.quotations.some((q) => q.caseId === c.id));
   const quoted = data.cases.filter((c) => data.quotations.some((q) => q.caseId === c.id));
   const card = "rounded-2xl p-6 wc-card wc-card-hover";
 
   return (
-    <main className="min-h-screen bg-[#05090d] text-white">
+    <main className="min-h-screen bg-white text-[#10243E]">
       <Nav />
       <div className="max-w-5xl mx-auto px-6 pt-32 pb-20">
-        <p className="text-[#8fd6cc] font-bold tracking-wide uppercase text-sm mb-1">Hospital Portal</p>
+        <p className="text-[#2F6FED] font-bold tracking-wide uppercase text-sm mb-1">Hospital Portal</p>
         <h1 className="text-3xl font-extrabold mb-10">{hospital?.name || "Dashboard"}</h1>
 
         <div className="grid grid-cols-3 gap-4 mb-10">
@@ -44,26 +44,26 @@ export default function HospitalDashboard() {
             { label: "Active cases", value: data.cases.length },
           ].map((s, i) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} className={card}>
-              <p className="text-3xl font-extrabold text-[#8fd6cc]">{s.value}</p>
-              <p className="text-sm text-[#9db3c4] mt-1">{s.label}</p>
+              <p className="text-3xl font-extrabold text-[#2F6FED]">{s.value}</p>
+              <p className="text-sm text-[#5B7184] mt-1">{s.label}</p>
             </motion.div>
           ))}
         </div>
 
         <h2 className="font-bold text-lg mb-4">New Cases</h2>
         {newCases.length === 0 && (
-          <p className="text-[#4B5D6B] text-sm mb-10">No new cases yet. Submit a patient case and send it to this hospital to see it here.</p>
+          <p className="text-[#5B7184] text-sm mb-10">No new cases yet. Submit a patient case and send it to this hospital to see it here.</p>
         )}
         <div className="space-y-3 mb-10">
           {newCases.map((c, i) => (
             <motion.div key={c.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}>
-              <Link href={`/hospital/${hid}/case/${c.id}`} className={`${card} block hover:border-[#8fd6cc]/40 transition`}>
+              <Link href={`/hospital/${hid}/case/${c.id}`} className={`${card} block hover:border-[#2F6FED]/40 transition`}>
                 <div className="flex justify-between">
                   <p className="font-bold">{c.patientName}</p>
-                  <span className="text-[#C9A66B] text-sm font-semibold">Action needed</span>
+                  <span className="text-[#8A6420] text-sm font-semibold">Action needed</span>
                 </div>
-                <p className="text-[#cfe0e8] text-sm mt-1">{c.condition}</p>
-                <p className="text-[#4B5D6B] text-xs mt-1">From {c.countryOfResidence} &middot; Budget {c.budgetRange || "not shared"}</p>
+                <p className="text-[#344A61] text-sm mt-1">{c.condition}</p>
+                <p className="text-[#5B7184] text-xs mt-1">From {c.countryOfResidence} &middot; Budget {c.budgetRange || "not shared"}</p>
               </Link>
             </motion.div>
           ))}
@@ -76,7 +76,7 @@ export default function HospitalDashboard() {
               {quoted.map((c) => (
                 <div key={c.id} className={`${card} opacity-70`}>
                   <p className="font-bold">{c.patientName}</p>
-                  <p className="text-[#cfe0e8] text-sm mt-1">{c.condition} &middot; Quotation submitted</p>
+                  <p className="text-[#344A61] text-sm mt-1">{c.condition} &middot; Quotation submitted</p>
                 </div>
               ))}
             </div>

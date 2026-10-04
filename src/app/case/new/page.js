@@ -37,14 +37,14 @@ export default function NewCase() {
   }
 
   const inputClass =
-    "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#4B5D6B] focus:outline-none focus:ring-2 focus:ring-[#8fd6cc] focus:border-transparent transition";
-  const labelClass = "text-sm font-semibold text-[#9db3c4] mb-2 block";
+    "w-full bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] placeholder:text-[#9AADBD] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] focus:border-transparent transition";
+  const labelClass = "text-sm font-semibold text-[#5B7184] mb-2 block";
 
   return (
-    <main className="min-h-screen bg-[#05090d] text-white">
+    <main className="min-h-screen bg-white text-[#10243E]">
       <Nav />
       <div className="max-w-2xl mx-auto px-6 pt-36 pb-20">
-        <p className="text-[#8fd6cc] font-bold tracking-wide uppercase text-sm mb-2">Create Case</p>
+        <p className="text-[#2F6FED] font-bold tracking-wide uppercase text-sm mb-2">Create Case</p>
         <h1 className="text-4xl font-extrabold mb-10">Tell us about your condition</h1>
 
         <div className="flex items-center gap-3 mb-10">
@@ -52,13 +52,13 @@ export default function NewCase() {
             <div key={s} className="flex items-center gap-3 flex-1">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                  i <= step ? "bg-[#8fd6cc] text-[#0a1c30]" : "bg-white/10 text-[#4B5D6B]"
+                  i <= step ? "wc-gradient text-white" : "bg-[#F3F7FC] text-[#9AADBD] border border-[#E3EAF2]"
                 }`}
               >
                 {i + 1}
               </div>
-              <span className={`text-sm hidden sm:block ${i <= step ? "text-white" : "text-[#4B5D6B]"}`}>{s}</span>
-              {i < STEPS.length - 1 && <div className="flex-1 h-px bg-white/10" />}
+              <span className={`text-sm hidden sm:block ${i <= step ? "text-[#10243E]" : "text-[#9AADBD]"}`}>{s}</span>
+              {i < STEPS.length - 1 && <div className="flex-1 h-px bg-[#E3EAF2]" />}
             </div>
           ))}
         </div>
@@ -69,7 +69,7 @@ export default function NewCase() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.35 }}
           onSubmit={step === STEPS.length - 1 ? submit : (e) => { e.preventDefault(); setStep((s) => s + 1); }}
-          className="rounded-2xl p-8 bg-gradient-to-br from-[#101e30] to-[#0a1626] border border-white/5 space-y-5"
+          className="rounded-2xl p-8 wc-card space-y-5"
         >
           {step === 0 && (
             <>
@@ -110,7 +110,7 @@ export default function NewCase() {
                   <input className={inputClass} value={form.timeline} onChange={(e) => update("timeline", e.target.value)} placeholder="e.g. Within 4 weeks" />
                 </div>
               </div>
-              <div className="border border-dashed border-white/15 rounded-xl px-4 py-8 text-center text-sm text-[#4B5D6B]">
+              <div className="border border-dashed border-[#D7E2EE] rounded-xl px-4 py-8 text-center text-sm text-[#9AADBD]">
                 Upload Records (demo &mdash; discharge_summary.pdf attached automatically)
               </div>
             </>
@@ -118,7 +118,7 @@ export default function NewCase() {
 
           {step === 2 && (
             <div className="space-y-3 text-sm">
-              <p className="text-[#9db3c4] mb-4">Review before submitting &mdash; this creates your Case ID and Case Room.</p>
+              <p className="text-[#5B7184] mb-4">Review before submitting &mdash; this creates your Case ID and Case Room.</p>
               {Object.entries({
                 "Patient": form.patientName,
                 "From": form.countryOfResidence,
@@ -127,8 +127,8 @@ export default function NewCase() {
                 "Budget": form.budgetRange || "—",
                 "Timeline": form.timeline || "—",
               }).map(([k, v]) => (
-                <div key={k} className="flex justify-between border-b border-white/5 pb-2">
-                  <span className="text-[#9db3c4]">{k}</span>
+                <div key={k} className="flex justify-between border-b border-[#E3EAF2] pb-2">
+                  <span className="text-[#5B7184]">{k}</span>
                   <span className="font-medium text-right max-w-xs">{v}</span>
                 </div>
               ))}
@@ -137,14 +137,14 @@ export default function NewCase() {
 
           <div className="flex gap-3 pt-2">
             {step > 0 && (
-              <button type="button" onClick={() => setStep((s) => s - 1)} className="px-6 py-3 rounded-xl font-semibold border border-white/15 hover:bg-white/5 transition">
+              <button type="button" onClick={() => setStep((s) => s - 1)} className="px-6 py-3 rounded-xl font-semibold border border-[#D7E2EE] hover:bg-[#F3F7FC] transition">
                 Back
               </button>
             )}
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 bg-[#8fd6cc] text-[#0a1c30] py-3 rounded-xl font-bold hover:bg-white transition disabled:opacity-50"
+              className="flex-1 btn-grad py-3 rounded-xl font-bold disabled:opacity-50"
             >
               {step === STEPS.length - 1 ? (submitting ? "Submitting..." : "Submit Case") : "Continue"}
             </button>
