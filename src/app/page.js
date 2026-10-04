@@ -1,11 +1,8 @@
 "use client";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Stethoscope, FileSearch, Building2, ScrollText, Plane, HeartPulse } from "lucide-react";
 import Nav from "@/components/Nav";
-
-const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -18,12 +15,12 @@ export default function Home() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative min-h-screen w-full overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid-faint [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_30%,black,transparent_70%)]" />
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-[#2E7D78]/20 blur-[120px]" />
-        <div className="pointer-events-none absolute right-0 top-1/3 h-[360px] w-[360px] rounded-full bg-[#C9A66B]/10 blur-[100px]" />
-        <GlobeHero />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#05090d]/35 to-[#05090d] pointer-events-none" />
+      <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#0d1b2c] via-[#0a1420] to-[#05090d]">
+        <div className="pointer-events-none absolute inset-0 bg-grid-faint [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_30%,black,transparent_75%)]" />
+        <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-[#2E7D78]/40 blur-[130px] animate-glow" />
+        <div className="pointer-events-none absolute right-[4%] top-1/4 h-[420px] w-[420px] rounded-full bg-[#ff7a8a]/25 blur-[120px] animate-glow [animation-delay:-2s]" />
+        <div className="pointer-events-none absolute left-[2%] bottom-[10%] h-[380px] w-[380px] rounded-full bg-[#C9A66B]/25 blur-[110px] animate-glow [animation-delay:-3s]" />
+        <div className="pointer-events-none absolute right-[25%] bottom-[5%] h-[260px] w-[260px] rounded-full bg-[#5ce1c4]/20 blur-[100px] animate-glow [animation-delay:-1s]" />
         <div className="noise absolute inset-0 pointer-events-none" />
 
         <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-20">
@@ -98,10 +95,10 @@ export default function Home() {
       {/* MARQUEE */}
       <section aria-label="Platform capabilities" className="overflow-hidden border-y border-white/10 bg-[#0d1b2c] py-4 border-y border-[#8fd6cc]/10">
         <div className="flex w-max animate-marquee gap-12 whitespace-nowrap font-eyebrow text-xs uppercase tracking-widest text-[#9db3c4]">
-          {[...Array(2)].flatMap(() =>
+          {[...Array(2)].flatMap((_, rep) =>
             ["Patient Case Room", "Hospital Portal", "Quotation Comparison", "Verified Directory", "AI Case Summaries", "AI Question Organizer", "Cost Calculator", "Open MVP"].map((t, i) => (
-              <span key={t + i} className="flex items-center gap-12">
-                {t}<span className="text-[#8fd6cc]">&#10022;</span>
+              <span key={`${rep}-${t}`} className="flex items-center gap-12">
+                {t}<span style={{ color: ["#8fd6cc", "#ff7a8a", "#C9A66B"][i % 3] }}>&#10022;</span>
               </span>
             ))
           )}
@@ -126,7 +123,7 @@ export default function Home() {
           variants={fadeUp}
           className="font-display text-4xl md:text-5xl mb-14 max-w-3xl"
         >
-          A trillion-dollar global wellness economy, a fast-growing
+          A <span className="text-grad">trillion-dollar</span> global wellness economy, a fast-growing
           cross-border wedge, and India as the entry point.
         </motion.h2>
         <div className="grid md:grid-cols-3 gap-6">
@@ -259,7 +256,7 @@ export default function Home() {
           variants={fadeUp}
           className="font-display text-4xl md:text-5xl mb-14 max-w-3xl"
         >
-          Most players are lead-gen marketplaces. We built the operating system underneath.
+          Most players are lead-gen marketplaces. We built the <span className="text-grad">operating system</span> underneath.
         </motion.h2>
         <div className="grid md:grid-cols-2 gap-5">
           {[
@@ -348,12 +345,12 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             {[
-              { icon: Stethoscope, step: "01", title: "Describe the need", body: "Patient submits condition, existing diagnosis, budget and timeline — a Case ID is created." },
-              { icon: FileSearch, step: "02", title: "Review & route", body: "Care team reviews the case, AI organizes it into a structured summary, and it's sent to matched hospitals." },
-              { icon: Building2, step: "03", title: "Hospital responds", body: "Hospitals accept the case in their portal and submit a structured quotation — procedure, doctor, stay, cost." },
-              { icon: ScrollText, step: "04", title: "Compare & decide", body: "Patient compares quotations side by side on cost, stay length, and provider — not a single opaque number." },
-              { icon: Plane, step: "05", title: "Coordinate travel", body: "Visa, flights, hotel and hospital transport line up around the confirmed treatment date." },
-              { icon: HeartPulse, step: "06", title: "Treat & follow up", body: "Treatment, discharge and a structured recovery plan — the relationship continues past the hospital stay." },
+              { icon: Stethoscope, step: "01", title: "Describe the need", body: "Patient submits condition, existing diagnosis, budget and timeline — a Case ID is created.", color: "#2E7D78" },
+              { icon: FileSearch, step: "02", title: "Review & route", body: "Care team reviews the case, AI organizes it into a structured summary, and it's sent to matched hospitals.", color: "#C9A66B" },
+              { icon: Building2, step: "03", title: "Hospital responds", body: "Hospitals accept the case in their portal and submit a structured quotation — procedure, doctor, stay, cost.", color: "#ff7a8a" },
+              { icon: ScrollText, step: "04", title: "Compare & decide", body: "Patient compares quotations side by side on cost, stay length, and provider — not a single opaque number.", color: "#5ce1c4" },
+              { icon: Plane, step: "05", title: "Coordinate travel", body: "Visa, flights, hotel and hospital transport line up around the confirmed treatment date.", color: "#7ea6e0" },
+              { icon: HeartPulse, step: "06", title: "Treat & follow up", body: "Treatment, discharge and a structured recovery plan — the relationship continues past the hospital stay.", color: "#C9A66B" },
             ].map((s, i) => (
               <motion.div
                 key={s.step}
@@ -362,11 +359,12 @@ export default function Home() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 transition={{ delay: i * 0.07 }}
-                className="rounded-2xl bg-white border border-[#e3eceb] p-6"
+                whileHover={{ y: -4 }}
+                className="rounded-2xl bg-white border border-[#e3eceb] p-6 transition-shadow hover:shadow-xl"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl wc-gradient flex items-center justify-center">
-                    <s.icon size={18} className="text-[#06120f]" />
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: s.color }}>
+                    <s.icon size={18} className="text-white" />
                   </div>
                   <span className="font-eyebrow text-xs text-[#9db3c4]">{s.step}</span>
                 </div>
@@ -402,7 +400,8 @@ export default function Home() {
       {/* FINAL CTA */}
       <section className="relative px-10 py-32 overflow-hidden text-center">
         <div className="pointer-events-none absolute inset-0 bg-grid-faint [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_50%,black,transparent_70%)]" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2E7D78]/20 blur-[130px]" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2E7D78]/20 blur-[130px] animate-glow" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-[120%] -translate-y-1/2 rounded-full bg-[#ff7a8a]/15 blur-[100px] animate-glow [animation-delay:-2s]" />
         <motion.h2
           initial="hidden"
           whileInView="show"

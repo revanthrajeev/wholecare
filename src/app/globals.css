@@ -62,28 +62,49 @@ body {
   transform: translateY(-2px);
 }
 
-/* Brand gradient: teal -> mint -> gold. Used sparingly as the one vivid
-   accent against the neutral navy/cream base, instead of flooding every
-   element with the same flat teal. */
+/* Brand gradient: teal -> coral -> gold. A genuinely vivid three-hue
+   gradient (not just a flat teal tint) carries the same energy Mirage's
+   amber/rose/violet gradient does, while the teal+gold bookends keep it
+   reading as a health brand rather than a generic consumer app. */
 .wc-gradient {
-  background: linear-gradient(120deg, #2e7d78 0%, #8fd6cc 50%, #c9a66b 100%);
+  background: linear-gradient(120deg, #2e7d78 0%, #5ce1c4 30%, #ff7a8a 65%, #c9a66b 100%);
+}
+.wc-gradient-anim {
+  background: linear-gradient(120deg, #2e7d78 0%, #5ce1c4 28%, #ff7a8a 60%, #c9a66b 85%, #2e7d78 100%);
+  background-size: 250% 100%;
+  animation: shimmer 6s linear infinite;
 }
 .text-grad {
-  background: linear-gradient(120deg, #8fd6cc 0%, #5ce1c4 45%, #c9a66b 100%);
+  background: linear-gradient(120deg, #8fd6cc 0%, #5ce1c4 35%, #ff9fb0 65%, #c9a66b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .btn-grad {
-  background: linear-gradient(120deg, #2e7d78 0%, #8fd6cc 50%, #c9a66b 100%);
+  background: linear-gradient(120deg, #2e7d78 0%, #5ce1c4 30%, #ff7a8a 65%, #c9a66b 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
   color: #06120f;
-  box-shadow: 0 8px 30px -10px rgba(143, 214, 204, 0.5);
-  transition: box-shadow 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 8px 30px -10px rgba(255, 122, 138, 0.45), 0 8px 30px -14px rgba(143, 214, 204, 0.5);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, background-position 0.5s ease;
 }
 .btn-grad:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 10px 40px -8px rgba(143, 214, 204, 0.7);
-  transform: translateY(-1px);
+  background-position: 100% 0%;
+  box-shadow: 0 12px 40px -8px rgba(255, 122, 138, 0.6), 0 12px 40px -10px rgba(143, 214, 204, 0.6);
+  transform: translateY(-2px) scale(1.02);
+}
+
+@keyframes shimmer {
+  from { background-position: 0% 0%; }
+  to { background-position: -250% 0%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+.animate-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
 }
 
 .noise {
@@ -108,7 +129,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-float, .animate-marquee {
+  .animate-float, .animate-marquee, .animate-glow, .wc-gradient-anim, .btn-grad {
     animation: none !important;
+    transition: none !important;
   }
 }
