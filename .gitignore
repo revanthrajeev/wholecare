@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local demo db (reset to seed.json on first run)
+/data/db.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

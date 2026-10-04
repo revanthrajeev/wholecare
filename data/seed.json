@@ -1,0 +1,58 @@
+{
+  "hospitals": [
+    {
+      "id": "h1",
+      "name": "Apex Global Hospital",
+      "city": "Bangalore",
+      "country": "India",
+      "accreditation": "JCI Accredited",
+      "specialties": ["Cardiac Surgery", "Orthopedics", "Oncology"],
+      "intlPatientDept": true,
+      "languages": ["English", "Arabic", "Russian"],
+      "verified": true,
+      "lastVerified": "2026-09-28"
+    },
+    {
+      "id": "h2",
+      "name": "Sunrise Medicity",
+      "city": "Chennai",
+      "country": "India",
+      "accreditation": "NABH Accredited",
+      "specialties": ["Cardiac Surgery", "Transplant", "Neurosurgery"],
+      "intlPatientDept": true,
+      "languages": ["English", "French"],
+      "verified": true,
+      "lastVerified": "2026-09-30"
+    },
+    {
+      "id": "h3",
+      "name": "Horizon Speciality Centre",
+      "city": "Mumbai",
+      "country": "India",
+      "accreditation": "JCI Accredited",
+      "specialties": ["Orthopedics", "Cosmetic Surgery", "Fertility"],
+      "intlPatientDept": true,
+      "languages": ["English", "Swahili"],
+      "verified": true,
+      "lastVerified": "2026-09-25"
+    }
+  ],
+  "doctors": [
+    { "id": "d1", "name": "Dr. Arvind Rao", "hospitalId": "h1", "specialty": "Cardiac Surgery", "experience": "22 years", "languages": ["English", "Arabic"], "procedures": ["CABG", "Valve Replacement", "Angioplasty"] },
+    { "id": "d2", "name": "Dr. Priya Menon", "hospitalId": "h2", "specialty": "Transplant Surgery", "experience": "18 years", "languages": ["English", "French"], "procedures": ["Liver Transplant", "Kidney Transplant"] },
+    { "id": "d3", "name": "Dr. Sanjay Kapoor", "hospitalId": "h1", "specialty": "Orthopedics", "experience": "15 years", "languages": ["English", "Russian"], "procedures": ["Total Knee Replacement", "Hip Replacement"] },
+    { "id": "d4", "name": "Dr. Leila Haddad", "hospitalId": "h3", "specialty": "Fertility (IVF)", "experience": "12 years", "languages": ["English", "Arabic", "Swahili"], "procedures": ["IVF", "ICSI", "Fertility Preservation"] },
+    { "id": "d5", "name": "Dr. Ramesh Iyer", "hospitalId": "h2", "specialty": "Neurosurgery", "experience": "20 years", "languages": ["English"], "procedures": ["Brain Tumor Resection", "Spine Surgery"] },
+    { "id": "d6", "name": "Dr. Neha Shah", "hospitalId": "h3", "specialty": "Cosmetic Surgery", "experience": "10 years", "languages": ["English", "Swahili"], "procedures": ["Rhinoplasty", "Body Contouring"] }
+  ],
+  "treatments": [
+    { "id": "t1", "name": "Coronary Bypass Surgery (CABG)", "specialty": "Cardiac Surgery", "indiaCostLow": 4500, "indiaCostHigh": 8500, "stayDays": "7-10", "homeCountryMultiple": "6-10x in US/UAE" },
+    { "id": "t2", "name": "Total Knee Replacement", "specialty": "Orthopedics", "indiaCostLow": 4000, "indiaCostHigh": 7500, "stayDays": "5-7", "homeCountryMultiple": "5-8x in US/UK" },
+    { "id": "t3", "name": "Liver Transplant", "specialty": "Transplant Surgery", "indiaCostLow": 35000, "indiaCostHigh": 55000, "stayDays": "21-28", "homeCountryMultiple": "10-15x in US" },
+    { "id": "t4", "name": "IVF Treatment", "specialty": "Fertility (IVF)", "indiaCostLow": 2500, "indiaCostHigh": 5500, "stayDays": "14-21", "homeCountryMultiple": "3-5x in US/UK" },
+    { "id": "t5", "name": "Oncology — Chemotherapy Course", "specialty": "Oncology", "indiaCostLow": 800, "indiaCostHigh": 3000, "stayDays": "varies", "homeCountryMultiple": "8-20x in US" },
+    { "id": "t6", "name": "Rhinoplasty", "specialty": "Cosmetic Surgery", "indiaCostLow": 2000, "indiaCostHigh": 4500, "stayDays": "2-4", "homeCountryMultiple": "3-6x in US/UK" }
+  ],
+  "cases": [],
+  "quotations": []
+}
