@@ -54,5 +54,11 @@
     { "id": "t6", "name": "Rhinoplasty", "specialty": "Cosmetic Surgery", "indiaCostLow": 2000, "indiaCostHigh": 4500, "stayDays": "2-4", "homeCountryMultiple": "3-6x in US/UK" }
   ],
   "cases": [],
-  "quotations": []
+  "quotations": [],
+  "users": [
+    { "id": "u_h1", "role": "hospital", "hospitalId": "h1", "name": "Apex Global Hospital", "email": "apex@demo.com", "passwordHash": "bdb9397836c5bbc6b62bb1694bee3d09:e2488a6f654d043c4492ddca6218515199b536c565e5efa88534d55e55be3e51ec8d5aba452b64ae608f852d66eec24b63afaf65f0efff396aa08365239d5707" },
+    { "id": "u_h2", "role": "hospital", "hospitalId": "h2", "name": "Sunrise Medicity", "email": "sunrise@demo.com", "passwordHash": "bcc80575759a034b059c51ae75dbfd6d:eefd0af7b9054a0f5da71e3036d2a8499492a4f34e8a5ccbaa509efdc6bf989e1845019ac5b8168080cddece63f65714b0e8f1265177fc87245bba33cdb13a9b" },
+    { "id": "u_h3", "role": "hospital", "hospitalId": "h3", "name": "Horizon Speciality Centre", "email": "horizon@demo.com", "passwordHash": "5658d7a397f16cb3cae9b1bb00dc2152:a8752c6638d93561a2492e9397de232d6e9a8cdac4111ee666544580930ef36491bc0de7fe4da78102f74a1e58c7b157f4122af1d24f7da9dd100d9610475a25" }
+  ],
+  "sessions": []
 }

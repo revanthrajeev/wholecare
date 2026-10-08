@@ -1,17 +1,25 @@
 import { NextResponse } from "next/server";
 import { readDb, writeDb, newId } from "@/lib/db";
+import { getCurrentUser } from "@/lib/auth";
 
 export async function GET() {
+  const user = await getCurrentUser();
   const db = readDb();
-  return NextResponse.json(db.cases);
+  if (!user) return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+  const mine = db.cases.filter((c) => c.ownerId === user.id);
+  return NextResponse.json(mine);
 }
 
 export async function POST(request) {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ error: "Sign in to create a case." }, { status: 401 });
+
   const body = await request.json();
   const db = readDb();
 
   const caseRecord = {
     id: newId("case"),
+    ownerId: user.id,
     patientName: body.patientName || "",
     countryOfResidence: body.countryOfResidence || "",
     preferredDestination: body.preferredDestination || "India",

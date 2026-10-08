@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 
 export default function HospitalDashboard() {
   const { hid } = useParams();
+  const router = useRouter();
+  const [authChecked, setAuthChecked] = useState(false);
   const [data, setData] = useState(null);
   const [hospitals, setHospitals] = useState([]);
 
@@ -20,11 +22,21 @@ export default function HospitalDashboard() {
   }
 
   useEffect(() => {
-    load();
-  }, [hid]);
+    fetch("/api/auth/me").then((r) => r.json()).then((d) => {
+      if (!d.user || d.user.role !== "hospital" || d.user.hospitalId !== hid) {
+        router.push(`/login?next=/hospital/${hid}`);
+        return;
+      }
+      setAuthChecked(true);
+    });
+  }, [hid, router]);
+
+  useEffect(() => {
+    if (authChecked) load();
+  }, [hid, authChecked]);
 
   const hospital = hospitals.find((h) => h.id === hid);
-  if (!data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
+  if (!authChecked || !data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
 
   const newCases = data.cases.filter((c) => !data.quotations.some((q) => q.caseId === c.id));
   const quoted = data.cases.filter((c) => data.quotations.some((q) => q.caseId === c.id));

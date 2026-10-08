@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Nav from "@/components/Nav";
@@ -8,8 +8,10 @@ const STEPS = ["Describe Need", "Preferences", "Review & Submit"];
 
 export default function NewCase() {
   const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     patientName: "",
     countryOfResidence: "",
@@ -20,6 +22,16 @@ export default function NewCase() {
     timeline: "",
   });
 
+  useEffect(() => {
+    fetch("/api/auth/me").then((r) => r.json()).then((d) => {
+      if (!d.user || d.user.role !== "patient") {
+        router.push("/login?next=/case/new");
+        return;
+      }
+      setCheckingAuth(false);
+    });
+  }, [router]);
+
   function update(key, value) {
     setForm((f) => ({ ...f, [key]: value }));
   }
@@ -27,13 +39,23 @@ export default function NewCase() {
   async function submit(e) {
     e?.preventDefault();
     setSubmitting(true);
+    setError("");
     const res = await fetch("/api/cases", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...form, documents: ["discharge_summary.pdf"] }),
     });
     const created = await res.json();
+    if (!res.ok) {
+      setSubmitting(false);
+      setError(created.error || "Something went wrong.");
+      return;
+    }
     router.push(`/case/${created.id}`);
+  }
+
+  if (checkingAuth) {
+    return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
   }
 
   const inputClass =
@@ -134,6 +156,8 @@ export default function NewCase() {
               ))}
             </div>
           )}
+
+          {error && <p className="text-sm text-[#C23B5A] font-medium">{error}</p>}
 
           <div className="flex gap-3 pt-2">
             {step > 0 && (

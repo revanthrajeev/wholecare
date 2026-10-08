@@ -6,6 +6,7 @@ import Nav from "@/components/Nav";
 export default function HospitalCaseView() {
   const { hid, caseId } = useParams();
   const router = useRouter();
+  const [authChecked, setAuthChecked] = useState(false);
   const [data, setData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -18,10 +19,20 @@ export default function HospitalCaseView() {
   });
 
   useEffect(() => {
-    fetch(`/api/cases/${caseId}`).then((r) => r.json()).then(setData);
-  }, [caseId]);
+    fetch("/api/auth/me").then((r) => r.json()).then((d) => {
+      if (!d.user || d.user.role !== "hospital" || d.user.hospitalId !== hid) {
+        router.push(`/login?next=/hospital/${hid}/case/${caseId}`);
+        return;
+      }
+      setAuthChecked(true);
+    });
+  }, [hid, caseId, router]);
 
-  if (!data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
+  useEffect(() => {
+    if (authChecked) fetch(`/api/cases/${caseId}`).then((r) => r.json()).then(setData);
+  }, [caseId, authChecked]);
+
+  if (!authChecked || !data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
   const { case: c } = data;
 
   function update(key, value) {
