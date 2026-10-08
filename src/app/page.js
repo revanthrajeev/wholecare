@@ -1,8 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Stethoscope, FileSearch, Building2, ScrollText, Plane, HeartPulse } from "lucide-react";
+import { Stethoscope, FileSearch, Building2, ScrollText, Plane, HeartPulse, Star, ChevronDown } from "lucide-react";
 import Nav from "@/components/Nav";
 
 const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
@@ -12,7 +13,81 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+function Stars({ count }) {
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} size={14} className={i < count ? "fill-[#D9A441] text-[#D9A441]" : "text-[#E3EAF2]"} />
+      ))}
+    </div>
+  );
+}
+
+function FaqItem({ q, a, defaultOpen }) {
+  const [open, setOpen] = useState(!!defaultOpen);
+  return (
+    <div className="wc-card rounded-xl px-6 py-5">
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between text-left">
+        <span className="font-semibold text-[#10243E]">{q}</span>
+        <ChevronDown size={18} className={`text-[#5B7184] shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && <p className="text-[#5B7184] text-sm mt-3 leading-relaxed">{a}</p>}
+    </div>
+  );
+}
+
+function InquiryForm() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("idle");
+
+  async function submit(e) {
+    e.preventDefault();
+    setStatus("loading");
+    const res = await fetch("/api/inquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    setStatus(res.ok ? "done" : "error");
+  }
+
+  if (status === "done") {
+    return (
+      <div className="wc-card rounded-2xl p-8 text-center">
+        <p className="font-bold text-lg mb-1">Thanks — we&rsquo;ll be in touch.</p>
+        <p className="text-[#5B7184] text-sm">A care coordinator will follow up at {form.email}.</p>
+      </div>
+    );
+  }
+
+  const inputClass =
+    "w-full bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] placeholder:text-[#9AADBD] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] focus:border-transparent transition";
+
+  return (
+    <form onSubmit={submit} className="wc-card rounded-2xl p-8 grid gap-4 max-w-xl mx-auto">
+      <div className="grid sm:grid-cols-2 gap-4">
+        <input required placeholder="Your name" className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+        <input required type="email" placeholder="Email" className={inputClass} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+      </div>
+      <textarea rows={3} placeholder="What do you need help with? (optional)" className={inputClass} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+      {status === "error" && <p className="text-sm text-[#C23B5A] font-medium">Something went wrong — please try again.</p>}
+      <button disabled={status === "loading"} className="btn-grad py-3.5 rounded-xl font-bold disabled:opacity-50">
+        {status === "loading" ? "Sending..." : "Get a free consultation"}
+      </button>
+      <p className="text-[#9AADBD] text-xs text-center">No case commitment — just a quick way for our team to reach out.</p>
+    </form>
+  );
+}
+
 export default function Home() {
+  const [reviews, setReviews] = useState([]);
+  const [faqs, setFaqs] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/reviews").then((r) => r.json()).then(setReviews);
+    fetch("/api/faqs").then((r) => r.json()).then(setFaqs);
+  }, []);
+
   return (
     <main className="bg-white text-[#10243E] overflow-hidden">
       <Nav />
@@ -394,6 +469,63 @@ export default function Home() {
             )}
           </div>
         </div>
+      </section>
+
+      {/* REVIEWS */}
+      <section className="bg-[#F3F7FC] px-10 py-28">
+        <div className="max-w-6xl mx-auto">
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3">
+            Patient Reviews
+          </motion.p>
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-5xl mb-4 max-w-3xl">
+            What patients say after their case closes.
+          </motion.h2>
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#9AADBD] text-xs mb-14 max-w-2xl">
+            Illustrative demo reviews for this MVP build — not yet collected from live patients.
+          </motion.p>
+          <div className="grid md:grid-cols-3 gap-5">
+            {reviews.slice(0, 6).map((r, i) => (
+              <motion.div key={r.id} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.07 }} className="rounded-2xl wc-card wc-card-hover p-6">
+                <Stars count={r.rating} />
+                <p className="text-[#344A61] text-sm mt-3 leading-relaxed">&ldquo;{r.text}&rdquo;</p>
+                <p className="text-[#10243E] text-sm font-bold mt-4">{r.author}</p>
+                <p className="text-[#9AADBD] text-xs">{r.country} &middot; {r.procedure}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="px-10 py-28 max-w-4xl mx-auto">
+        <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3 text-center">
+          FAQ
+        </motion.p>
+        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-5xl mb-14 text-center">
+          Common questions
+        </motion.h2>
+        <div className="grid gap-4">
+          {faqs.map((f, i) => (
+            <motion.div key={f.q} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
+              <FaqItem q={f.q} a={f.a} defaultOpen={i === 0} />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* LEAD CAPTURE */}
+      <section className="bg-[#F3F7FC] px-10 py-28">
+        <div className="max-w-xl mx-auto text-center mb-10">
+          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3">
+            Not ready for a full case yet?
+          </motion.p>
+          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-3xl md:text-4xl">
+            Talk to a care coordinator first.
+          </motion.h2>
+        </div>
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
+          <InquiryForm />
+        </motion.div>
       </section>
 
       {/* FINAL CTA */}

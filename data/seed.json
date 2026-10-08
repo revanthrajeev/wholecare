@@ -10,7 +10,9 @@
       "intlPatientDept": true,
       "languages": ["English", "Arabic", "Russian"],
       "verified": true,
-      "lastVerified": "2026-09-28"
+      "lastVerified": "2026-09-28",
+      "rating": 4.7,
+      "reviewCount": 182
     },
     {
       "id": "h2",
@@ -22,7 +24,9 @@
       "intlPatientDept": true,
       "languages": ["English", "French"],
       "verified": true,
-      "lastVerified": "2026-09-30"
+      "lastVerified": "2026-09-30",
+      "rating": 4.5,
+      "reviewCount": 96
     },
     {
       "id": "h3",
@@ -34,7 +38,9 @@
       "intlPatientDept": true,
       "languages": ["English", "Swahili"],
       "verified": true,
-      "lastVerified": "2026-09-25"
+      "lastVerified": "2026-09-25",
+      "rating": 4.8,
+      "reviewCount": 127
     }
   ],
   "doctors": [
@@ -55,6 +61,20 @@
   ],
   "cases": [],
   "quotations": [],
+  "reviews": [
+    { "id": "r1", "hospitalId": "h1", "author": "F. Al-Mansoori", "country": "UAE", "rating": 5, "procedure": "Coronary Bypass Surgery", "text": "Illustrative demo review — coordination from first consult to discharge was handled as one case, not scattered across agents.", "date": "2026-08-12" },
+    { "id": "r2", "hospitalId": "h1", "author": "J. Okafor", "country": "Kenya", "rating": 4, "procedure": "Total Knee Replacement", "text": "Illustrative demo review — clear cost breakdown before travel, no surprise charges on arrival.", "date": "2026-07-03" },
+    { "id": "r3", "hospitalId": "h2", "author": "M. Hassan", "country": "Bangladesh", "rating": 5, "procedure": "Liver Transplant", "text": "Illustrative demo review — quotation comparison made it easy to pick between hospitals without flying out first.", "date": "2026-09-01" },
+    { "id": "r4", "hospitalId": "h3", "author": "L. Dubois", "country": "France", "rating": 5, "procedure": "IVF Treatment", "text": "Illustrative demo review — case room kept every document and update in one thread instead of WhatsApp.", "date": "2026-06-20" },
+    { "id": "r5", "hospitalId": "h3", "author": "A. Ouma", "country": "Kenya", "rating": 4, "procedure": "Rhinoplasty", "text": "Illustrative demo review — recovery plan after discharge was more structured than I expected.", "date": "2026-05-15" }
+  ],
+  "faqs": [
+    { "q": "Is this a medical diagnosis tool?", "a": "No. Whole Care coordinates your case — intake, hospital matching, quotations and logistics. All diagnosis and treatment decisions are made by licensed doctors at the treating hospital." },
+    { "q": "How is my cost estimate calculated?", "a": "The calculator uses sourced specialty price ranges for the procedure and destination, plus typical stay length and travel costs. Hospitals then confirm a binding quotation for your specific case." },
+    { "q": "What does the AI actually do?", "a": "It organizes your submitted case into a structured summary for care coordinators, and helps you prepare questions before a doctor consultation. It never diagnoses or recommends treatment." },
+    { "q": "How are hospitals verified?", "a": "Each listed hospital carries a recognized accreditation (JCI or NABH) and a last-verified date. The MVP directory covers a seeded set of partner hospitals; the model scales by onboarding accredited partners with signed agreements." },
+    { "q": "Is my data secure?", "a": "Case data is tied to your account and only visible to you and the hospitals you explicitly send your case to. This MVP uses a simple file-backed store suited for a pilot; production deployments move to an encrypted database." }
+  ],
   "users": [
     { "id": "u_h1", "role": "hospital", "hospitalId": "h1", "name": "Apex Global Hospital", "email": "apex@demo.com", "passwordHash": "bdb9397836c5bbc6b62bb1694bee3d09:e2488a6f654d043c4492ddca6218515199b536c565e5efa88534d55e55be3e51ec8d5aba452b64ae608f852d66eec24b63afaf65f0efff396aa08365239d5707" },
     { "id": "u_h2", "role": "hospital", "hospitalId": "h2", "name": "Sunrise Medicity", "email": "sunrise@demo.com", "passwordHash": "bcc80575759a034b059c51ae75dbfd6d:eefd0af7b9054a0f5da71e3036d2a8499492a4f34e8a5ccbaa509efdc6bf989e1845019ac5b8168080cddece63f65714b0e8f1265177fc87245bba33cdb13a9b" },

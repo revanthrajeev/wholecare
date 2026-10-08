@@ -1,7 +1,18 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { Star } from "lucide-react";
 import Nav from "@/components/Nav";
+
+function Rating({ rating, count }) {
+  return (
+    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#8A6420]">
+      <Star size={13} className="fill-[#D9A441] text-[#D9A441]" />
+      {rating.toFixed(1)}
+      <span className="text-[#9AADBD] font-normal">({count})</span>
+    </span>
+  );
+}
 
 export default function Directory() {
   const [tab, setTab] = useState("hospitals");
@@ -83,7 +94,10 @@ export default function Directory() {
                   <p className="font-bold text-lg">{h.name}</p>
                   {h.verified && <span className="text-xs bg-[#2F6FED]/10 text-[#2F6FED] px-2.5 py-1 rounded-full font-semibold">Verified</span>}
                 </div>
-                <p className="text-[#5B7184] text-sm mb-3">{h.city}, {h.country} &middot; {h.accreditation}</p>
+                <div className="flex items-center gap-3 mb-3">
+                  <p className="text-[#5B7184] text-sm">{h.city}, {h.country} &middot; {h.accreditation}</p>
+                  {h.rating && <Rating rating={h.rating} count={h.reviewCount} />}
+                </div>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {h.specialties.map((s) => (
                     <span key={s} className="text-xs bg-[#F7FAFD] border border-[#E3EAF2] px-2.5 py-1 rounded-full text-[#344A61]">{s}</span>
