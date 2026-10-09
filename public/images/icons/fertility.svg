@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#2F6FED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Parent & child protective embrace / fertility life symbol -->
+  <circle cx="26" cy="18" r="7" fill="#F4F8FE"/>
+  <circle cx="42" cy="24" r="5" fill="#F4F8FE"/>
+  <!-- Protective arms curving around -->
+  <path d="M14 50c0-10 6-16 16-16 6 0 10 3 12 7"/>
+  <path d="M34 50c0-7 4-11 11-11 5 0 9 4 9 11"/>
+  <path d="M10 54h44"/>
+  <!-- Tiny heart motif -->
+  <path d="M31 38a3 3 0 0 1 5 2c0 3-5 6-5 6s-5-3-5-6a3 3 0 0 1 5-2z" fill="#2F6FED"/>
+</svg>

@@ -3,8 +3,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Stethoscope, FileSearch, Building2, ScrollText, Plane, HeartPulse, Star, ChevronDown } from "lucide-react";
 import Nav from "@/components/Nav";
+
+const JOURNEY_IMAGES = {
+  "Describe the need": "/images/journey/step_1_records.jpg",
+  "Review & route": "/images/journey/step_2_telehealth.jpg",
+  "Hospital responds": "/images/journey/step_3_hospital_match.jpg",
+};
 
 const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
 
@@ -94,6 +101,9 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#EAF2FF] via-white to-white">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
+          <Image src="/images/hero/hero_hospital_atrium.jpg" alt="" fill className="object-cover" priority />
+        </div>
         <div className="pointer-events-none absolute inset-0 bg-grid-faint [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_25%,black,transparent_75%)]" />
         <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-[#2F6FED]/14 blur-[130px] animate-glow" />
         <div className="pointer-events-none absolute right-[4%] top-1/4 h-[420px] w-[420px] rounded-full bg-[#FF6B81]/14 blur-[120px] animate-glow [animation-delay:-2s]" />
@@ -434,16 +444,23 @@ export default function Home() {
                 variants={fadeUp}
                 transition={{ delay: i * 0.07 }}
                 whileHover={{ y: -4 }}
-                className="rounded-2xl wc-card wc-card-hover p-6"
+                className="rounded-2xl wc-card wc-card-hover overflow-hidden"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: s.color }}>
-                    <s.icon size={18} className="text-white" />
+                {JOURNEY_IMAGES[s.title] && (
+                  <div className="relative w-full h-32">
+                    <Image src={JOURNEY_IMAGES[s.title]} alt="" fill className="object-cover" />
                   </div>
-                  <span className="font-eyebrow text-xs text-[#9AADBD]">{s.step}</span>
+                )}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: s.color }}>
+                      <s.icon size={18} className="text-white" />
+                    </div>
+                    <span className="font-eyebrow text-xs text-[#9AADBD]">{s.step}</span>
+                  </div>
+                  <h3 className="font-bold mb-1.5">{s.title}</h3>
+                  <p className="text-[#5B7184] text-sm leading-relaxed">{s.body}</p>
                 </div>
-                <h3 className="font-bold mb-1.5">{s.title}</h3>
-                <p className="text-[#5B7184] text-sm leading-relaxed">{s.body}</p>
               </motion.div>
             ))}
           </div>

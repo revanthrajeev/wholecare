@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#2F6FED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Cupped supporting hands -->
+  <path d="M12 40c4 4 10 8 20 8s16-4 20-8"/>
+  <path d="M12 40l6-10a4 4 0 0 1 6-1l4 3"/>
+  <path d="M52 40l-6-10a4 4 0 0 0-6-1l-4 3"/>
+  <!-- Central vital organ / heart held carefully -->
+  <path d="M32 30s-10-7-10-14a6.5 6.5 0 0 1 11-4.2A6.5 6.5 0 0 1 44 16c0 7-12 14-12 14z" fill="#F4F8FE"/>
+  <!-- Medical cross inside -->
+  <path d="M32 15v6M29 18h6" stroke="#2F6FED" stroke-width="2"/>
+</svg>

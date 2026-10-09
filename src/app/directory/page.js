@@ -2,7 +2,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import Image from "next/image";
 import Nav from "@/components/Nav";
+
+const HOSPITAL_IMAGES = { h1: "/images/hospitals/hospital_1.jpg", h2: "/images/hospitals/hospital_2.jpg", h3: "/images/hospitals/hospital_3.jpg" };
+const DOCTOR_IMAGES = { d1: "/images/doctors/doctor_1.jpg", d2: "/images/doctors/doctor_2.jpg", d3: "/images/doctors/doctor_3.jpg", d4: "/images/doctors/doctor_4.jpg", d5: "/images/doctors/doctor_5.jpg", d6: "/images/doctors/doctor_6.jpg" };
 
 function Rating({ rating, count }) {
   return (
@@ -89,7 +93,13 @@ export default function Directory() {
         {tab === "hospitals" ? (
           <div className="grid md:grid-cols-2 gap-5">
             {filteredHospitals.map((h, i) => (
-              <motion.div key={h.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className={card}>
+              <motion.div key={h.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className={`${card} overflow-hidden !p-0`}>
+                {HOSPITAL_IMAGES[h.id] && (
+                  <div className="relative w-full h-40">
+                    <Image src={HOSPITAL_IMAGES[h.id]} alt={h.name} fill className="object-cover" />
+                  </div>
+                )}
+                <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
                   <p className="font-bold text-lg">{h.name}</p>
                   {h.verified && <span className="text-xs bg-[#2F6FED]/10 text-[#2F6FED] px-2.5 py-1 rounded-full font-semibold">Verified</span>}
@@ -104,6 +114,7 @@ export default function Directory() {
                   ))}
                 </div>
                 <p className="text-[#5B7184] text-xs">Languages: {h.languages.join(", ")} &middot; Last verified {h.lastVerified}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -112,7 +123,13 @@ export default function Directory() {
             {filteredDoctors.map((d, i) => {
               const h = hospitals.find((x) => x.id === d.hospitalId);
               return (
-                <motion.div key={d.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className={card}>
+                <motion.div key={d.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className={`${card} flex gap-4`}>
+                  {DOCTOR_IMAGES[d.id] && (
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 border border-[#E3EAF2]">
+                      <Image src={DOCTOR_IMAGES[d.id]} alt={d.name} fill className="object-cover" />
+                    </div>
+                  )}
+                  <div>
                   <p className="font-bold text-lg">{d.name}</p>
                   <p className="text-[#2F6FED] text-sm font-semibold mt-1">{d.specialty}</p>
                   <p className="text-[#5B7184] text-sm mt-1">{h?.name} &middot; {d.experience}</p>
@@ -122,6 +139,7 @@ export default function Directory() {
                     ))}
                   </div>
                   <p className="text-[#5B7184] text-xs mt-3">Languages: {d.languages.join(", ")}</p>
+                  </div>
                 </motion.div>
               );
             })}

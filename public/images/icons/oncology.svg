@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#2F6FED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Microscope body -->
+  <path d="M22 14l12-7 6 10-12 7z" fill="#F4F8FE"/>
+  <path d="M25 21l-5 9"/>
+  <path d="M34 26l7 12"/>
+  <circle cx="28" cy="46" r="14"/>
+  <path d="M14 58h28"/>
+  <!-- Target cell with nucleus inside observation circle -->
+  <circle cx="28" cy="46" r="5" stroke-width="2" fill="#2F6FED" fill-opacity="0.2"/>
+  <circle cx="28" cy="46" r="2" fill="#2F6FED"/>
+</svg>
