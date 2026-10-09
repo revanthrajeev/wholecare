@@ -101,8 +101,9 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#EAF2FF] via-white to-white">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.16]">
           <Image src="/images/hero/hero_hospital_atrium.jpg" alt="" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/70 to-white" />
         </div>
         <div className="pointer-events-none absolute inset-0 bg-grid-faint [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_50%_25%,black,transparent_75%)]" />
         <div className="pointer-events-none absolute left-1/2 top-[-10%] h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-[#2F6FED]/14 blur-[130px] animate-glow" />

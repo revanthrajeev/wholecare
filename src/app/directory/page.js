@@ -6,7 +6,8 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 
 const HOSPITAL_IMAGES = { h1: "/images/hospitals/hospital_1.jpg", h2: "/images/hospitals/hospital_2.jpg", h3: "/images/hospitals/hospital_3.jpg" };
-const DOCTOR_IMAGES = { d1: "/images/doctors/doctor_1.jpg", d2: "/images/doctors/doctor_2.jpg", d3: "/images/doctors/doctor_3.jpg", d4: "/images/doctors/doctor_4.jpg", d5: "/images/doctors/doctor_5.jpg", d6: "/images/doctors/doctor_6.jpg" };
+// doctor_1/3/5 are female portraits, doctor_2/4/6 are male — mapped to match each doctor's name/gender
+const DOCTOR_IMAGES = { d1: "/images/doctors/doctor_2.jpg", d2: "/images/doctors/doctor_1.jpg", d3: "/images/doctors/doctor_4.jpg", d4: "/images/doctors/doctor_3.jpg", d5: "/images/doctors/doctor_6.jpg", d6: "/images/doctors/doctor_5.jpg" };
 
 function Rating({ rating, count }) {
   return (

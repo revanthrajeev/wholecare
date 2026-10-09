@@ -73,9 +73,15 @@ function LoginForm() {
           </p>
         </form>
 
-        <div className="mt-6 rounded-2xl p-5 bg-[#F3F7FC] border border-[#E3EAF2] text-xs text-[#5B7184] space-y-1">
-          <p className="font-semibold text-[#344A61]">Demo hospital logins</p>
-          <p>apex@demo.com / sunrise@demo.com / horizon@demo.com &mdash; password: demo123</p>
+        <div className="mt-6 rounded-2xl p-5 bg-[#F3F7FC] border border-[#E3EAF2] text-xs text-[#5B7184] space-y-2">
+          <div>
+            <p className="font-semibold text-[#344A61]">Demo patient login</p>
+            <p>demo.patient@wholecare.com &mdash; password: demo123 (has 2 sample cases)</p>
+          </div>
+          <div>
+            <p className="font-semibold text-[#344A61]">Demo hospital logins</p>
+            <p>apex@demo.com / sunrise@demo.com / horizon@demo.com &mdash; password: demo123</p>
+          </div>
         </div>
       </div>
     </main>
