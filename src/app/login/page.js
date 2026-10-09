@@ -40,6 +40,8 @@ function LoginForm() {
     }
     if (data.role === "hospital") {
       router.push(`/hospital/${data.hospitalId}`);
+    } else if (data.role === "admin") {
+      router.push("/admin");
     } else {
       router.push(params.get("next") || "/dashboard");
     }
@@ -81,6 +83,10 @@ function LoginForm() {
           <div>
             <p className="font-semibold text-[#344A61]">Demo hospital logins</p>
             <p>apex@demo.com / sunrise@demo.com / horizon@demo.com &mdash; password: demo123</p>
+          </div>
+          <div>
+            <p className="font-semibold text-[#344A61]">Demo admin login</p>
+            <p>admin@wholecare.com &mdash; password: admin123</p>
           </div>
         </div>
       </div>

@@ -127,6 +127,7 @@
     { "q": "Is my data secure?", "a": "Case data is tied to your account and only visible to you and the hospitals you explicitly send your case to. This MVP uses a simple file-backed store suited for a pilot; production deployments move to an encrypted database." }
   ],
   "users": [
+    { "id": "u_admin", "role": "admin", "name": "Whole Care Admin", "email": "admin@wholecare.com", "passwordHash": "d5bc2906c5dd17ed5c9d73e586b86ea8:f4fd7c559b69219c840edfb3f6e33138b56bc256a59d39a7643d94b294e4d7e5703443a1eff96a2ef24e413e6ceae4418e251a90108ba6c478bdd0b9d7b589ec", "createdAt": "2026-09-01T00:00:00.000Z" },
     { "id": "u_demo_patient", "role": "patient", "name": "Aisha Karim", "email": "demo.patient@wholecare.com", "passwordHash": "bdb9397836c5bbc6b62bb1694bee3d09:e2488a6f654d043c4492ddca6218515199b536c565e5efa88534d55e55be3e51ec8d5aba452b64ae608f852d66eec24b63afaf65f0efff396aa08365239d5707", "createdAt": "2026-09-20T09:00:00.000Z" },
     { "id": "u_h1", "role": "hospital", "hospitalId": "h1", "name": "Apex Global Hospital", "email": "apex@demo.com", "passwordHash": "bdb9397836c5bbc6b62bb1694bee3d09:e2488a6f654d043c4492ddca6218515199b536c565e5efa88534d55e55be3e51ec8d5aba452b64ae608f852d66eec24b63afaf65f0efff396aa08365239d5707" },
     { "id": "u_h2", "role": "hospital", "hospitalId": "h2", "name": "Sunrise Medicity", "email": "sunrise@demo.com", "passwordHash": "bcc80575759a034b059c51ae75dbfd6d:eefd0af7b9054a0f5da71e3036d2a8499492a4f34e8a5ccbaa509efdc6bf989e1845019ac5b8168080cddece63f65714b0e8f1265177fc87245bba33cdb13a9b" },

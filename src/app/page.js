@@ -11,7 +11,12 @@ const JOURNEY_IMAGES = {
   "Describe the need": "/images/journey/step_1_records.jpg",
   "Review & route": "/images/journey/step_2_telehealth.jpg",
   "Hospital responds": "/images/journey/step_3_hospital_match.jpg",
+  "Compare & decide": "/images/journey/step_4_compare_quotes.jpg",
+  "Coordinate travel": "/images/journey/step_5_travel_prep.jpg",
+  "Treat & follow up": "/images/journey/step_6_recovery_care.jpg",
 };
+
+const REVIEW_AVATARS = ["/images/reviews/avatar_1.jpg", "/images/reviews/avatar_2.jpg", "/images/reviews/avatar_3.jpg", "/images/reviews/avatar_4.jpg", "/images/reviews/avatar_5.jpg", "/images/reviews/avatar_6.jpg"];
 
 const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
 
@@ -506,8 +511,17 @@ export default function Home() {
               <motion.div key={r.id} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.07 }} className="rounded-2xl wc-card wc-card-hover p-6">
                 <Stars count={r.rating} />
                 <p className="text-[#344A61] text-sm mt-3 leading-relaxed">&ldquo;{r.text}&rdquo;</p>
-                <p className="text-[#10243E] text-sm font-bold mt-4">{r.author}</p>
-                <p className="text-[#9AADBD] text-xs">{r.country} &middot; {r.procedure}</p>
+                <div className="flex items-center gap-3 mt-4">
+                  {REVIEW_AVATARS[i % REVIEW_AVATARS.length] && (
+                    <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-[#E3EAF2]">
+                      <Image src={REVIEW_AVATARS[i % REVIEW_AVATARS.length]} alt={r.author} fill className="object-cover" />
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-[#10243E] text-sm font-bold">{r.author}</p>
+                    <p className="text-[#9AADBD] text-xs">{r.country} &middot; {r.procedure}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
