@@ -59,6 +59,30 @@
     { "id": "t5", "name": "Oncology — Chemotherapy Course", "specialty": "Oncology", "indiaCostLow": 800, "indiaCostHigh": 3000, "stayDays": "varies", "homeCountryMultiple": "8-20x in US" },
     { "id": "t6", "name": "Rhinoplasty", "specialty": "Cosmetic Surgery", "indiaCostLow": 2000, "indiaCostHigh": 4500, "stayDays": "2-4", "homeCountryMultiple": "3-6x in US/UK" }
   ],
+  "countryGuides": [
+    {
+      "slug": "india",
+      "country": "India",
+      "heroImage": "/images/hero/hero_hospital_atrium.jpg",
+      "tagline": "World-class hospitals, 70–80% lower cost than the US/UAE, and a mature international-patient infrastructure.",
+      "whyChoose": [
+        "JCI and NABH accredited hospitals in every major specialty",
+        "English-speaking medical and nursing staff nationwide",
+        "Established medical-visa process for 150+ countries",
+        "Significant cost savings without compromising outcomes",
+        "Direct flight connectivity from the Gulf, Africa and South Asia"
+      ],
+      "visa": {
+        "type": "Medical Visa (e-Medical or regular)",
+        "duration": "Up to 60 days, extendable, triple-entry",
+        "notes": "Requires a hospital invitation letter — Whole Care generates this once a hospital accepts your case."
+      },
+      "bestTimeToVisit": "October–March (cooler, comfortable for recovery and travel)",
+      "currency": "Indian Rupee (INR)",
+      "cities": ["Bangalore", "Chennai", "Mumbai"]
+    }
+  ],
+  "consultations": [],
   "cases": [
     {
       "id": "case_demo1",

@@ -26,6 +26,8 @@ export default function Nav() {
       <nav className="hidden md:flex gap-8 text-sm text-[#5B7184]">
         <Link href="/directory" className="hover:text-[#10243E] transition">Directory</Link>
         <Link href="/match" className="hover:text-[#10243E] transition">Find My Match</Link>
+        <Link href="/countries" className="hover:text-[#10243E] transition">Country Guides</Link>
+        <Link href="/consult" className="hover:text-[#10243E] transition">Book Consultation</Link>
         <Link href="/calculator" className="hover:text-[#10243E] transition">Cost Calculator</Link>
         <Link href="/hospital" className="hover:text-[#10243E] transition">Hospital Portal</Link>
         {user && user.role === "patient" && (
