@@ -465,8 +465,8 @@ export default function Home() {
                     <p className="text-[#5B7184] text-sm leading-relaxed max-w-sm">{s.body}</p>
                   </div>
                   {JOURNEY_IMAGES[s.title] && (
-                    <div className={`relative w-full h-48 rounded-2xl overflow-hidden ${reverse ? "md:order-1" : ""}`}>
-                      <Image src={JOURNEY_IMAGES[s.title]} alt="" fill className="object-cover" />
+                    <div className={`relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#F3F7FC] ${reverse ? "md:order-1" : ""}`}>
+                      <Image src={JOURNEY_IMAGES[s.title]} alt="" fill className="object-contain p-4" />
                     </div>
                   )}
                 </motion.div>
