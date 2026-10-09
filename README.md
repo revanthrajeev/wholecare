@@ -1,4 +1,4 @@
-# Whole Care — MVP
+# Whole Care
 
 Cross-border healthcare case coordination platform: patient case flow, hospital portal, verified directory, cost calculator, and AI-assisted case coordination.
 

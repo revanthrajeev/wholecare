@@ -507,7 +507,7 @@ export default function Home() {
             What patients say after their case closes.
           </motion.h2>
           <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#9AADBD] text-xs mb-14 max-w-2xl">
-            Illustrative demo reviews for this MVP build — not yet collected from live patients.
+            Illustrative demo reviews for this build — not yet collected from live patients.
           </motion.p>
           <div className="grid md:grid-cols-3 gap-5">
             {reviews.slice(0, 6).map((r, i) => (
@@ -613,7 +613,7 @@ export default function Home() {
             <span className="font-bold text-sm tracking-wide text-[#10243E]">WHOLE CARE</span>
           </div>
           <p className="text-[#9AADBD] text-xs text-center">
-            MVP build &middot; NSRCEL AccUbate 2026 &middot; Figures labeled illustrative/indicative are planning estimates, not audited or forecast numbers.
+            Figures labeled illustrative/indicative are planning estimates, not audited or forecast numbers.
           </p>
         </div>
       </footer>

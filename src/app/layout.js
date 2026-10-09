@@ -25,7 +25,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Whole Care — Hospital Portal MVP",
+  title: "Whole Care — Hospital Portal",
   description: "Cross-border healthcare case coordination platform",
 };
 
