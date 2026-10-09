@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { readDb, writeDb, newId } from "@/lib/db";
+import { notify } from "@/lib/notify";
+import { recordAudit } from "@/lib/audit";
+import { getCurrentUser } from "@/lib/auth";
 
 export async function POST(request) {
   const body = await request.json();
@@ -28,6 +31,10 @@ export async function POST(request) {
     label: `Quotation received from hospital`,
     at: new Date().toISOString(),
   });
+
+  const user = await getCurrentUser();
+  recordAudit(db, { userId: user?.id || "unknown", action: "quotation.created", targetId: quotation.id });
+  notify(db, { userId: c.ownerId, message: `New quotation received for your case`, link: `/case/${c.id}` });
 
   writeDb(db);
   return NextResponse.json(quotation, { status: 201 });

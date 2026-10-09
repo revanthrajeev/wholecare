@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { LayoutDashboard, FileText, Stethoscope, ScrollText, Plane } from "lucide-react";
+import { LayoutDashboard, FileText, Stethoscope, ScrollText, Plane, MessageSquare } from "lucide-react";
 import Nav from "@/components/Nav";
 
 const STAGES = ["Submitted", "Under Review", "Sent to Hospitals", "Quotation Received", "Confirmed", "Completed"];
@@ -12,6 +12,7 @@ const TABS = [
   { id: "documents", label: "Documents", icon: FileText },
   { id: "consultations", label: "Ask the Doctor", icon: Stethoscope },
   { id: "quotations", label: "Quotations", icon: ScrollText },
+  { id: "messages", label: "Messages", icon: MessageSquare },
   { id: "travel", label: "Travel", icon: Plane },
 ];
 
@@ -30,14 +31,42 @@ export default function CaseRoom() {
   const [askLoading, setAskLoading] = useState(false);
   const [askError, setAskError] = useState(null);
 
+  const [messages, setMessages] = useState([]);
+  const [messageText, setMessageText] = useState("");
+  const [sendingMessage, setSendingMessage] = useState(false);
+  const [me, setMe] = useState(null);
+
   async function load() {
     const res = await fetch(`/api/cases/${id}`);
     setData(await res.json());
   }
 
+  async function loadMessages() {
+    const res = await fetch(`/api/cases/${id}/messages`);
+    if (res.ok) setMessages(await res.json());
+  }
+
   useEffect(() => {
     load();
+    loadMessages();
+    fetch("/api/auth/me").then((r) => r.json()).then((d) => setMe(d.user));
   }, [id]);
+
+  async function sendMessage(e) {
+    e.preventDefault();
+    if (!messageText.trim()) return;
+    setSendingMessage(true);
+    const res = await fetch(`/api/cases/${id}/messages`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: messageText }),
+    });
+    if (res.ok) {
+      setMessageText("");
+      await loadMessages();
+    }
+    setSendingMessage(false);
+  }
 
   if (!data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading case&hellip;</main>;
   if (data.error) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Case not found.</main>;
@@ -321,6 +350,40 @@ export default function CaseRoom() {
                     )}
                   </motion.div>
                 )
+              )}
+
+              {tab === "messages" && (
+                <motion.div key="messages" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className={card}>
+                  <h2 className="font-bold mb-4">Messages</h2>
+                  <div className="space-y-3 max-h-96 overflow-y-auto mb-4">
+                    {messages.length === 0 ? (
+                      <p className="text-[#9AADBD] text-sm">No messages yet. Hospitals you&rsquo;ve sent this case to can message you here.</p>
+                    ) : (
+                      messages.map((m) => (
+                        <div key={m.id} className={`max-w-[80%] rounded-xl px-4 py-2.5 text-sm ${m.senderId === me?.id ? "ml-auto bg-[#2F6FED] text-white" : "bg-[#F3F7FC] text-[#344A61]"}`}>
+                          <p className={`text-xs font-semibold mb-0.5 ${m.senderId === me?.id ? "text-white/80" : "text-[#5B7184]"}`}>{m.senderLabel}</p>
+                          <p>{m.text}</p>
+                          <p className={`text-[10px] mt-1 ${m.senderId === me?.id ? "text-white/60" : "text-[#9AADBD]"}`}>{new Date(m.at).toLocaleString()}</p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                  {c.sentToHospitals.length === 0 ? (
+                    <p className="text-[#9AADBD] text-xs">Send your case to a hospital before starting a conversation.</p>
+                  ) : (
+                    <form onSubmit={sendMessage} className="flex gap-2">
+                      <input
+                        value={messageText}
+                        onChange={(e) => setMessageText(e.target.value)}
+                        placeholder="Type a message..."
+                        className="flex-1 bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+                      />
+                      <button disabled={sendingMessage || !messageText.trim()} className="btn-grad px-5 py-2.5 rounded-xl font-bold text-sm disabled:opacity-50">
+                        Send
+                      </button>
+                    </form>
+                  )}
+                </motion.div>
               )}
 
               {tab === "travel" && (

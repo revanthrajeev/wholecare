@@ -4,6 +4,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 
+// Indicative, static conversion rates from USD for display only — not live FX.
+const CURRENCIES = {
+  USD: { symbol: "$", rate: 1 },
+  EUR: { symbol: "€", rate: 0.92 },
+  GBP: { symbol: "£", rate: 0.79 },
+  AED: { symbol: "AED ", rate: 3.67 },
+  INR: { symbol: "₹", rate: 83.1 },
+};
+
 const TRAVEL_LAYERS = [
   { key: "visa", label: "Visa", cost: 150 },
   { key: "flights", label: "Flights (round trip)", cost: 700 },
@@ -17,6 +26,7 @@ export default function Calculator() {
   const [selected, setSelected] = useState(null);
   const [stayWeeks, setStayWeeks] = useState(1);
   const [companion, setCompanion] = useState(true);
+  const [currency, setCurrency] = useState("USD");
 
   useEffect(() => {
     fetch("/api/treatments").then((r) => r.json()).then((t) => {
@@ -38,6 +48,9 @@ export default function Calculator() {
 
   const totalLow = medicalLow + travelCost;
   const totalHigh = medicalHigh + travelCost;
+
+  const { symbol, rate } = CURRENCIES[currency];
+  const fmt = (usd) => `${symbol}${Math.round(usd * rate).toLocaleString()}`;
 
   const card = "rounded-2xl p-6 wc-card wc-card-hover";
 
@@ -76,10 +89,21 @@ export default function Calculator() {
             />
             <p className="text-sm text-[#344A61] mb-6">{stayWeeks} week{stayWeeks > 1 ? "s" : ""}</p>
 
-            <label className="flex items-center gap-3 text-sm cursor-pointer">
+            <label className="flex items-center gap-3 text-sm cursor-pointer mb-6">
               <input type="checkbox" checked={companion} onChange={(e) => setCompanion(e.target.checked)} className="accent-[#2F6FED]" />
               Include companion travel costs
             </label>
+
+            <label className="text-sm font-semibold text-[#5B7184] mb-2 block">Display currency</label>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              className="w-full bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+            >
+              {Object.keys(CURRENCIES).map((c) => (
+                <option key={c} value={c} className="bg-white">{c}</option>
+              ))}
+            </select>
           </div>
 
           <div className={card}>
@@ -87,15 +111,15 @@ export default function Calculator() {
             <div className="space-y-3 text-sm mb-6">
               <div className="flex justify-between">
                 <span className="text-[#5B7184]">Medical (India, {treatment?.specialty})</span>
-                <span className="font-semibold">${medicalLow.toLocaleString()}&ndash;${medicalHigh.toLocaleString()}</span>
+                <span className="font-semibold">{fmt(medicalLow)}&ndash;{fmt(medicalHigh)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-[#5B7184]">Travel + stay ({stayWeeks}w{companion ? ", with companion" : ""})</span>
-                <span className="font-semibold">${travelCost.toLocaleString()}</span>
+                <span className="font-semibold">{fmt(travelCost)}</span>
               </div>
               <div className="flex justify-between border-t border-[#E3EAF2] pt-3 text-base">
                 <span className="font-bold">Total estimated journey</span>
-                <span className="font-extrabold text-[#2F6FED] text-xl">${totalLow.toLocaleString()}&ndash;${totalHigh.toLocaleString()}</span>
+                <span className="font-extrabold text-[#2F6FED] text-xl">{fmt(totalLow)}&ndash;{fmt(totalHigh)}</span>
               </div>
             </div>
             {treatment && (

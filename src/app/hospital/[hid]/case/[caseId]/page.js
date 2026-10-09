@@ -9,6 +9,10 @@ export default function HospitalCaseView() {
   const [authChecked, setAuthChecked] = useState(false);
   const [data, setData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [me, setMe] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [messageText, setMessageText] = useState("");
+  const [sendingMessage, setSendingMessage] = useState(false);
   const [form, setForm] = useState({
     procedure: "",
     doctor: "",
@@ -24,13 +28,38 @@ export default function HospitalCaseView() {
         router.push(`/login?next=/hospital/${hid}/case/${caseId}`);
         return;
       }
+      setMe(d.user);
       setAuthChecked(true);
     });
   }, [hid, caseId, router]);
 
+  async function loadMessages() {
+    const res = await fetch(`/api/cases/${caseId}/messages`);
+    if (res.ok) setMessages(await res.json());
+  }
+
   useEffect(() => {
-    if (authChecked) fetch(`/api/cases/${caseId}`).then((r) => r.json()).then(setData);
+    if (authChecked) {
+      fetch(`/api/cases/${caseId}`).then((r) => r.json()).then(setData);
+      loadMessages();
+    }
   }, [caseId, authChecked]);
+
+  async function sendMessage(e) {
+    e.preventDefault();
+    if (!messageText.trim()) return;
+    setSendingMessage(true);
+    const res = await fetch(`/api/cases/${caseId}/messages`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: messageText }),
+    });
+    if (res.ok) {
+      setMessageText("");
+      await loadMessages();
+    }
+    setSendingMessage(false);
+  }
 
   if (!authChecked || !data) return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
   const { case: c } = data;
@@ -69,6 +98,34 @@ export default function HospitalCaseView() {
           <p><span className="text-[#5B7184]">Budget shared:</span> {c.budgetRange || "not shared"}</p>
           <p><span className="text-[#5B7184]">Timeline:</span> {c.timeline || "—"}</p>
           <p><span className="text-[#5B7184]">Documents:</span> {c.documents.join(", ")}</p>
+        </div>
+
+        <h2 className="font-bold text-lg mb-4">Messages</h2>
+        <div className={`${card} mb-8`}>
+          <div className="space-y-3 max-h-80 overflow-y-auto mb-4">
+            {messages.length === 0 ? (
+              <p className="text-[#9AADBD] text-sm">No messages yet.</p>
+            ) : (
+              messages.map((m) => (
+                <div key={m.id} className={`max-w-[80%] rounded-xl px-4 py-2.5 text-sm ${m.senderId === me?.id ? "ml-auto bg-[#2F6FED] text-white" : "bg-[#F3F7FC] text-[#344A61]"}`}>
+                  <p className={`text-xs font-semibold mb-0.5 ${m.senderId === me?.id ? "text-white/80" : "text-[#5B7184]"}`}>{m.senderLabel}</p>
+                  <p>{m.text}</p>
+                  <p className={`text-[10px] mt-1 ${m.senderId === me?.id ? "text-white/60" : "text-[#9AADBD]"}`}>{new Date(m.at).toLocaleString()}</p>
+                </div>
+              ))
+            )}
+          </div>
+          <form onSubmit={sendMessage} className="flex gap-2">
+            <input
+              value={messageText}
+              onChange={(e) => setMessageText(e.target.value)}
+              placeholder="Type a message..."
+              className="flex-1 bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F6FED]"
+            />
+            <button disabled={sendingMessage || !messageText.trim()} className="btn-grad px-5 py-2.5 rounded-xl font-bold text-sm disabled:opacity-50">
+              Send
+            </button>
+          </form>
         </div>
 
         <h2 className="font-bold text-lg mb-4">Submit Quotation</h2>

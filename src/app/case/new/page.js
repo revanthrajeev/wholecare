@@ -20,6 +20,7 @@ export default function NewCase() {
     existingTreatment: "",
     budgetRange: "",
     timeline: "",
+    consent: false,
   });
 
   useEffect(() => {
@@ -154,6 +155,17 @@ export default function NewCase() {
                   <span className="font-medium text-right max-w-xs">{v}</span>
                 </div>
               ))}
+              <label className="flex items-start gap-3 pt-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="accent-[#2F6FED] mt-0.5"
+                  checked={form.consent}
+                  onChange={(e) => update("consent", e.target.checked)}
+                />
+                <span className="text-[#344A61] text-sm">
+                  I consent to Whole Care sharing the medical information above with hospitals I choose to send my case to, for the purpose of coordinating my treatment.
+                </span>
+              </label>
             </div>
           )}
 
@@ -167,7 +179,7 @@ export default function NewCase() {
             )}
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || (step === STEPS.length - 1 && !form.consent)}
               className="flex-1 btn-grad py-3 rounded-xl font-bold disabled:opacity-50"
             >
               {step === STEPS.length - 1 ? (submitting ? "Submitting..." : "Submit Case") : "Continue"}

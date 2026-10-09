@@ -31,5 +31,9 @@ export async function GET() {
     hospitals: db.hospitals,
     patients: patients.map(({ passwordHash, ...p }) => p),
     inquiries: (db.inquiries || []).slice().reverse(),
+    auditLog: (db.auditLog || []).slice().reverse().slice(0, 100).map((a) => ({
+      ...a,
+      userEmail: (db.users || []).find((u) => u.id === a.userId)?.email || a.userId,
+    })),
   });
 }

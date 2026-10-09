@@ -35,6 +35,16 @@ export default function AdminOverview() {
     }
   }, [authChecked]);
 
+  async function approveHospital(id) {
+    await fetch(`/api/admin/hospitals/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ verified: true }),
+    });
+    const refreshed = await fetch("/api/admin/overview").then((r) => r.json());
+    setData(refreshed);
+  }
+
   if (!authChecked || !data) {
     return <main className="min-h-screen bg-white text-[#10243E] flex items-center justify-center">Loading&hellip;</main>;
   }
@@ -64,8 +74,8 @@ export default function AdminOverview() {
           ))}
         </div>
 
-        <div className="flex gap-3 mb-6">
-          {["cases", "hospitals", "patients", "inquiries"].map((t) => (
+        <div className="flex gap-3 mb-6 flex-wrap">
+          {["cases", "hospitals", "patients", "inquiries", "audit log"].map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -103,9 +113,23 @@ export default function AdminOverview() {
           <div className="grid md:grid-cols-2 gap-4">
             {data.hospitals.map((h) => (
               <div key={h.id} className={card}>
-                <p className="font-bold">{h.name}</p>
-                <p className="text-[#5B7184] text-sm mt-1">{h.city}, {h.country} &middot; {h.accreditation}</p>
-                <p className="text-[#9AADBD] text-xs mt-1">Rating {h.rating} ({h.reviewCount} reviews)</p>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-bold">{h.name}</p>
+                    <p className="text-[#5B7184] text-sm mt-1">{h.city}, {h.country} &middot; {h.accreditation}</p>
+                    <p className="text-[#9AADBD] text-xs mt-1">{h.rating ? `Rating ${h.rating} (${h.reviewCount} reviews)` : "No reviews yet"}</p>
+                  </div>
+                  {h.verified ? (
+                    <span className="text-xs font-bold bg-[#1E9E6B]/10 text-[#1E9E6B] px-2.5 py-1 rounded-full shrink-0">Verified</span>
+                  ) : (
+                    <button
+                      onClick={() => approveHospital(h.id)}
+                      className="text-xs font-bold bg-[#D9A441]/10 text-[#8A6420] px-3 py-1.5 rounded-full shrink-0 hover:bg-[#D9A441]/20 transition"
+                    >
+                      Approve
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -139,6 +163,27 @@ export default function AdminOverview() {
                 {inq.message && <p className="text-[#344A61] text-sm mt-2">{inq.message}</p>}
               </div>
             ))}
+          </div>
+        )}
+
+        {tab === "audit log" && (
+          <div className="rounded-2xl wc-card overflow-hidden">
+            {data.auditLog.length === 0 ? (
+              <p className="text-[#5B7184] text-sm p-6">No audit events recorded yet.</p>
+            ) : (
+              <table className="w-full text-sm">
+                <tbody>
+                  {data.auditLog.map((a) => (
+                    <tr key={a.id} className="border-b border-[#E3EAF2] last:border-0">
+                      <td className="p-4 text-[#344A61] font-medium">{a.action}</td>
+                      <td className="p-4 text-[#5B7184]">{a.userEmail}</td>
+                      <td className="p-4 text-[#9AADBD] font-mono text-xs">{a.targetId}</td>
+                      <td className="p-4 text-[#9AADBD] text-xs whitespace-nowrap">{new Date(a.at).toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         )}
       </div>

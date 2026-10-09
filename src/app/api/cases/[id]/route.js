@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { readDb, writeDb } from "@/lib/db";
+import { notify } from "@/lib/notify";
+import { recordAudit } from "@/lib/audit";
+import { getCurrentUser } from "@/lib/auth";
 
 export async function GET(request, { params }) {
   const { id } = await params;
@@ -28,6 +31,13 @@ export async function PATCH(request, { params }) {
     c.timeline_events.push({
       label: `Case sent to ${body.sendToHospitalIds.length} hospital(s)`,
       at: new Date().toISOString(),
+    });
+
+    const user = await getCurrentUser();
+    recordAudit(db, { userId: user?.id || "unknown", action: "case.sent_to_hospitals", targetId: c.id });
+    body.sendToHospitalIds.forEach((hid) => {
+      const hospitalUser = db.users.find((u) => u.role === "hospital" && u.hospitalId === hid);
+      if (hospitalUser) notify(db, { userId: hospitalUser.id, message: `New case: ${c.patientName}`, link: `/hospital/${hid}/case/${c.id}` });
     });
   }
 
