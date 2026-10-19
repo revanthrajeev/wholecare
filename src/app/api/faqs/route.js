@@ -1,7 +1,6 @@
-import { NextResponse } from "next/server";
-import { readDb } from "@/lib/db";
+import { ok } from "@/lib/http";
+import { FAQS } from "@/content/faqs";
 
 export async function GET() {
-  const db = readDb();
-  return NextResponse.json(db.faqs || []);
+  return ok(FAQS);
 }

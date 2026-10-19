@@ -1,67 +1,66 @@
-import { NextResponse } from "next/server";
-import { readDb } from "@/lib/db";
+import { ok, fail, readJson } from "@/lib/http";
+import { getPublicHospitals } from "@/lib/data";
+import { treatmentBySlug } from "@/content/treatments";
 
-// Original scoring model: weights specialty fit, budget fit (against treatment
-// cost ranges for that specialty), hospital rating, and destination city match.
+// Transparent scoring — every point awarded comes with a human-readable reason.
 export async function POST(request) {
-  const body = await request.json();
-  const specialty = (body.specialty || "").trim();
-  const city = (body.city || "").trim().toLowerCase();
-  const maxBudget = Number(body.maxBudget) || null;
+  const body = await readJson(request);
+  const treatment = treatmentBySlug(body.treatmentSlug);
+  const specialty = treatment?.specialty || String(body.specialty || "");
+  if (!specialty) return fail("Choose a treatment or specialty.");
+  const budget = Number(body.maxBudget) || null;
   const minRating = Number(body.minRating) || 0;
+  const destination = String(body.destination || "");
+  const language = String(body.language || "");
+  const weights = { price: 1, quality: 1, speed: 1, ...(body.priorities || {}) };
 
-  const db = readDb();
-
-  const scored = db.hospitals
+  const matches = getPublicHospitals()
+    .filter((h) => h.specialties.includes(specialty))
+    .filter((h) => !minRating || (h.rating || 0) >= minRating)
     .map((h) => {
-      let score = 0;
-      const reasons = [];
-
-      const specialtyMatch = specialty && h.specialties.includes(specialty);
-      if (specialtyMatch) {
-        score += 40;
-        reasons.push(`Offers ${specialty}`);
-      } else if (specialty) {
-        return null; // not a candidate at all if it doesn't offer the requested specialty
+      let score = 30;
+      const reasons = [{ text: `Offers ${specialty}`, tone: "good" }];
+      const range = treatment?.prices?.[h.country] || null;
+      if (budget && range) {
+        if (range[1] <= budget) {
+          score += 25 * weights.price;
+          reasons.push({ text: "Typical range within your budget", tone: "good" });
+        } else if (range[0] <= budget) {
+          score += 12 * weights.price;
+          reasons.push({ text: "Budget covers the lower end of the typical range", tone: "neutral" });
+        } else {
+          score -= 20 * weights.price;
+          reasons.push({ text: "Typical range is above your budget", tone: "warn" });
+        }
+      } else if (range) {
+        score += Math.max(0, 12 - range[0] / 2500) * weights.price;
       }
-
-      if (h.rating) {
-        const ratingScore = Math.max(0, Math.min(25, (h.rating - 3) * 12.5));
-        score += ratingScore;
-        if (h.rating >= minRating) reasons.push(`${h.rating}★ rated (${h.reviewCount} reviews)`);
-      }
-      if (minRating && (!h.rating || h.rating < minRating)) {
-        return null;
-      }
-
-      if (city) {
-        if (h.city.toLowerCase().includes(city) || h.country.toLowerCase().includes(city)) {
+      if (destination && destination !== "any") {
+        if (h.country === destination) {
           score += 15;
-          reasons.push(`Located in ${h.city}`);
-        }
+          reasons.push({ text: `In ${h.country}, your preferred destination`, tone: "good" });
+        } else score -= 10;
       }
-
-      if (maxBudget) {
-        const relevantTreatments = db.treatments.filter((t) => !specialty || t.specialty === specialty);
-        const affordable = relevantTreatments.some((t) => t.indiaCostLow <= maxBudget);
-        if (affordable) {
-          score += 20;
-          reasons.push("Treatment cost fits your budget");
-        } else if (relevantTreatments.length > 0) {
-          score -= 15;
-          reasons.push("May exceed your stated budget");
-        }
+      if (h.rating) {
+        score += (h.rating - 3) * 10 * weights.quality;
+        if (h.rating >= 4.5) reasons.push({ text: `${h.rating.toFixed(1)}★ from ${h.reviewCount} review${h.reviewCount === 1 ? "" : "s"}`, tone: "good" });
       }
-
-      if (h.verified) {
-        score += 5;
-        reasons.push("Verified accreditation");
+      if (h.accreditations.includes("JCI")) {
+        score += 5 * weights.quality;
+        reasons.push({ text: "JCI accredited", tone: "good" });
       }
-
-      return { hospital: h, score: Math.round(Math.max(0, score)), reasons };
+      if (language) {
+        if (h.languages.includes(language)) {
+          score += 10;
+          reasons.push({ text: `${language}-speaking staff`, tone: "good" });
+        } else reasons.push({ text: `No listed ${language} interpreters`, tone: "warn" });
+      }
+      if (h.responseHours) {
+        score += Math.max(0, 10 - h.responseHours / 3) * weights.speed;
+        if (h.responseHours <= 12) reasons.push({ text: `Replies in ~${h.responseHours}h`, tone: "good" });
+      }
+      return { hospital: h, score: Math.max(0, Math.min(100, Math.round(score))), reasons, range };
     })
-    .filter(Boolean)
     .sort((a, b) => b.score - a.score);
-
-  return NextResponse.json({ matches: scored });
+  return ok({ matches, specialty, treatment: treatment ? { slug: treatment.slug, name: treatment.name } : null });
 }

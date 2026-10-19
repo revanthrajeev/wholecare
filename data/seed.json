@@ -1,126 +1,2657 @@
 {
+  "meta": {
+    "schemaVersion": 2,
+    "generatedAt": "2026-10-19T15:05:05.641Z"
+  },
+  "users": [
+    {
+      "id": "u_admin",
+      "role": "admin",
+      "name": "Whole Care Admin",
+      "email": "admin@wholecare.com",
+      "passwordHash": "d3b0cddb1ffe13457b115321cce11bc1:57617923b0123dd996f23a4715f87831d90707530cca859bf9b286bfcd13c28ba77d3583da97e75a54ee901d29e0eb662c1974fce936d8953bf3b516c645589c",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_coord",
+      "role": "coordinator",
+      "name": "Nadia Rahman",
+      "email": "care@wholecare.com",
+      "phone": "+971 4 000 0000",
+      "passwordHash": "7f64ba647a83e0a80ff0617404d8d243:7813b7909aed8c1b2f0a47e91b6090eddf9254d160c0f178b0d61d4063e4c224ba70880bb36eeb42e7eb24a2e4333290fa30ef4d54611dd7a782601138394c3f",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_demo_patient",
+      "role": "patient",
+      "name": "Aisha Karim",
+      "email": "demo.patient@wholecare.com",
+      "country": "UAE",
+      "phone": "+971 50 000 0000",
+      "passwordHash": "ce51e0d19a85cefcdddddbc447992f7e:61da0de3c799ffa3c7a20f88a342a61240c70a9e196671f246fc15929c8dbb36acf281089dc14e2b968a9dfc873b950ff3b69e5c84b7418d96a9a2cd531ccbce",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_p_okafor",
+      "role": "patient",
+      "name": "Daniel Okafor",
+      "email": "daniel.okafor@example.com",
+      "country": "Nigeria",
+      "passwordHash": "b0d6ddbd7b4b1dc9bd909784b67b4c48:01511905c794ab9f9efabe56141cefff4a0aa00e9432276a8d26d6321ce33e4538fd575841216c377f7ab822145ef8fbe50207edc9a97d292cf4d3c33517476b",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_p_hughes",
+      "role": "patient",
+      "name": "Margaret Hughes",
+      "email": "margaret.hughes@example.com",
+      "country": "United Kingdom",
+      "passwordHash": "47814fb43676cc02b24a2af26cb14bed:465853f4257e5d07695b57fa2bed0bcb6188a983bbf052ebf7ec795da752d56970f788703c96542863b0d5060b7ec0f5111898e288b308e07557aa04ee8b6247",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_p_uddin",
+      "role": "patient",
+      "name": "Nasreen Uddin",
+      "email": "nasreen.uddin@example.com",
+      "country": "Bangladesh",
+      "passwordHash": "1aaa17ef5e79933f93ecbcdd3e11dcbb:48ca9703ce581e1b430e95a5edbac4cbfec6c1dc7cda3d5f0ff4b32ee8aa5400c271efd332c5a220c62d75a361e3657ef8eba21bddfaf9f52a02ba0ac0e1a24e",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h1",
+      "role": "hospital",
+      "hospitalId": "h1",
+      "name": "Apex Global Hospital",
+      "email": "apex@demo.com",
+      "passwordHash": "acda2392a7cac1dd66af3b2f3b7356ec:bfb4a2d4ac5328fd8f4b447540496db4100413138e35447e4f04e411bc8452ed4e3ac2a5204ce47cea308fe35581b3635c80dde961e88dfd983cdca5b1a90d5b",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h2",
+      "role": "hospital",
+      "hospitalId": "h2",
+      "name": "Sunrise Medicity",
+      "email": "sunrise@demo.com",
+      "passwordHash": "2e443f9407baad78b88dc815a7846ed9:2c72a33dfce0d61076039d310838af0fc9d8702588170f5c2614bb917d46ff9e4af9814fb6590d557f2d61ed1e675e1bac6be125af317ae387998bcd2ed1839e",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h3",
+      "role": "hospital",
+      "hospitalId": "h3",
+      "name": "Horizon Speciality Centre",
+      "email": "horizon@demo.com",
+      "passwordHash": "f03369db7945e3ee07312b9b51cbdf6f:e205450bec6df391d2f5deb29c48238c5865840cce9683b92ab32c0ab8fa8465a4981aa74ac86cae3d163aa58054429c5cb4f8801bacec79b92e180262200e49",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h4",
+      "role": "hospital",
+      "hospitalId": "h4",
+      "name": "Northstar Heart & Joint Institute",
+      "email": "northstar@demo.com",
+      "passwordHash": "12706716872460d426312bec1d1c95d6:6cf003f4245e6fc4ee71a9e2f3a33bddd4aaf417174e3840e150a676accb0a2921354565834527de938ce7b26dab7e100fb0b585d2de334b772b211f371169d4",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h5",
+      "role": "hospital",
+      "hospitalId": "h5",
+      "name": "Meridyen Istanbul Hospital",
+      "email": "meridyen@demo.com",
+      "passwordHash": "170c70c8c0f46000f10eec1d75853087:65a682782a221c8dce0a64f4202b821264e1331b0e3b8be27a36031795650f24f0080e5e46c37357b5747a149274f5f971b09710e89fb92ea5fba41230b433a3",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h6",
+      "role": "hospital",
+      "hospitalId": "h6",
+      "name": "Lykia Coast Medical",
+      "email": "lykia@demo.com",
+      "passwordHash": "33ad446d7288e658f9c132516e3abe93:91a3d5f59b0518071bd01b591a329387becf9c19bdbc176647ab381e739257170f85368f5654ab852fd1b775103296ad8126141f4aaf7c9b72d20cb9e2901482",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h7",
+      "role": "hospital",
+      "hospitalId": "h7",
+      "name": "Lotus River International Hospital",
+      "email": "lotusriver@demo.com",
+      "passwordHash": "3cdba753490aebe1da7c5ada70a30595:7ce498e6047859ab7c1bc0120c8f04691e8e0aa3e5051d5b376e8ce9179520b377a4f18d088d156bd16ebdd9346406cb0c83f08079b5ce05bea2bbb7c5ba5940",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h8",
+      "role": "hospital",
+      "hospitalId": "h8",
+      "name": "Lumen Bay Medical Centre",
+      "email": "lumenbay@demo.com",
+      "passwordHash": "21404917777b18d70ac152f997b73bff:46205b9ca36fc0f88db7ecc2ea06b8ad9bde05247b3969bc0db7a8b384ff6a22bf08fed5b0abf55cdb825c2bef1091ef3628bd025b25f4f3cbeeb25a21c0aa4a",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h9",
+      "role": "hospital",
+      "hospitalId": "h9",
+      "name": "Pacifica Frontera Medical",
+      "email": "pacifica@demo.com",
+      "passwordHash": "3a468dff1b4973addf20eabb8ab1c48f:ff736cb51be3778cd53bc00602396c89869b912bbc1e84b24b15b4328ca7e765289384400a01dc3237db6416d1ad8fdd46120a97be11a9a147ce4e59690bcb8c",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h10",
+      "role": "hospital",
+      "hospitalId": "h10",
+      "name": "Crescent Palm Hospital",
+      "email": "crescentpalm@demo.com",
+      "passwordHash": "591ac78ef255d5fe5e820f84d444ba58:4aeaa0e759c918c8c59bf1ee27596d9021d040ab3119189255b9c7a1ce7bca47bd6869bf09a8858a5c2d4741853b6de20880e57c6a51c0f0f0bac59b48d1a0de",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "u_h11",
+      "role": "hospital",
+      "hospitalId": "h11",
+      "name": "Seri Kenanga Specialist Hospital",
+      "email": "serikenanga@demo.com",
+      "passwordHash": "c190654759cf72294e27eac33e4eb859:e76b2d6849d6a74164b565f9297e3f0908c9582f140cafeba02ed4ce2cf64c549724969f7b7e4c531f03539f0beeb045299c7af78342f61b9e8aa5f1250f7056",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    }
+  ],
+  "sessions": [],
   "hospitals": [
     {
       "id": "h1",
       "name": "Apex Global Hospital",
       "city": "Bangalore",
       "country": "India",
-      "accreditation": "JCI Accredited",
-      "specialties": ["Cardiac Surgery", "Orthopedics", "Oncology"],
-      "intlPatientDept": true,
-      "languages": ["English", "Arabic", "Russian"],
+      "lat": 12.9716,
+      "lng": 77.5946,
+      "accreditations": [
+        "JCI",
+        "NABH"
+      ],
+      "specialties": [
+        "Cardiac Surgery",
+        "Orthopedics",
+        "Oncology",
+        "Spine Surgery"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Arabic",
+        "Russian"
+      ],
+      "beds": 650,
+      "established": 2004,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Visa invitation letter",
+        "Accommodation help",
+        "Halal meals",
+        "Prayer room",
+        "International patient lounge"
+      ],
+      "description": "Multi-specialty tertiary hospital with a dedicated international patient department, known for its cardiac and joint-replacement programmes.",
+      "highlights": [
+        "Hybrid cardiac operating theatres",
+        "Robotic-assisted joint replacement",
+        "On-site international patient lounge"
+      ],
+      "image": "/images/hospitals/hospital_1.jpg",
       "verified": true,
       "lastVerified": "2026-09-28",
-      "rating": 4.7,
-      "reviewCount": 182
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 18,
+      "slug": "apex-global-hospital",
+      "accreditation": "JCI · NABH",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "apex@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
       "id": "h2",
       "name": "Sunrise Medicity",
       "city": "Chennai",
       "country": "India",
-      "accreditation": "NABH Accredited",
-      "specialties": ["Cardiac Surgery", "Transplant", "Neurosurgery"],
-      "intlPatientDept": true,
-      "languages": ["English", "French"],
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "accreditations": [
+        "NABH"
+      ],
+      "specialties": [
+        "Transplant Surgery",
+        "Neurosurgery",
+        "Orthopedics",
+        "Cardiac Surgery"
+      ],
+      "languages": [
+        "English",
+        "Tamil",
+        "Arabic",
+        "Bengali"
+      ],
+      "beds": 520,
+      "established": 2009,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Visa invitation letter",
+        "Accommodation help",
+        "Halal meals"
+      ],
+      "description": "Transplant and neurosciences centre with a living-donor transplant programme and a dedicated transplant coordination team.",
+      "highlights": [
+        "Living-donor liver and kidney transplant programme",
+        "Neuro-navigation and intraoperative imaging",
+        "Transplant committee paperwork support"
+      ],
+      "image": "/images/hospitals/hospital_2.jpg",
       "verified": true,
-      "lastVerified": "2026-09-30",
-      "rating": 4.5,
-      "reviewCount": 96
+      "lastVerified": "2026-09-25",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 26,
+      "slug": "sunrise-medicity",
+      "accreditation": "NABH",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "sunrise@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
       "id": "h3",
       "name": "Horizon Speciality Centre",
       "city": "Mumbai",
       "country": "India",
-      "accreditation": "JCI Accredited",
-      "specialties": ["Orthopedics", "Cosmetic Surgery", "Fertility"],
-      "intlPatientDept": true,
-      "languages": ["English", "Swahili"],
+      "lat": 19.076,
+      "lng": 72.8777,
+      "accreditations": [
+        "JCI",
+        "NABH"
+      ],
+      "specialties": [
+        "Fertility (IVF)",
+        "Cosmetic Surgery",
+        "Bariatric Surgery",
+        "Ophthalmology"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Arabic",
+        "French",
+        "Bengali"
+      ],
+      "beds": 280,
+      "established": 2011,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Visa invitation letter",
+        "Accommodation help",
+        "Partner residency suites"
+      ],
+      "description": "Speciality centre focused on fertility, bariatric, eye and aesthetic procedures, with residency suites for longer stays.",
+      "highlights": [
+        "In-house embryology lab",
+        "Day-surgery suites",
+        "Residency suites for IVF cycles"
+      ],
+      "image": "/images/hospitals/hospital_3.jpg",
       "verified": true,
-      "lastVerified": "2026-09-25",
-      "rating": 4.8,
-      "reviewCount": 127
+      "lastVerified": "2026-09-30",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 12,
+      "slug": "horizon-speciality-centre",
+      "accreditation": "JCI · NABH",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "horizon@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h4",
+      "name": "Northstar Heart & Joint Institute",
+      "city": "Gurugram",
+      "country": "India",
+      "lat": 28.4595,
+      "lng": 77.0266,
+      "accreditations": [
+        "JCI",
+        "NABH"
+      ],
+      "specialties": [
+        "Cardiac Surgery",
+        "Orthopedics",
+        "Spine Surgery",
+        "Bariatric Surgery"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Arabic",
+        "Russian",
+        "Uzbek"
+      ],
+      "beds": 410,
+      "established": 2013,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Visa invitation letter",
+        "Fast-track pre-op assessment",
+        "Accommodation help"
+      ],
+      "description": "Heart and joint institute near Delhi's international airport, with fast-track pre-operative assessment for international patients.",
+      "highlights": [
+        "Pre-op tests within 48 hours of arrival",
+        "Off-pump bypass programme",
+        "Minimally invasive spine unit"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-10-02",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 10,
+      "slug": "northstar-heart-joint-institute",
+      "accreditation": "JCI · NABH",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "northstar@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h5",
+      "name": "Meridyen Istanbul Hospital",
+      "city": "Istanbul",
+      "country": "Turkey",
+      "lat": 41.0082,
+      "lng": 28.9784,
+      "accreditations": [
+        "JCI",
+        "Ministry of Health licensed"
+      ],
+      "specialties": [
+        "Hair Restoration",
+        "Dental",
+        "Cosmetic Surgery",
+        "Bariatric Surgery",
+        "Ophthalmology"
+      ],
+      "languages": [
+        "Turkish",
+        "English",
+        "Arabic",
+        "German",
+        "Russian"
+      ],
+      "beds": 220,
+      "established": 2010,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Hotel desk",
+        "Visa invitation letter"
+      ],
+      "description": "Aesthetic, dental and bariatric hospital on Istanbul's European side with an in-house transfer and hotel desk.",
+      "highlights": [
+        "Surgeon-led hairline design",
+        "In-house dental lab",
+        "Bundled hotel and transfers"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-09-18",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 6,
+      "slug": "meridyen-istanbul-hospital",
+      "accreditation": "JCI · Ministry of Health licensed",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "meridyen@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h6",
+      "name": "Lykia Coast Medical",
+      "city": "Antalya",
+      "country": "Turkey",
+      "lat": 36.8969,
+      "lng": 30.7133,
+      "accreditations": [
+        "Ministry of Health licensed"
+      ],
+      "specialties": [
+        "Orthopedics",
+        "Dental",
+        "Ophthalmology",
+        "Fertility (IVF)"
+      ],
+      "languages": [
+        "Turkish",
+        "English",
+        "German",
+        "Russian"
+      ],
+      "beds": 180,
+      "established": 2014,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Seaside recovery stays"
+      ],
+      "description": "Coastal hospital combining elective orthopaedic, eye and dental care with seaside recovery stays.",
+      "highlights": [
+        "Seaside recovery residence",
+        "Same-week cataract scheduling"
+      ],
+      "image": null,
+      "verified": false,
+      "lastVerified": null,
+      "verification": {
+        "license": true,
+        "accreditation": false,
+        "intlDesk": true,
+        "siteVisit": false,
+        "notes": "Awaiting accreditation certificate upload."
+      },
+      "responseHours": null,
+      "slug": "lykia-coast-medical",
+      "accreditation": "Ministry of Health licensed",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "lykia@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h7",
+      "name": "Lotus River International Hospital",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "accreditations": [
+        "JCI",
+        "HA Thailand"
+      ],
+      "specialties": [
+        "Cardiac Surgery",
+        "Orthopedics",
+        "Cosmetic Surgery",
+        "Oncology",
+        "Spine Surgery"
+      ],
+      "languages": [
+        "Thai",
+        "English",
+        "Arabic",
+        "Japanese",
+        "Mandarin"
+      ],
+      "beds": 480,
+      "established": 2002,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Embassy liaison",
+        "Visa invitation letter",
+        "Halal meals"
+      ],
+      "description": "Bangkok international hospital with interpreters in more than a dozen languages and an embassy liaison desk.",
+      "highlights": [
+        "Embassy liaison desk",
+        "Hotel-style inpatient floors",
+        "Dedicated Arabic-speaking team"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-09-21",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 14,
+      "slug": "lotus-river-international-hospital",
+      "accreditation": "JCI · HA Thailand",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "lotusriver@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h8",
+      "name": "Lumen Bay Medical Centre",
+      "city": "Singapore",
+      "country": "Singapore",
+      "lat": 1.2903,
+      "lng": 103.8519,
+      "accreditations": [
+        "JCI",
+        "MOH licensed"
+      ],
+      "specialties": [
+        "Oncology",
+        "Transplant Surgery",
+        "Neurosurgery",
+        "Cardiac Surgery"
+      ],
+      "languages": [
+        "English",
+        "Mandarin",
+        "Malay",
+        "Bahasa Indonesia"
+      ],
+      "beds": 350,
+      "established": 2008,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Tumour board reviews",
+        "Visa support letter"
+      ],
+      "description": "Tertiary referral centre for complex oncology, neurosurgery and transplant, with weekly multidisciplinary tumour boards.",
+      "highlights": [
+        "Weekly multidisciplinary tumour board",
+        "Image-guided neurosurgery suites",
+        "Remote records review before travel"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-09-29",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 20,
+      "slug": "lumen-bay-medical-centre",
+      "accreditation": "JCI · MOH licensed",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "lumenbay@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h9",
+      "name": "Pacifica Frontera Medical",
+      "city": "Tijuana",
+      "country": "Mexico",
+      "lat": 32.5149,
+      "lng": -117.0382,
+      "accreditations": [
+        "CSG certified"
+      ],
+      "specialties": [
+        "Bariatric Surgery",
+        "Dental",
+        "Cosmetic Surgery",
+        "Orthopedics"
+      ],
+      "languages": [
+        "Spanish",
+        "English"
+      ],
+      "beds": 120,
+      "established": 2012,
+      "services": [
+        "San Diego airport shuttle",
+        "Interpreters",
+        "Recovery hotel",
+        "Dietitian follow-up"
+      ],
+      "description": "Border-city hospital about 20 minutes from San Diego, with bariatric, dental and aesthetic programmes and a cross-border shuttle.",
+      "highlights": [
+        "Cross-border shuttle from San Diego",
+        "Six-month dietitian follow-up",
+        "Same-time-zone care for the US West Coast"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-09-24",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 8,
+      "slug": "pacifica-frontera-medical",
+      "accreditation": "CSG certified",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "pacifica@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h10",
+      "name": "Crescent Palm Hospital",
+      "city": "Dubai",
+      "country": "UAE",
+      "lat": 25.2048,
+      "lng": 55.2708,
+      "accreditations": [
+        "JCI",
+        "DHA licensed"
+      ],
+      "specialties": [
+        "Orthopedics",
+        "Fertility (IVF)",
+        "Cardiac Surgery",
+        "Ophthalmology"
+      ],
+      "languages": [
+        "Arabic",
+        "English",
+        "Hindi",
+        "Urdu",
+        "Russian"
+      ],
+      "beds": 300,
+      "established": 2015,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Medical visa sponsorship",
+        "Family suites"
+      ],
+      "description": "Premium Dubai hospital for patients who want international-standard care closer to home in the GCC.",
+      "highlights": [
+        "Family suites",
+        "Sports medicine and joint unit",
+        "Medical visa sponsorship"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-10-05",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 9,
+      "slug": "crescent-palm-hospital",
+      "accreditation": "JCI · DHA licensed",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "crescentpalm@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
+    },
+    {
+      "id": "h11",
+      "name": "Seri Kenanga Specialist Hospital",
+      "city": "Kuala Lumpur",
+      "country": "Malaysia",
+      "lat": 3.139,
+      "lng": 101.6869,
+      "accreditations": [
+        "MSQH",
+        "JCI"
+      ],
+      "specialties": [
+        "Cardiac Surgery",
+        "Fertility (IVF)",
+        "Orthopedics",
+        "Oncology"
+      ],
+      "languages": [
+        "Malay",
+        "English",
+        "Mandarin",
+        "Arabic",
+        "Bahasa Indonesia"
+      ],
+      "beds": 390,
+      "established": 2006,
+      "services": [
+        "Airport pickup",
+        "Interpreters",
+        "Visa support letter",
+        "Halal meals",
+        "Prayer room"
+      ],
+      "description": "Kuala Lumpur specialist hospital known for fertility and cardiac care, popular with Indonesian and Middle Eastern patients.",
+      "highlights": [
+        "Fertility monitoring can start at home",
+        "Muslim-friendly facilities",
+        "Cardiac rehab gym"
+      ],
+      "image": null,
+      "verified": true,
+      "lastVerified": "2026-09-27",
+      "verification": {
+        "license": true,
+        "accreditation": true,
+        "intlDesk": true,
+        "siteVisit": true
+      },
+      "responseHours": 16,
+      "slug": "seri-kenanga-specialist-hospital",
+      "accreditation": "MSQH · JCI",
+      "sample": true,
+      "intlPatientDept": true,
+      "contactEmail": "serikenanga@demo.com",
+      "createdAt": "2026-09-01T00:00:00.000Z"
     }
   ],
   "doctors": [
-    { "id": "d1", "name": "Dr. Arvind Rao", "hospitalId": "h1", "specialty": "Cardiac Surgery", "experience": "22 years", "languages": ["English", "Arabic"], "procedures": ["CABG", "Valve Replacement", "Angioplasty"] },
-    { "id": "d2", "name": "Dr. Priya Menon", "hospitalId": "h2", "specialty": "Transplant Surgery", "experience": "18 years", "languages": ["English", "French"], "procedures": ["Liver Transplant", "Kidney Transplant"] },
-    { "id": "d3", "name": "Dr. Sanjay Kapoor", "hospitalId": "h1", "specialty": "Orthopedics", "experience": "15 years", "languages": ["English", "Russian"], "procedures": ["Total Knee Replacement", "Hip Replacement"] },
-    { "id": "d4", "name": "Dr. Leila Haddad", "hospitalId": "h3", "specialty": "Fertility (IVF)", "experience": "12 years", "languages": ["English", "Arabic", "Swahili"], "procedures": ["IVF", "ICSI", "Fertility Preservation"] },
-    { "id": "d5", "name": "Dr. Ramesh Iyer", "hospitalId": "h2", "specialty": "Neurosurgery", "experience": "20 years", "languages": ["English"], "procedures": ["Brain Tumor Resection", "Spine Surgery"] },
-    { "id": "d6", "name": "Dr. Neha Shah", "hospitalId": "h3", "specialty": "Cosmetic Surgery", "experience": "10 years", "languages": ["English", "Swahili"], "procedures": ["Rhinoplasty", "Body Contouring"] }
-  ],
-  "treatments": [
-    { "id": "t1", "name": "Coronary Bypass Surgery (CABG)", "specialty": "Cardiac Surgery", "indiaCostLow": 4500, "indiaCostHigh": 8500, "stayDays": "7-10", "homeCountryMultiple": "6-10x in US/UAE" },
-    { "id": "t2", "name": "Total Knee Replacement", "specialty": "Orthopedics", "indiaCostLow": 4000, "indiaCostHigh": 7500, "stayDays": "5-7", "homeCountryMultiple": "5-8x in US/UK" },
-    { "id": "t3", "name": "Liver Transplant", "specialty": "Transplant Surgery", "indiaCostLow": 35000, "indiaCostHigh": 55000, "stayDays": "21-28", "homeCountryMultiple": "10-15x in US" },
-    { "id": "t4", "name": "IVF Treatment", "specialty": "Fertility (IVF)", "indiaCostLow": 2500, "indiaCostHigh": 5500, "stayDays": "14-21", "homeCountryMultiple": "3-5x in US/UK" },
-    { "id": "t5", "name": "Oncology — Chemotherapy Course", "specialty": "Oncology", "indiaCostLow": 800, "indiaCostHigh": 3000, "stayDays": "varies", "homeCountryMultiple": "8-20x in US" },
-    { "id": "t6", "name": "Rhinoplasty", "specialty": "Cosmetic Surgery", "indiaCostLow": 2000, "indiaCostHigh": 4500, "stayDays": "2-4", "homeCountryMultiple": "3-6x in US/UK" }
-  ],
-  "countryGuides": [
     {
-      "slug": "india",
-      "country": "India",
-      "heroImage": "/images/hero/hero_hospital_atrium.jpg",
-      "tagline": "World-class hospitals, 70–80% lower cost than the US/UAE, and a mature international-patient infrastructure.",
-      "whyChoose": [
-        "JCI and NABH accredited hospitals in every major specialty",
-        "English-speaking medical and nursing staff nationwide",
-        "Established medical-visa process for 150+ countries",
-        "Significant cost savings without compromising outcomes",
-        "Direct flight connectivity from the Gulf, Africa and South Asia"
+      "id": "d1",
+      "slug": "dr-arvind-rao",
+      "name": "Dr. Arvind Rao",
+      "gender": "male",
+      "image": "/images/doctors/doctor_2.jpg",
+      "title": "MBBS, MS, MCh (Cardiothoracic Surgery)",
+      "specialty": "Cardiac Surgery",
+      "hospitalId": "h1",
+      "experienceYears": 22,
+      "languages": [
+        "English",
+        "Hindi",
+        "Arabic"
       ],
-      "visa": {
-        "type": "Medical Visa (e-Medical or regular)",
-        "duration": "Up to 60 days, extendable, triple-entry",
-        "notes": "Requires a hospital invitation letter — Whole Care generates this once a hospital accepts your case."
+      "procedures": [
+        "Coronary Artery Bypass (CABG)",
+        "Heart Valve Replacement",
+        "Minimally invasive cardiac surgery"
+      ],
+      "consultFeeUSD": 70,
+      "bio": "Cardiothoracic surgeon focused on adult bypass and valve surgery, including minimally invasive approaches.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
       },
-      "bestTimeToVisit": "October–March (cooler, comfortable for recovery and travel)",
-      "currency": "Indian Rupee (INR)",
-      "cities": ["Bangalore", "Chennai", "Mumbai"]
+      "sample": true
+    },
+    {
+      "id": "d2",
+      "slug": "dr-priya-menon",
+      "name": "Dr. Priya Menon",
+      "gender": "female",
+      "image": "/images/doctors/doctor_1.jpg",
+      "title": "MBBS, MS, MCh (Surgical Gastroenterology)",
+      "specialty": "Transplant Surgery",
+      "hospitalId": "h2",
+      "experienceYears": 18,
+      "languages": [
+        "English",
+        "Tamil",
+        "Malayalam"
+      ],
+      "procedures": [
+        "Living-Donor Liver Transplant",
+        "Kidney Transplant",
+        "Hepatobiliary surgery"
+      ],
+      "consultFeeUSD": 90,
+      "bio": "Transplant surgeon who leads the living-donor programme and its donor-assessment pathway.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d3",
+      "slug": "dr-sanjay-kapoor",
+      "name": "Dr. Sanjay Kapoor",
+      "gender": "male",
+      "image": "/images/doctors/doctor_4.jpg",
+      "title": "MBBS, MS (Orthopaedics), Fellowship in Arthroplasty",
+      "specialty": "Orthopedics",
+      "hospitalId": "h1",
+      "experienceYears": 16,
+      "languages": [
+        "English",
+        "Hindi"
+      ],
+      "procedures": [
+        "Total Knee Replacement",
+        "Total Hip Replacement",
+        "Revision arthroplasty"
+      ],
+      "consultFeeUSD": 50,
+      "bio": "Joint-replacement surgeon with a particular interest in getting patients walking early and safely.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d4",
+      "slug": "dr-leila-haddad",
+      "name": "Dr. Leila Haddad",
+      "gender": "female",
+      "image": "/images/doctors/doctor_3.jpg",
+      "title": "MBBS, MD (Obstetrics & Gynaecology), Fellowship in Reproductive Medicine",
+      "specialty": "Fertility (IVF)",
+      "hospitalId": "h3",
+      "experienceYears": 14,
+      "languages": [
+        "English",
+        "Arabic",
+        "French"
+      ],
+      "procedures": [
+        "IVF (one cycle)",
+        "ICSI",
+        "Egg freezing"
+      ],
+      "consultFeeUSD": 60,
+      "bio": "Fertility specialist who designs split-cycle plans so part of the monitoring can happen at home.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d5",
+      "slug": "dr-ramesh-iyer",
+      "name": "Dr. Ramesh Iyer",
+      "gender": "male",
+      "image": "/images/doctors/doctor_6.jpg",
+      "title": "MBBS, MS, MCh (Neurosurgery)",
+      "specialty": "Neurosurgery",
+      "hospitalId": "h2",
+      "experienceYears": 20,
+      "languages": [
+        "English",
+        "Tamil",
+        "Hindi"
+      ],
+      "procedures": [
+        "Brain Tumour Surgery",
+        "Spinal decompression",
+        "Deep brain stimulation evaluation"
+      ],
+      "consultFeeUSD": 80,
+      "bio": "Neurosurgeon working with neuro-navigation and intraoperative imaging for tumour and spine surgery.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d6",
+      "slug": "dr-neha-shah",
+      "name": "Dr. Neha Shah",
+      "gender": "female",
+      "image": "/images/doctors/doctor_5.jpg",
+      "title": "MBBS, MS, MCh (Plastic Surgery)",
+      "specialty": "Cosmetic Surgery",
+      "hospitalId": "h3",
+      "experienceYears": 12,
+      "languages": [
+        "English",
+        "Hindi",
+        "Gujarati"
+      ],
+      "procedures": [
+        "Rhinoplasty",
+        "Liposuction",
+        "Abdominoplasty"
+      ],
+      "consultFeeUSD": 55,
+      "bio": "Plastic surgeon focused on natural-looking facial and body contouring results.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d7",
+      "slug": "dr-meera-krishnan",
+      "name": "Dr. Meera Krishnan",
+      "gender": "female",
+      "image": null,
+      "title": "MBBS, MD, DM (Medical Oncology)",
+      "specialty": "Oncology",
+      "hospitalId": "h1",
+      "experienceYears": 15,
+      "languages": [
+        "English",
+        "Hindi",
+        "Kannada"
+      ],
+      "procedures": [
+        "Cancer Treatment Planning",
+        "Immunotherapy",
+        "Tumour board review"
+      ],
+      "consultFeeUSD": 75,
+      "bio": "Medical oncologist who chairs the hospital's weekly tumour board for international referrals.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d8",
+      "slug": "dr-kunal-desai",
+      "name": "Dr. Kunal Desai",
+      "gender": "male",
+      "image": null,
+      "title": "MBBS, MS, FMAS (Minimal Access Surgery)",
+      "specialty": "Bariatric Surgery",
+      "hospitalId": "h3",
+      "experienceYears": 13,
+      "languages": [
+        "English",
+        "Hindi",
+        "Marathi"
+      ],
+      "procedures": [
+        "Gastric Sleeve (Sleeve Gastrectomy)",
+        "Gastric Bypass"
+      ],
+      "consultFeeUSD": 50,
+      "bio": "Bariatric surgeon who pairs every operation with a structured dietitian programme.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d9",
+      "slug": "dr-vikram-sethi",
+      "name": "Dr. Vikram Sethi",
+      "gender": "male",
+      "image": null,
+      "title": "MBBS, MS, MCh (CTVS)",
+      "specialty": "Cardiac Surgery",
+      "hospitalId": "h4",
+      "experienceYears": 24,
+      "languages": [
+        "English",
+        "Hindi",
+        "Punjabi"
+      ],
+      "procedures": [
+        "Coronary Artery Bypass (CABG)",
+        "Off-pump bypass",
+        "Heart Valve Replacement"
+      ],
+      "consultFeeUSD": 80,
+      "bio": "Cardiac surgeon with a large off-pump bypass practice.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d10",
+      "slug": "dr-ananya-bose",
+      "name": "Dr. Ananya Bose",
+      "gender": "female",
+      "image": null,
+      "title": "MBBS, MS (Orthopaedics), Fellowship in Joint Replacement",
+      "specialty": "Orthopedics",
+      "hospitalId": "h4",
+      "experienceYears": 11,
+      "languages": [
+        "English",
+        "Hindi",
+        "Bengali"
+      ],
+      "procedures": [
+        "Total Knee Replacement",
+        "ACL Reconstruction"
+      ],
+      "consultFeeUSD": 45,
+      "bio": "Orthopaedic surgeon specialising in knee replacement and sports injuries.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d11",
+      "slug": "dr-emre-y-ld-z",
+      "name": "Dr. Emre Yıldız",
+      "gender": "male",
+      "image": null,
+      "title": "MD (Dermatology), Hair Restoration Fellowship",
+      "specialty": "Hair Restoration",
+      "hospitalId": "h5",
+      "experienceYears": 12,
+      "languages": [
+        "Turkish",
+        "English",
+        "Arabic"
+      ],
+      "procedures": [
+        "Hair Transplant (FUE, ~3,000 grafts)",
+        "DHI",
+        "Beard transplant"
+      ],
+      "consultFeeUSD": 40,
+      "bio": "Dermatologist who personally designs each hairline and supervises graft placement.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d12",
+      "slug": "dr-selin-ayd-n",
+      "name": "Dr. Selin Aydın",
+      "gender": "female",
+      "image": null,
+      "title": "DDS, PhD (Prosthodontics)",
+      "specialty": "Dental",
+      "hospitalId": "h5",
+      "experienceYears": 10,
+      "languages": [
+        "Turkish",
+        "English",
+        "German"
+      ],
+      "procedures": [
+        "Dental Implant (single, with crown)",
+        "All-on-4 Full-Arch Implants (per arch)",
+        "Veneers"
+      ],
+      "consultFeeUSD": 35,
+      "bio": "Prosthodontist focused on full-arch rehabilitation and implant planning.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d13",
+      "slug": "dr-murat-kaya",
+      "name": "Dr. Murat Kaya",
+      "gender": "male",
+      "image": null,
+      "title": "MD (Orthopaedics & Traumatology)",
+      "specialty": "Orthopedics",
+      "hospitalId": "h6",
+      "experienceYears": 17,
+      "languages": [
+        "Turkish",
+        "English",
+        "German"
+      ],
+      "procedures": [
+        "Total Hip Replacement",
+        "Total Knee Replacement",
+        "Arthroscopy"
+      ],
+      "consultFeeUSD": 50,
+      "bio": "Orthopaedic surgeon with a coastal recovery programme for joint patients.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d14",
+      "slug": "dr-deniz-arslan",
+      "name": "Dr. Deniz Arslan",
+      "gender": "female",
+      "image": null,
+      "title": "MD (Ophthalmology)",
+      "specialty": "Ophthalmology",
+      "hospitalId": "h6",
+      "experienceYears": 13,
+      "languages": [
+        "Turkish",
+        "English",
+        "Russian"
+      ],
+      "procedures": [
+        "Cataract Surgery (per eye)",
+        "LASIK",
+        "Refractive lens exchange"
+      ],
+      "consultFeeUSD": 40,
+      "bio": "Eye surgeon offering same-week cataract scheduling.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d15",
+      "slug": "dr-somchai-rattanakorn",
+      "name": "Dr. Somchai Rattanakorn",
+      "gender": "male",
+      "image": null,
+      "title": "MD, Board-certified Cardiothoracic Surgeon",
+      "specialty": "Cardiac Surgery",
+      "hospitalId": "h7",
+      "experienceYears": 21,
+      "languages": [
+        "Thai",
+        "English"
+      ],
+      "procedures": [
+        "Coronary Artery Bypass (CABG)",
+        "Heart Valve Replacement"
+      ],
+      "consultFeeUSD": 90,
+      "bio": "Cardiothoracic surgeon leading the hospital's international cardiac programme.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d16",
+      "slug": "dr-nattaya-srisuk",
+      "name": "Dr. Nattaya Srisuk",
+      "gender": "female",
+      "image": null,
+      "title": "MD, Board-certified Plastic Surgeon",
+      "specialty": "Cosmetic Surgery",
+      "hospitalId": "h7",
+      "experienceYears": 14,
+      "languages": [
+        "Thai",
+        "English",
+        "Japanese"
+      ],
+      "procedures": [
+        "Rhinoplasty",
+        "Facelift",
+        "Blepharoplasty"
+      ],
+      "consultFeeUSD": 70,
+      "bio": "Plastic surgeon known for conservative facial surgery.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d17",
+      "slug": "dr-rachel-tan",
+      "name": "Dr. Rachel Tan",
+      "gender": "female",
+      "image": null,
+      "title": "MBBS, MRCP, FAMS (Medical Oncology)",
+      "specialty": "Oncology",
+      "hospitalId": "h8",
+      "experienceYears": 16,
+      "languages": [
+        "English",
+        "Mandarin"
+      ],
+      "procedures": [
+        "Cancer Treatment Planning",
+        "Targeted therapy",
+        "Second opinions"
+      ],
+      "consultFeeUSD": 120,
+      "bio": "Medical oncologist who reviews international referrals at the weekly tumour board.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d18",
+      "slug": "dr-daniel-lim",
+      "name": "Dr. Daniel Lim",
+      "gender": "male",
+      "image": null,
+      "title": "MBBS, FRCS (Neurosurgery)",
+      "specialty": "Neurosurgery",
+      "hospitalId": "h8",
+      "experienceYears": 19,
+      "languages": [
+        "English",
+        "Mandarin",
+        "Malay"
+      ],
+      "procedures": [
+        "Brain Tumour Surgery",
+        "Endoscopic spine surgery"
+      ],
+      "consultFeeUSD": 120,
+      "bio": "Neurosurgeon specialising in image-guided tumour surgery.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d19",
+      "slug": "dr-alejandro-ruiz",
+      "name": "Dr. Alejandro Ruiz",
+      "gender": "male",
+      "image": null,
+      "title": "MD, Board-certified General & Bariatric Surgeon",
+      "specialty": "Bariatric Surgery",
+      "hospitalId": "h9",
+      "experienceYears": 15,
+      "languages": [
+        "Spanish",
+        "English"
+      ],
+      "procedures": [
+        "Gastric Sleeve (Sleeve Gastrectomy)",
+        "Gastric Bypass",
+        "Revision bariatric surgery"
+      ],
+      "consultFeeUSD": 45,
+      "bio": "Bariatric surgeon running a cross-border programme for US and Canadian patients.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d20",
+      "slug": "dr-sofia-morales",
+      "name": "Dr. Sofía Morales",
+      "gender": "female",
+      "image": null,
+      "title": "DDS (Implantology)",
+      "specialty": "Dental",
+      "hospitalId": "h9",
+      "experienceYears": 11,
+      "languages": [
+        "Spanish",
+        "English"
+      ],
+      "procedures": [
+        "Dental Implant (single, with crown)",
+        "All-on-4 Full-Arch Implants (per arch)",
+        "Crowns"
+      ],
+      "consultFeeUSD": 30,
+      "bio": "Implant dentist focused on two-visit full-arch treatment.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d21",
+      "slug": "dr-omar-al-farsi",
+      "name": "Dr. Omar Al-Farsi",
+      "gender": "male",
+      "image": null,
+      "title": "MBBS, FRCS (Trauma & Orthopaedics)",
+      "specialty": "Orthopedics",
+      "hospitalId": "h10",
+      "experienceYears": 18,
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "procedures": [
+        "Total Knee Replacement",
+        "ACL Reconstruction",
+        "Total Hip Replacement"
+      ],
+      "consultFeeUSD": 110,
+      "bio": "Orthopaedic surgeon covering joint replacement and sports injuries for GCC patients.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d22",
+      "slug": "dr-hana-nasser",
+      "name": "Dr. Hana Nasser",
+      "gender": "female",
+      "image": null,
+      "title": "MBBS, MRCOG, Subspecialty in Reproductive Medicine",
+      "specialty": "Fertility (IVF)",
+      "hospitalId": "h10",
+      "experienceYears": 13,
+      "languages": [
+        "Arabic",
+        "English",
+        "French"
+      ],
+      "procedures": [
+        "IVF (one cycle)",
+        "ICSI",
+        "Fertility preservation"
+      ],
+      "consultFeeUSD": 100,
+      "bio": "Reproductive medicine specialist with an Arabic-speaking fertility team.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d23",
+      "slug": "dr-aziz-rahman",
+      "name": "Dr. Aziz Rahman",
+      "gender": "male",
+      "image": null,
+      "title": "MBBS, MS, FRCS (Cardiothoracic)",
+      "specialty": "Cardiac Surgery",
+      "hospitalId": "h11",
+      "experienceYears": 20,
+      "languages": [
+        "Malay",
+        "English",
+        "Arabic"
+      ],
+      "procedures": [
+        "Coronary Artery Bypass (CABG)",
+        "Heart Valve Replacement",
+        "Coronary Angioplasty (PCI with stent)"
+      ],
+      "consultFeeUSD": 70,
+      "bio": "Cardiac surgeon leading the cardiac rehab programme for international patients.",
+      "availability": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "slots": [
+          "09:00",
+          "10:30",
+          "14:00",
+          "16:30"
+        ]
+      },
+      "sample": true
+    },
+    {
+      "id": "d24",
+      "slug": "dr-mei-ling-wong",
+      "name": "Dr. Mei Ling Wong",
+      "gender": "female",
+      "image": null,
+      "title": "MBBS, MOG, Fellowship in Reproductive Medicine",
+      "specialty": "Fertility (IVF)",
+      "hospitalId": "h11",
+      "experienceYears": 12,
+      "languages": [
+        "English",
+        "Mandarin",
+        "Malay"
+      ],
+      "procedures": [
+        "IVF (one cycle)",
+        "ICSI",
+        "Egg freezing"
+      ],
+      "consultFeeUSD": 65,
+      "bio": "Fertility specialist who starts monitoring remotely before patients travel.",
+      "availability": {
+        "days": [
+          1,
+          3,
+          5
+        ],
+        "slots": [
+          "10:00",
+          "11:30",
+          "15:00",
+          "17:00"
+        ]
+      },
+      "sample": true
     }
   ],
-  "consultations": [],
+  "packages": [
+    {
+      "id": "p1",
+      "hospitalId": "h1",
+      "treatmentSlug": "total-knee-replacement",
+      "title": "Knee Replacement Recovery Package",
+      "priceUSD": 6200,
+      "hospitalNights": 5,
+      "hotelNights": 10,
+      "includes": [
+        "Surgeon, anaesthesia and standard implant",
+        "5 nights in hospital",
+        "10 nights in a partner hotel near the hospital",
+        "Airport pickup and drop",
+        "Interpreter on request",
+        "6 physiotherapy sessions",
+        "2 follow-up video consults after you fly home"
+      ],
+      "excludes": [
+        "Flights",
+        "Premium implants",
+        "Post-discharge medication"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p2",
+      "hospitalId": "h4",
+      "treatmentSlug": "coronary-bypass-cabg",
+      "title": "Heart Bypass Package",
+      "priceUSD": 7900,
+      "hospitalNights": 8,
+      "hotelNights": 10,
+      "includes": [
+        "Surgeon, anaesthesia and perfusion fees",
+        "8 nights in hospital incl. 2 in ICU",
+        "10 nights in a partner hotel",
+        "Pre-op tests within 48 hours of arrival",
+        "Airport transfers and interpreter",
+        "Cardiac rehab session before departure"
+      ],
+      "excludes": [
+        "Flights",
+        "Extended ICU stay for complications"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p3",
+      "hospitalId": "h9",
+      "treatmentSlug": "gastric-sleeve",
+      "title": "Gastric Sleeve All-Inclusive",
+      "priceUSD": 5400,
+      "hospitalNights": 2,
+      "hotelNights": 3,
+      "includes": [
+        "Surgeon and anaesthesia fees",
+        "2 nights in hospital",
+        "3 nights recovery hotel",
+        "San Diego airport shuttle",
+        "6-month video dietitian programme"
+      ],
+      "excludes": [
+        "Flights",
+        "Supplements"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p4",
+      "hospitalId": "h5",
+      "treatmentSlug": "hair-transplant",
+      "title": "FUE 3,000 Grafts Package",
+      "priceUSD": 2600,
+      "hospitalNights": 0,
+      "hotelNights": 3,
+      "includes": [
+        "Procedure with surgeon-designed hairline",
+        "3 hotel nights",
+        "Airport and clinic transfers",
+        "Medication and wash kit",
+        "One PRP session",
+        "12-month online follow-up"
+      ],
+      "excludes": [
+        "Flights",
+        "Extra grafts beyond 3,000"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p5",
+      "hospitalId": "h5",
+      "treatmentSlug": "all-on-4-implants",
+      "title": "All-on-4 Single Arch",
+      "priceUSD": 5900,
+      "hospitalNights": 0,
+      "hotelNights": 12,
+      "includes": [
+        "Four implants and temporary bridge (visit 1)",
+        "Permanent bridge (visit 2)",
+        "6 hotel nights per visit",
+        "Transfers on both visits",
+        "CBCT scans"
+      ],
+      "excludes": [
+        "Flights",
+        "Extractions beyond the plan"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p6",
+      "hospitalId": "h11",
+      "treatmentSlug": "ivf",
+      "title": "IVF Cycle with ICSI",
+      "priceUSD": 5200,
+      "hospitalNights": 0,
+      "hotelNights": 14,
+      "includes": [
+        "Consultations and monitoring scans",
+        "Egg collection and ICSI",
+        "Embryo transfer",
+        "Remote monitoring before travel"
+      ],
+      "excludes": [
+        "Stimulation medication",
+        "Genetic testing (PGT)"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p7",
+      "hospitalId": "h3",
+      "treatmentSlug": "cataract-surgery",
+      "title": "Both Eyes Cataract Package",
+      "priceUSD": 2400,
+      "hospitalNights": 0,
+      "hotelNights": 4,
+      "includes": [
+        "Surgery on both eyes with standard monofocal lenses",
+        "4 hotel nights",
+        "Airport transfers",
+        "Post-op checks"
+      ],
+      "excludes": [
+        "Premium lenses",
+        "Glasses"
+      ],
+      "sample": true,
+      "active": true
+    },
+    {
+      "id": "p8",
+      "hospitalId": "h7",
+      "treatmentSlug": "rhinoplasty",
+      "title": "Rhinoplasty Comfort Package",
+      "priceUSD": 4900,
+      "hospitalNights": 1,
+      "hotelNights": 7,
+      "includes": [
+        "Surgeon and anaesthesia fees",
+        "1 night in hospital",
+        "7 hotel nights",
+        "Transfers and interpreter",
+        "Splint removal visit"
+      ],
+      "excludes": [
+        "Flights",
+        "Revision surgery"
+      ],
+      "sample": true,
+      "active": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "r1",
+      "hospitalId": "h1",
+      "author": "F. Al-Mansoori",
+      "country": "UAE",
+      "rating": 5,
+      "procedure": "Coronary bypass",
+      "text": "Coordination from the first consult to discharge felt like one case, not scattered across agents. The itemized quote matched the final bill.",
+      "date": "2026-08-12",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r2",
+      "hospitalId": "h1",
+      "author": "G. Oduya",
+      "country": "Kenya",
+      "rating": 4,
+      "procedure": "Knee replacement",
+      "text": "The physio team was excellent. Airport pickup ran late on arrival, but the coordinator sorted it out quickly.",
+      "date": "2026-07-30",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r3",
+      "hospitalId": "h2",
+      "author": "M. Rahman",
+      "country": "Bangladesh",
+      "rating": 5,
+      "procedure": "Kidney transplant",
+      "text": "The transplant coordinator explained every document the committee needed. A long stay, but we never felt lost.",
+      "date": "2026-06-18",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r4",
+      "hospitalId": "h3",
+      "author": "S. Chowdhury",
+      "country": "Bangladesh",
+      "rating": 5,
+      "procedure": "IVF",
+      "text": "Clear about what medication was and wasn't included — no surprises at the end.",
+      "date": "2026-08-03",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r5",
+      "hospitalId": "h3",
+      "author": "A. Benali",
+      "country": "Morocco",
+      "rating": 4,
+      "procedure": "Cataract surgery",
+      "text": "Quick and well organised. I would have liked my discharge notes in French as well as English.",
+      "date": "2026-07-11",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r6",
+      "hospitalId": "h4",
+      "author": "D. Petrov",
+      "country": "Uzbekistan",
+      "rating": 5,
+      "procedure": "Heart bypass",
+      "text": "Pre-op tests were done within two days of landing, with a Russian-speaking interpreter throughout.",
+      "date": "2026-09-02",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r7",
+      "hospitalId": "h5",
+      "author": "J. Murphy",
+      "country": "United Kingdom",
+      "rating": 5,
+      "procedure": "Hair transplant",
+      "text": "The surgeon designed the hairline personally and the hotel transfers were seamless.",
+      "date": "2026-08-21",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r8",
+      "hospitalId": "h5",
+      "author": "K. Alotaibi",
+      "country": "Saudi Arabia",
+      "rating": 4,
+      "procedure": "Dental implants",
+      "text": "Good result. It's a busy clinic, so book the second visit well in advance.",
+      "date": "2026-06-29",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r9",
+      "hospitalId": "h7",
+      "author": "E. Johnson",
+      "country": "Australia",
+      "rating": 5,
+      "procedure": "Rhinoplasty",
+      "text": "A calm, hotel-like hospital. Swelling went down exactly as they said it would.",
+      "date": "2026-07-19",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r10",
+      "hospitalId": "h8",
+      "author": "P. Santoso",
+      "country": "Indonesia",
+      "rating": 5,
+      "procedure": "Cancer treatment planning",
+      "text": "The tumour board gave us a clear plan with costs for each stage before we travelled.",
+      "date": "2026-08-27",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r11",
+      "hospitalId": "h9",
+      "author": "R. Alvarez",
+      "country": "United States",
+      "rating": 5,
+      "procedure": "Gastric sleeve",
+      "text": "The shuttle from San Diego made it easy, and the dietitian check-ins continued after I got home.",
+      "date": "2026-09-09",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r12",
+      "hospitalId": "h9",
+      "author": "L. Chen",
+      "country": "Canada",
+      "rating": 4,
+      "procedure": "Dental implants",
+      "text": "Saved a lot compared with quotes at home. Two trips were needed, which they explained upfront.",
+      "date": "2026-05-22",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r13",
+      "hospitalId": "h10",
+      "author": "H. Al-Balushi",
+      "country": "Oman",
+      "rating": 5,
+      "procedure": "ACL reconstruction",
+      "text": "Close to home with everything in Arabic. Pricier than India, but worth it for our family.",
+      "date": "2026-08-08",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    },
+    {
+      "id": "r14",
+      "hospitalId": "h11",
+      "author": "N. Putri",
+      "country": "Indonesia",
+      "rating": 5,
+      "procedure": "IVF",
+      "text": "A kind team and clear pricing. Monitoring started at home before we flew.",
+      "date": "2026-09-14",
+      "sample": true,
+      "verified": false,
+      "status": "published"
+    }
+  ],
   "cases": [
     {
       "id": "case_demo1",
       "ownerId": "u_demo_patient",
+      "type": "treatment",
       "patientName": "Aisha Karim",
+      "patientAge": 52,
       "countryOfResidence": "UAE",
+      "treatmentSlug": "coronary-bypass-cabg",
+      "specialty": "Cardiac Surgery",
       "preferredDestination": "India",
-      "condition": "Diagnosed with coronary artery disease, local cardiologist recommended bypass surgery.",
-      "existingTreatment": "On medication (beta blockers), angiogram report available.",
+      "condition": "Diagnosed with coronary artery disease; my cardiologist recommended bypass surgery after an angiogram.",
+      "existingTreatment": "On beta blockers and aspirin. Angiogram report and discharge summary attached.",
       "budgetRange": "$6,000–10,000",
       "timeline": "Within 6 weeks",
-      "documents": ["discharge_summary.pdf", "angiogram_report.pdf"],
       "stage": "Quotation Received",
-      "sentToHospitals": ["h1", "h2"],
-      "createdAt": "2026-09-20T09:00:00.000Z",
+      "sentToHospitals": [
+        "h1",
+        "h4"
+      ],
+      "coordinatorId": "u_coord",
+      "hospitalStatus": {
+        "h1": {
+          "status": "quoted"
+        },
+        "h4": {
+          "status": "quoted"
+        }
+      },
+      "consentGivenAt": "2026-10-06T08:40:00.000Z",
+      "createdAt": "2026-10-06T08:40:00.000Z",
       "timeline_events": [
-        { "label": "Case submitted", "at": "2026-09-20T09:00:00.000Z" },
-        { "label": "Case sent to 2 hospital(s)", "at": "2026-09-21T10:00:00.000Z" },
-        { "label": "Quotation received from Apex Global Hospital", "at": "2026-09-23T14:00:00.000Z" }
-      ]
+        {
+          "label": "Case submitted",
+          "at": "2026-10-06T08:40:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Coordinator Nadia Rahman assigned",
+          "at": "2026-10-06T10:05:00.000Z",
+          "kind": "coordinator"
+        },
+        {
+          "label": "Case sent to 2 hospitals",
+          "at": "2026-10-07T09:00:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Quotation received from Apex Global Hospital",
+          "at": "2026-10-09T13:20:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Quotation received from Northstar Heart & Joint Institute",
+          "at": "2026-10-10T11:45:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Video consultation with Dr. Arvind Rao confirmed",
+          "at": "2026-10-11T07:30:00.000Z",
+          "kind": "system"
+        }
+      ],
+      "messages": [
+        {
+          "id": "msg_d1",
+          "senderId": "u_h1",
+          "senderRole": "hospital",
+          "senderLabel": "Apex Global Hospital",
+          "text": "Hello Aisha — Dr. Rao has reviewed your angiogram. He'd also like a recent echocardiogram if you have one, so he can confirm the plan during your video consult.",
+          "at": "2026-10-08T10:12:00.000Z"
+        },
+        {
+          "id": "msg_d2",
+          "senderId": "u_demo_patient",
+          "senderRole": "patient",
+          "senderLabel": "Aisha Karim",
+          "text": "Thank you. I had an echo in September — uploading it this week.",
+          "at": "2026-10-08T15:40:00.000Z"
+        },
+        {
+          "id": "msg_d3",
+          "senderId": "u_coord",
+          "senderRole": "coordinator",
+          "senderLabel": "Nadia Rahman (Whole Care)",
+          "text": "Both quotes are in. Northstar includes 3 hotel nights; Apex doesn't but is $450 lower. Happy to walk through them on a call.",
+          "at": "2026-10-10T12:30:00.000Z"
+        }
+      ],
+      "travel": {
+        "arrivalDate": "",
+        "flightNumber": "",
+        "departureDate": "",
+        "companions": 1,
+        "accommodation": "",
+        "airportPickup": true,
+        "interpreterLanguage": "Arabic",
+        "notes": ""
+      },
+      "visaLetter": {
+        "status": "none"
+      },
+      "recovery": {
+        "plan": [],
+        "checkins": []
+      },
+      "share": {
+        "enabled": false,
+        "token": null
+      },
+      "updatedAt": "2026-10-11T07:30:00.000Z"
     },
     {
       "id": "case_demo2",
       "ownerId": "u_demo_patient",
-      "patientName": "Aisha Karim",
+      "type": "second_opinion",
+      "patientName": "Yusuf Karim",
+      "patientAge": 61,
       "countryOfResidence": "UAE",
+      "treatmentSlug": "total-knee-replacement",
+      "specialty": "Orthopedics",
       "preferredDestination": "India",
-      "condition": "Chronic right knee pain, orthopedic specialist recommended total knee replacement.",
-      "existingTreatment": "Physiotherapy for 6 months, X-rays available.",
-      "budgetRange": "$4,000–7,000",
-      "timeline": "Flexible, within 3 months",
-      "documents": ["xray_report.pdf"],
-      "stage": "Submitted",
-      "sentToHospitals": [],
-      "createdAt": "2026-10-05T11:30:00.000Z",
+      "condition": "Knee osteoarthritis (right knee). Local surgeon advised total knee replacement.",
+      "existingTreatment": "Physiotherapy for 6 months and two steroid injections, with limited relief. MRI report attached.",
+      "questions": "Is a knee replacement needed now, or could other treatment delay it? If surgery is needed, which implant would you suggest for a 61-year-old who walks a lot?",
+      "budgetRange": "",
+      "timeline": "Exploring options",
+      "stage": "Under Review",
+      "sentToHospitals": [
+        "h1"
+      ],
+      "coordinatorId": "u_coord",
+      "hospitalStatus": {
+        "h1": {
+          "status": "reviewing"
+        }
+      },
+      "secondOpinion": {
+        "doctorId": "d3",
+        "hospitalId": "h1",
+        "status": "in_review",
+        "requestedAt": "2026-10-14T09:10:00.000Z",
+        "dueBy": "2026-10-21"
+      },
+      "consentGivenAt": "2026-10-14T09:10:00.000Z",
+      "createdAt": "2026-10-14T09:10:00.000Z",
       "timeline_events": [
-        { "label": "Case submitted", "at": "2026-10-05T11:30:00.000Z" }
-      ]
+        {
+          "label": "Second-opinion request submitted",
+          "at": "2026-10-14T09:10:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Assigned to Dr. Sanjay Kapoor (Orthopedics)",
+          "at": "2026-10-14T13:00:00.000Z",
+          "kind": "coordinator"
+        }
+      ],
+      "messages": [],
+      "travel": {
+        "arrivalDate": "",
+        "flightNumber": "",
+        "departureDate": "",
+        "companions": 0,
+        "accommodation": "",
+        "airportPickup": false,
+        "interpreterLanguage": "",
+        "notes": ""
+      },
+      "visaLetter": {
+        "status": "none"
+      },
+      "recovery": {
+        "plan": [],
+        "checkins": []
+      },
+      "share": {
+        "enabled": false,
+        "token": null
+      },
+      "updatedAt": "2026-10-14T13:00:00.000Z"
+    },
+    {
+      "id": "case_demo3",
+      "ownerId": "u_demo_patient",
+      "type": "treatment",
+      "patientName": "Fatima Karim",
+      "patientAge": 58,
+      "countryOfResidence": "UAE",
+      "treatmentSlug": "total-knee-replacement",
+      "specialty": "Orthopedics",
+      "preferredDestination": "India",
+      "condition": "Severe arthritis in the right knee; walking limited to short distances.",
+      "existingTreatment": "Painkillers and physiotherapy for two years.",
+      "budgetRange": "$5,000–8,000",
+      "timeline": "August 2026",
+      "stage": "Completed",
+      "sentToHospitals": [
+        "h1"
+      ],
+      "coordinatorId": "u_coord",
+      "acceptedQuoteId": "quo_demo3",
+      "hospitalStatus": {
+        "h1": {
+          "status": "discharged"
+        }
+      },
+      "consentGivenAt": "2026-07-28T07:00:00.000Z",
+      "createdAt": "2026-07-28T07:00:00.000Z",
+      "timeline_events": [
+        {
+          "label": "Case submitted",
+          "at": "2026-07-28T07:00:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Quotation received from Apex Global Hospital",
+          "at": "2026-07-30T12:00:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Quote accepted — price locked at $6,450",
+          "at": "2026-08-01T09:30:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Visa invitation letter issued",
+          "at": "2026-08-02T11:00:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Arrived in Bangalore — airport pickup completed",
+          "at": "2026-08-18T22:10:00.000Z",
+          "kind": "coordinator"
+        },
+        {
+          "label": "Admitted for surgery",
+          "at": "2026-08-20T06:30:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Surgery completed successfully",
+          "at": "2026-08-20T13:45:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Discharged to partner hotel",
+          "at": "2026-08-25T11:00:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Flew home — recovery plan active",
+          "at": "2026-09-01T18:00:00.000Z",
+          "kind": "coordinator"
+        },
+        {
+          "label": "Case completed after 6-week follow-up",
+          "at": "2026-10-02T12:00:00.000Z",
+          "kind": "coordinator"
+        }
+      ],
+      "messages": [
+        {
+          "id": "msg_f1",
+          "senderId": "u_h1",
+          "senderRole": "hospital",
+          "senderLabel": "Apex Global Hospital",
+          "text": "Mrs. Karim is out of surgery and recovering well. Dr. Kapoor will see her on the ward this evening.",
+          "at": "2026-08-20T14:05:00.000Z"
+        },
+        {
+          "id": "msg_f2",
+          "senderId": "u_demo_patient",
+          "senderRole": "patient",
+          "senderLabel": "Aisha Karim",
+          "text": "Thank you so much for the update — the family tracker has been a relief for everyone at home.",
+          "at": "2026-08-20T14:30:00.000Z"
+        }
+      ],
+      "travel": {
+        "arrivalDate": "2026-08-18",
+        "flightNumber": "EK 568",
+        "departureDate": "2026-09-01",
+        "companions": 1,
+        "accommodation": "Partner hotel 1.2 km from hospital",
+        "airportPickup": true,
+        "interpreterLanguage": "Arabic",
+        "notes": "Wheelchair assistance booked for the return flight."
+      },
+      "visaLetter": {
+        "status": "issued",
+        "requestedAt": "2026-08-01T10:00:00.000Z",
+        "issuedAt": "2026-08-02T11:00:00.000Z",
+        "issuedBy": "h1",
+        "refNo": "AGH/IPD/2026/0814"
+      },
+      "recovery": {
+        "plan": [
+          {
+            "id": "rt1",
+            "title": "Wound check with surgeon (video)",
+            "due": "2026-08-31",
+            "done": true
+          },
+          {
+            "id": "rt2",
+            "title": "Staple removal at a local clinic",
+            "due": "2026-09-04",
+            "done": true
+          },
+          {
+            "id": "rt3",
+            "title": "Physiotherapy, 3 sessions a week for 4 weeks",
+            "due": "2026-09-30",
+            "done": true
+          },
+          {
+            "id": "rt4",
+            "title": "6-week follow-up video consult",
+            "due": "2026-10-02",
+            "done": true
+          },
+          {
+            "id": "rt5",
+            "title": "3-month review with X-ray (send to Dr. Kapoor)",
+            "due": "2026-11-20",
+            "done": false
+          }
+        ],
+        "checkins": [
+          {
+            "date": "2026-08-27",
+            "pain": 7,
+            "mobility": 2,
+            "note": "First day at the hotel, walking with a frame."
+          },
+          {
+            "date": "2026-08-30",
+            "pain": 6,
+            "mobility": 3,
+            "note": ""
+          },
+          {
+            "date": "2026-09-03",
+            "pain": 5,
+            "mobility": 4,
+            "note": "Flew home on the 1st — managed the flight well."
+          },
+          {
+            "date": "2026-09-08",
+            "pain": 4,
+            "mobility": 5,
+            "note": ""
+          },
+          {
+            "date": "2026-09-15",
+            "pain": 3,
+            "mobility": 6,
+            "note": "Physio going well."
+          },
+          {
+            "date": "2026-09-22",
+            "pain": 3,
+            "mobility": 7,
+            "note": ""
+          },
+          {
+            "date": "2026-09-29",
+            "pain": 2,
+            "mobility": 8,
+            "note": ""
+          },
+          {
+            "date": "2026-10-06",
+            "pain": 2,
+            "mobility": 8,
+            "note": "Walking without a stick indoors."
+          }
+        ]
+      },
+      "share": {
+        "enabled": true,
+        "token": "fam-demo-2v8k4q",
+        "createdAt": "2026-08-02T12:00:00.000Z"
+      },
+      "updatedAt": "2026-10-02T12:00:00.000Z"
+    },
+    {
+      "id": "case_okafor",
+      "ownerId": "u_p_okafor",
+      "type": "treatment",
+      "patientName": "Daniel Okafor",
+      "patientAge": 47,
+      "countryOfResidence": "Nigeria",
+      "treatmentSlug": "spinal-fusion",
+      "specialty": "Spine Surgery",
+      "preferredDestination": "India or Thailand",
+      "condition": "Lower back pain with leg numbness; MRI shows L4–L5 spondylolisthesis. Surgeon in Lagos recommended fusion.",
+      "existingTreatment": "Physiotherapy and pain medication for a year.",
+      "budgetRange": "$8,000–15,000",
+      "timeline": "Within 2 months",
+      "stage": "Sent to Hospitals",
+      "sentToHospitals": [
+        "h4",
+        "h7"
+      ],
+      "coordinatorId": null,
+      "hospitalStatus": {
+        "h4": {
+          "status": "new"
+        },
+        "h7": {
+          "status": "new"
+        }
+      },
+      "consentGivenAt": "2026-10-16T16:00:00.000Z",
+      "createdAt": "2026-10-16T16:00:00.000Z",
+      "timeline_events": [
+        {
+          "label": "Case submitted",
+          "at": "2026-10-16T16:00:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Case sent to 2 hospitals",
+          "at": "2026-10-16T16:20:00.000Z",
+          "kind": "patient"
+        }
+      ],
+      "messages": [],
+      "travel": {
+        "arrivalDate": "",
+        "flightNumber": "",
+        "departureDate": "",
+        "companions": 1,
+        "accommodation": "",
+        "airportPickup": true,
+        "interpreterLanguage": "",
+        "notes": ""
+      },
+      "visaLetter": {
+        "status": "none"
+      },
+      "recovery": {
+        "plan": [],
+        "checkins": []
+      },
+      "share": {
+        "enabled": false,
+        "token": null
+      },
+      "updatedAt": "2026-10-16T16:20:00.000Z"
+    },
+    {
+      "id": "case_hughes",
+      "ownerId": "u_p_hughes",
+      "type": "treatment",
+      "patientName": "Margaret Hughes",
+      "patientAge": 66,
+      "countryOfResidence": "United Kingdom",
+      "treatmentSlug": "total-hip-replacement",
+      "specialty": "Orthopedics",
+      "preferredDestination": "Any",
+      "condition": "Hip osteoarthritis (left). NHS waiting list estimate is 14 months.",
+      "existingTreatment": "Painkillers; X-ray report attached.",
+      "budgetRange": "£10,000–16,000",
+      "timeline": "Within 3 months",
+      "stage": "Quotation Received",
+      "sentToHospitals": [
+        "h1",
+        "h10"
+      ],
+      "coordinatorId": "u_coord",
+      "hospitalStatus": {
+        "h1": {
+          "status": "reviewing"
+        },
+        "h10": {
+          "status": "quoted"
+        }
+      },
+      "consentGivenAt": "2026-10-09T10:00:00.000Z",
+      "createdAt": "2026-10-09T10:00:00.000Z",
+      "timeline_events": [
+        {
+          "label": "Case submitted",
+          "at": "2026-10-09T10:00:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Case sent to 2 hospitals",
+          "at": "2026-10-09T10:30:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Quotation received from Crescent Palm Hospital",
+          "at": "2026-10-13T08:15:00.000Z",
+          "kind": "hospital"
+        }
+      ],
+      "messages": [
+        {
+          "id": "msg_h1",
+          "senderId": "u_h10",
+          "senderRole": "hospital",
+          "senderLabel": "Crescent Palm Hospital",
+          "text": "Dear Margaret, Dr. Al-Farsi has prepared a quote. He'd be glad to discuss implant options on a video call.",
+          "at": "2026-10-13T08:20:00.000Z"
+        }
+      ],
+      "travel": {
+        "arrivalDate": "",
+        "flightNumber": "",
+        "departureDate": "",
+        "companions": 1,
+        "accommodation": "",
+        "airportPickup": true,
+        "interpreterLanguage": "",
+        "notes": ""
+      },
+      "visaLetter": {
+        "status": "none"
+      },
+      "recovery": {
+        "plan": [],
+        "checkins": []
+      },
+      "share": {
+        "enabled": false,
+        "token": null
+      },
+      "updatedAt": "2026-10-13T08:15:00.000Z"
+    },
+    {
+      "id": "case_uddin",
+      "ownerId": "u_p_uddin",
+      "type": "treatment",
+      "patientName": "Nasreen Uddin",
+      "patientAge": 34,
+      "countryOfResidence": "Bangladesh",
+      "treatmentSlug": "ivf",
+      "specialty": "Fertility (IVF)",
+      "preferredDestination": "India",
+      "condition": "Unexplained infertility for 4 years; two unsuccessful IUI cycles.",
+      "existingTreatment": "Fertility work-up completed in Dhaka (report attached).",
+      "budgetRange": "$4,000–6,000",
+      "timeline": "November 2026",
+      "stage": "Confirmed",
+      "sentToHospitals": [
+        "h3"
+      ],
+      "coordinatorId": "u_coord",
+      "acceptedQuoteId": "quo_uddin",
+      "hospitalStatus": {
+        "h3": {
+          "status": "accepted"
+        }
+      },
+      "consentGivenAt": "2026-09-29T05:00:00.000Z",
+      "createdAt": "2026-09-29T05:00:00.000Z",
+      "timeline_events": [
+        {
+          "label": "Case submitted",
+          "at": "2026-09-29T05:00:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Quotation received from Horizon Speciality Centre",
+          "at": "2026-10-02T09:00:00.000Z",
+          "kind": "hospital"
+        },
+        {
+          "label": "Quote accepted — price locked at $4,350",
+          "at": "2026-10-06T06:00:00.000Z",
+          "kind": "patient"
+        },
+        {
+          "label": "Visa invitation letter issued",
+          "at": "2026-10-07T10:30:00.000Z",
+          "kind": "hospital"
+        }
+      ],
+      "messages": [
+        {
+          "id": "msg_u1",
+          "senderId": "u_h3",
+          "senderRole": "hospital",
+          "senderLabel": "Horizon Speciality Centre",
+          "text": "Your residency suite is reserved from 3 November. Dr. Haddad's team will start monitoring scans the morning after you arrive.",
+          "at": "2026-10-08T07:00:00.000Z"
+        }
+      ],
+      "travel": {
+        "arrivalDate": "2026-11-03",
+        "flightNumber": "BG 201",
+        "departureDate": "2026-11-20",
+        "companions": 1,
+        "accommodation": "Horizon residency suite (on campus)",
+        "airportPickup": true,
+        "interpreterLanguage": "Bengali",
+        "notes": ""
+      },
+      "visaLetter": {
+        "status": "issued",
+        "requestedAt": "2026-10-06T06:30:00.000Z",
+        "issuedAt": "2026-10-07T10:30:00.000Z",
+        "issuedBy": "h3",
+        "refNo": "HSC/IPD/2026/1107"
+      },
+      "recovery": {
+        "plan": [],
+        "checkins": []
+      },
+      "share": {
+        "enabled": false,
+        "token": null
+      },
+      "updatedAt": "2026-10-07T10:30:00.000Z"
     }
   ],
   "quotations": [
@@ -128,34 +2659,506 @@
       "id": "quo_demo1",
       "caseId": "case_demo1",
       "hospitalId": "h1",
-      "procedure": "Coronary Bypass Surgery (CABG)",
-      "doctor": "Dr. Arvind Rao",
-      "hospitalStayDays": "8",
-      "estimatedCost": "$7,200",
-      "exclusions": "Travel, post-discharge medication",
-      "validityDays": "21"
+      "doctorId": "d1",
+      "doctorName": "Dr. Arvind Rao",
+      "procedure": "Coronary Artery Bypass (CABG)",
+      "hospitalStayDays": 8,
+      "lineItems": [
+        {
+          "label": "Surgeon, anaesthesia & perfusion fees",
+          "amountUSD": 2600
+        },
+        {
+          "label": "Hospital stay — 8 nights incl. 2 in ICU",
+          "amountUSD": 2350
+        },
+        {
+          "label": "Operating theatre & consumables",
+          "amountUSD": 1250
+        },
+        {
+          "label": "Pre-operative tests",
+          "amountUSD": 450
+        },
+        {
+          "label": "Medicines during admission",
+          "amountUSD": 350
+        }
+      ],
+      "totalUSD": 7000,
+      "currency": "USD",
+      "inclusions": [
+        "Airport pickup",
+        "Arabic interpreter"
+      ],
+      "exclusions": "Flights, hotel after discharge, post-discharge medication",
+      "validityDays": 21,
+      "notes": "",
+      "status": "submitted",
+      "createdAt": "2026-10-09T13:20:00.000Z"
+    },
+    {
+      "id": "quo_demo2",
+      "caseId": "case_demo1",
+      "hospitalId": "h4",
+      "doctorId": "d9",
+      "doctorName": "Dr. Vikram Sethi",
+      "procedure": "Off-pump Coronary Bypass (CABG)",
+      "hospitalStayDays": 7,
+      "lineItems": [
+        {
+          "label": "Surgeon & anaesthesia fees",
+          "amountUSD": 2900
+        },
+        {
+          "label": "Hospital stay — 7 nights incl. 2 in ICU",
+          "amountUSD": 2100
+        },
+        {
+          "label": "Operating theatre & consumables",
+          "amountUSD": 1300
+        },
+        {
+          "label": "Pre-operative tests (fast-track)",
+          "amountUSD": 400
+        },
+        {
+          "label": "Medicines during admission",
+          "amountUSD": 300
+        },
+        {
+          "label": "Partner hotel — 3 nights after discharge",
+          "amountUSD": 450
+        }
+      ],
+      "totalUSD": 7450,
+      "currency": "USD",
+      "inclusions": [
+        "Airport pickup",
+        "Arabic interpreter",
+        "3 hotel nights"
+      ],
+      "exclusions": "Flights, post-discharge medication",
+      "validityDays": 30,
+      "notes": "",
+      "status": "submitted",
+      "createdAt": "2026-10-10T11:45:00.000Z"
+    },
+    {
+      "id": "quo_demo3",
+      "caseId": "case_demo3",
+      "hospitalId": "h1",
+      "doctorId": "d3",
+      "doctorName": "Dr. Sanjay Kapoor",
+      "procedure": "Total Knee Replacement (right)",
+      "hospitalStayDays": 5,
+      "lineItems": [
+        {
+          "label": "Surgeon & anaesthesia fees",
+          "amountUSD": 2100
+        },
+        {
+          "label": "Standard knee implant",
+          "amountUSD": 1900
+        },
+        {
+          "label": "Hospital stay — 5 nights",
+          "amountUSD": 1500
+        },
+        {
+          "label": "Inpatient physiotherapy",
+          "amountUSD": 350
+        },
+        {
+          "label": "Pre-operative tests & medicines",
+          "amountUSD": 600
+        }
+      ],
+      "totalUSD": 6450,
+      "currency": "USD",
+      "inclusions": [
+        "Airport pickup",
+        "Arabic interpreter",
+        "6 outpatient physio sessions"
+      ],
+      "exclusions": "Flights, hotel, post-discharge medication",
+      "validityDays": 21,
+      "notes": "",
+      "status": "accepted",
+      "createdAt": "2026-07-30T12:00:00.000Z",
+      "acceptedAt": "2026-08-01T09:30:00.000Z",
+      "lockCode": "WC-LOCK-3F8K2",
+      "lockedUntil": "2026-09-30"
+    },
+    {
+      "id": "quo_hughes",
+      "caseId": "case_hughes",
+      "hospitalId": "h10",
+      "doctorId": "d21",
+      "doctorName": "Dr. Omar Al-Farsi",
+      "procedure": "Total Hip Replacement (left)",
+      "hospitalStayDays": 4,
+      "lineItems": [
+        {
+          "label": "Surgeon & anaesthesia fees",
+          "amountUSD": 6800
+        },
+        {
+          "label": "Standard hip implant",
+          "amountUSD": 4200
+        },
+        {
+          "label": "Hospital stay — 4 nights (private room)",
+          "amountUSD": 4400
+        },
+        {
+          "label": "Physiotherapy (inpatient)",
+          "amountUSD": 900
+        },
+        {
+          "label": "Pre-operative tests & medicines",
+          "amountUSD": 2300
+        }
+      ],
+      "totalUSD": 18600,
+      "currency": "USD",
+      "inclusions": [
+        "Airport pickup",
+        "Family suite upgrade on request"
+      ],
+      "exclusions": "Flights, hotel, post-discharge medication",
+      "validityDays": 30,
+      "notes": "",
+      "status": "submitted",
+      "createdAt": "2026-10-13T08:15:00.000Z"
+    },
+    {
+      "id": "quo_uddin",
+      "caseId": "case_uddin",
+      "hospitalId": "h3",
+      "doctorId": "d4",
+      "doctorName": "Dr. Leila Haddad",
+      "procedure": "IVF with ICSI (one cycle)",
+      "hospitalStayDays": 0,
+      "lineItems": [
+        {
+          "label": "Consultations & monitoring scans",
+          "amountUSD": 650
+        },
+        {
+          "label": "Egg collection (incl. sedation)",
+          "amountUSD": 1100
+        },
+        {
+          "label": "ICSI & embryology lab",
+          "amountUSD": 1400
+        },
+        {
+          "label": "Embryo transfer",
+          "amountUSD": 700
+        },
+        {
+          "label": "Residency suite — 14 nights",
+          "amountUSD": 500
+        }
+      ],
+      "totalUSD": 4350,
+      "currency": "USD",
+      "inclusions": [
+        "Airport pickup",
+        "Bengali interpreter",
+        "Residency suite"
+      ],
+      "exclusions": "Stimulation medication, embryo freezing, genetic testing",
+      "validityDays": 30,
+      "notes": "",
+      "status": "accepted",
+      "createdAt": "2026-10-02T09:00:00.000Z",
+      "acceptedAt": "2026-10-06T06:00:00.000Z",
+      "lockCode": "WC-LOCK-9QX4T",
+      "lockedUntil": "2026-11-30"
     }
   ],
-  "reviews": [
-    { "id": "r1", "hospitalId": "h1", "author": "F. Al-Mansoori", "country": "UAE", "rating": 5, "procedure": "Coronary Bypass Surgery", "text": "Illustrative demo review — coordination from first consult to discharge was handled as one case, not scattered across agents.", "date": "2026-08-12" },
-    { "id": "r2", "hospitalId": "h1", "author": "J. Okafor", "country": "Kenya", "rating": 4, "procedure": "Total Knee Replacement", "text": "Illustrative demo review — clear cost breakdown before travel, no surprise charges on arrival.", "date": "2026-07-03" },
-    { "id": "r3", "hospitalId": "h2", "author": "M. Hassan", "country": "Bangladesh", "rating": 5, "procedure": "Liver Transplant", "text": "Illustrative demo review — quotation comparison made it easy to pick between hospitals without flying out first.", "date": "2026-09-01" },
-    { "id": "r4", "hospitalId": "h3", "author": "L. Dubois", "country": "France", "rating": 5, "procedure": "IVF Treatment", "text": "Illustrative demo review — case room kept every document and update in one thread instead of WhatsApp.", "date": "2026-06-20" },
-    { "id": "r5", "hospitalId": "h3", "author": "A. Ouma", "country": "Kenya", "rating": 4, "procedure": "Rhinoplasty", "text": "Illustrative demo review — recovery plan after discharge was more structured than I expected.", "date": "2026-05-15" }
+  "consultations": [
+    {
+      "id": "consult_demo1",
+      "ownerId": "u_demo_patient",
+      "caseId": "case_demo1",
+      "doctorId": "d1",
+      "hospitalId": "h1",
+      "doctorName": "Dr. Arvind Rao",
+      "hospitalName": "Apex Global Hospital",
+      "specialty": "Cardiac Surgery",
+      "date": "2026-10-23",
+      "timeSlot": "10:30",
+      "timezone": "IST (UTC+5:30)",
+      "timeZone": "Asia/Kolkata",
+      "reason": "Bypass vs. stents, timing, and recovery before flying home.",
+      "status": "confirmed",
+      "feeUSD": 70,
+      "roomId": "wholecare-a751e7f038090a9330",
+      "createdAt": "2026-10-10T16:00:00.000Z",
+      "confirmedAt": "2026-10-11T07:30:00.000Z"
+    },
+    {
+      "id": "consult_demo2",
+      "ownerId": "u_demo_patient",
+      "caseId": "case_demo3",
+      "doctorId": "d3",
+      "hospitalId": "h1",
+      "doctorName": "Dr. Sanjay Kapoor",
+      "hospitalName": "Apex Global Hospital",
+      "specialty": "Orthopedics",
+      "date": "2026-10-02",
+      "timeSlot": "16:00",
+      "timezone": "IST (UTC+5:30)",
+      "timeZone": "Asia/Kolkata",
+      "reason": "Six-week follow-up for Fatima.",
+      "status": "completed",
+      "feeUSD": 0,
+      "roomId": "wholecare-28e33f345689089f40",
+      "createdAt": "2026-09-20T10:00:00.000Z",
+      "confirmedAt": "2026-09-20T12:00:00.000Z"
+    },
+    {
+      "id": "consult_hughes",
+      "ownerId": "u_p_hughes",
+      "caseId": "case_hughes",
+      "doctorId": "d21",
+      "hospitalId": "h10",
+      "doctorName": "Dr. Omar Al-Farsi",
+      "hospitalName": "Crescent Palm Hospital",
+      "specialty": "Orthopedics",
+      "date": "2026-10-27",
+      "timeSlot": "14:00",
+      "timezone": "GST (UTC+4)",
+      "timeZone": "Asia/Dubai",
+      "reason": "Implant options and recovery time.",
+      "status": "requested",
+      "feeUSD": 110,
+      "roomId": "wholecare-6666649e6c3c2c43c9",
+      "createdAt": "2026-10-14T09:00:00.000Z"
+    }
   ],
-  "faqs": [
-    { "q": "Is this a medical diagnosis tool?", "a": "No. Whole Care coordinates your case — intake, hospital matching, quotations and logistics. All diagnosis and treatment decisions are made by licensed doctors at the treating hospital." },
-    { "q": "How is my cost estimate calculated?", "a": "The calculator uses sourced specialty price ranges for the procedure and destination, plus typical stay length and travel costs. Hospitals then confirm a binding quotation for your specific case." },
-    { "q": "What does the AI actually do?", "a": "It organizes your submitted case into a structured summary for care coordinators, and helps you prepare questions before a doctor consultation. It never diagnoses or recommends treatment." },
-    { "q": "How are hospitals verified?", "a": "Each listed hospital carries a recognized accreditation (JCI or NABH) and a last-verified date. The MVP directory covers a seeded set of partner hospitals; the model scales by onboarding accredited partners with signed agreements." },
-    { "q": "Is my data secure?", "a": "Case data is tied to your account and only visible to you and the hospitals you explicitly send your case to. This MVP uses a simple file-backed store suited for a pilot; production deployments move to an encrypted database." }
+  "files": [
+    {
+      "id": "f_demo1",
+      "caseId": "case_demo1",
+      "uploadedBy": "u_demo_patient",
+      "name": "angiogram_report.pdf",
+      "category": "report",
+      "type": "application/pdf",
+      "storedAs": "f_demo1.pdf",
+      "size": 837,
+      "demo": true,
+      "createdAt": "2026-10-06T08:40:00.000Z"
+    },
+    {
+      "id": "f_demo2",
+      "caseId": "case_demo1",
+      "uploadedBy": "u_demo_patient",
+      "name": "discharge_summary.pdf",
+      "category": "report",
+      "type": "application/pdf",
+      "storedAs": "f_demo2.pdf",
+      "size": 838,
+      "demo": true,
+      "createdAt": "2026-10-06T08:40:00.000Z"
+    },
+    {
+      "id": "f_demo3",
+      "caseId": "case_demo2",
+      "uploadedBy": "u_demo_patient",
+      "name": "knee_mri_report.pdf",
+      "category": "scan",
+      "type": "application/pdf",
+      "storedAs": "f_demo3.pdf",
+      "size": 836,
+      "demo": true,
+      "createdAt": "2026-10-14T09:10:00.000Z"
+    },
+    {
+      "id": "f_demo4",
+      "caseId": "case_demo3",
+      "uploadedBy": "u_h1",
+      "name": "discharge_summary_apex.pdf",
+      "category": "discharge",
+      "type": "application/pdf",
+      "storedAs": "f_demo4.pdf",
+      "size": 844,
+      "demo": true,
+      "createdAt": "2026-07-28T07:00:00.000Z"
+    },
+    {
+      "id": "f_hughes1",
+      "caseId": "case_hughes",
+      "uploadedBy": "u_p_hughes",
+      "name": "hip_xray_report.pdf",
+      "category": "scan",
+      "type": "application/pdf",
+      "storedAs": "f_hughes1.pdf",
+      "size": 841,
+      "demo": true,
+      "createdAt": "2026-10-09T10:00:00.000Z"
+    },
+    {
+      "id": "f_okafor1",
+      "caseId": "case_okafor",
+      "uploadedBy": "u_p_okafor",
+      "name": "mri_lumbar_spine_report.pdf",
+      "category": "scan",
+      "type": "application/pdf",
+      "storedAs": "f_okafor1.pdf",
+      "size": 847,
+      "demo": true,
+      "createdAt": "2026-10-16T16:00:00.000Z"
+    },
+    {
+      "id": "f_uddin1",
+      "caseId": "case_uddin",
+      "uploadedBy": "u_p_uddin",
+      "name": "fertility_workup.pdf",
+      "category": "report",
+      "type": "application/pdf",
+      "storedAs": "f_uddin1.pdf",
+      "size": 839,
+      "demo": true,
+      "createdAt": "2026-09-29T05:00:00.000Z"
+    }
   ],
-  "users": [
-    { "id": "u_admin", "role": "admin", "name": "Whole Care Admin", "email": "admin@wholecare.com", "passwordHash": "d5bc2906c5dd17ed5c9d73e586b86ea8:f4fd7c559b69219c840edfb3f6e33138b56bc256a59d39a7643d94b294e4d7e5703443a1eff96a2ef24e413e6ceae4418e251a90108ba6c478bdd0b9d7b589ec", "createdAt": "2026-09-01T00:00:00.000Z" },
-    { "id": "u_demo_patient", "role": "patient", "name": "Aisha Karim", "email": "demo.patient@wholecare.com", "passwordHash": "bdb9397836c5bbc6b62bb1694bee3d09:e2488a6f654d043c4492ddca6218515199b536c565e5efa88534d55e55be3e51ec8d5aba452b64ae608f852d66eec24b63afaf65f0efff396aa08365239d5707", "createdAt": "2026-09-20T09:00:00.000Z" },
-    { "id": "u_h1", "role": "hospital", "hospitalId": "h1", "name": "Apex Global Hospital", "email": "apex@demo.com", "passwordHash": "bdb9397836c5bbc6b62bb1694bee3d09:e2488a6f654d043c4492ddca6218515199b536c565e5efa88534d55e55be3e51ec8d5aba452b64ae608f852d66eec24b63afaf65f0efff396aa08365239d5707" },
-    { "id": "u_h2", "role": "hospital", "hospitalId": "h2", "name": "Sunrise Medicity", "email": "sunrise@demo.com", "passwordHash": "bcc80575759a034b059c51ae75dbfd6d:eefd0af7b9054a0f5da71e3036d2a8499492a4f34e8a5ccbaa509efdc6bf989e1845019ac5b8168080cddece63f65714b0e8f1265177fc87245bba33cdb13a9b" },
-    { "id": "u_h3", "role": "hospital", "hospitalId": "h3", "name": "Horizon Speciality Centre", "email": "horizon@demo.com", "passwordHash": "5658d7a397f16cb3cae9b1bb00dc2152:a8752c6638d93561a2492e9397de232d6e9a8cdac4111ee666544580930ef36491bc0de7fe4da78102f74a1e58c7b157f4122af1d24f7da9dd100d9610475a25" }
+  "notifications": [
+    {
+      "id": "n1",
+      "userId": "u_demo_patient",
+      "message": "Northstar Heart & Joint Institute sent a quotation",
+      "link": "/case/case_demo1?tab=quotes",
+      "read": false,
+      "createdAt": "2026-10-10T11:45:00.000Z"
+    },
+    {
+      "id": "n2",
+      "userId": "u_demo_patient",
+      "message": "Video consult with Dr. Arvind Rao confirmed for Oct 23, 10:30 IST",
+      "link": "/dashboard",
+      "read": false,
+      "createdAt": "2026-10-11T07:30:00.000Z"
+    },
+    {
+      "id": "n3",
+      "userId": "u_demo_patient",
+      "message": "Apex Global Hospital sent a quotation",
+      "link": "/case/case_demo1?tab=quotes",
+      "read": true,
+      "createdAt": "2026-10-09T13:20:00.000Z"
+    },
+    {
+      "id": "n4",
+      "userId": "u_h1",
+      "message": "Second opinion requested: Yusuf Karim (Orthopedics)",
+      "link": "/hospital/h1/case/case_demo2",
+      "read": false,
+      "createdAt": "2026-10-14T13:00:00.000Z"
+    },
+    {
+      "id": "n5",
+      "userId": "u_h4",
+      "message": "New case: Daniel Okafor (Spine Surgery)",
+      "link": "/hospital/h4/case/case_okafor",
+      "read": false,
+      "createdAt": "2026-10-16T16:20:00.000Z"
+    },
+    {
+      "id": "n6",
+      "userId": "u_h7",
+      "message": "New case: Daniel Okafor (Spine Surgery)",
+      "link": "/hospital/h7/case/case_okafor",
+      "read": false,
+      "createdAt": "2026-10-16T16:20:00.000Z"
+    },
+    {
+      "id": "n7",
+      "userId": "u_coord",
+      "message": "Unassigned case: Daniel Okafor (Spine Surgery)",
+      "link": "/admin?tab=cases",
+      "read": false,
+      "createdAt": "2026-10-16T16:20:00.000Z"
+    }
   ],
-  "sessions": []
+  "inquiries": [
+    {
+      "id": "inq1",
+      "name": "Grace Wanjiru",
+      "email": "grace.w@example.com",
+      "phone": "+254 700 000 000",
+      "message": "What does IVF cost in India compared with Malaysia?",
+      "source": "home",
+      "status": "new",
+      "createdAt": "2026-10-17T08:00:00.000Z"
+    },
+    {
+      "id": "inq2",
+      "name": "Tom Becker",
+      "email": "tom.becker@example.com",
+      "phone": "",
+      "message": "Hip replacement — NHS wait is 18 months. Which destinations make sense from the UK?",
+      "source": "contact",
+      "status": "contacted",
+      "createdAt": "2026-10-12T19:30:00.000Z"
+    },
+    {
+      "id": "inq3",
+      "name": "Layla Saleh",
+      "email": "layla.saleh@example.com",
+      "phone": "",
+      "message": "Rhinoplasty in Turkey or Thailand — how do recovery times compare?",
+      "source": "assistant",
+      "status": "new",
+      "createdAt": "2026-10-18T11:10:00.000Z"
+    }
+  ],
+  "auditLog": [
+    {
+      "id": "a1",
+      "userId": "u_demo_patient",
+      "action": "case.created",
+      "targetId": "case_demo1",
+      "at": "2026-10-06T08:40:00.000Z"
+    },
+    {
+      "id": "a2",
+      "userId": "u_demo_patient",
+      "action": "case.sent_to_hospitals",
+      "targetId": "case_demo1",
+      "at": "2026-10-07T09:00:00.000Z"
+    },
+    {
+      "id": "a3",
+      "userId": "u_h1",
+      "action": "case.viewed",
+      "targetId": "case_demo1",
+      "at": "2026-10-08T09:55:00.000Z"
+    },
+    {
+      "id": "a4",
+      "userId": "u_h1",
+      "action": "quotation.created",
+      "targetId": "quo_demo1",
+      "at": "2026-10-09T13:20:00.000Z"
+    },
+    {
+      "id": "a5",
+      "userId": "u_h4",
+      "action": "quotation.created",
+      "targetId": "quo_demo2",
+      "at": "2026-10-10T11:45:00.000Z"
+    },
+    {
+      "id": "a6",
+      "userId": "u_admin",
+      "action": "hospital.approved",
+      "targetId": "h10",
+      "at": "2026-10-05T09:00:00.000Z"
+    }
+  ],
+  "assistantLog": []
 }

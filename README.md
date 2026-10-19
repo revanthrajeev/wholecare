@@ -1,31 +1,82 @@
 # Whole Care
 
-Cross-border healthcare case coordination platform: patient case flow, hospital portal, verified directory, cost calculator, and AI-assisted case coordination.
+Medical-travel coordination platform. Patients compare treatment prices across seven destinations, get specialist second opinions and itemized hospital quotes, book video consultations, and run their whole trip (documents, messages, travel, visa letter, recovery, family updates) from one case room. Hospitals work cases in their own portal; the Whole Care team runs operations from an admin console.
 
-## Getting Started
+Built with Next.js 16 (App Router, Turbopack), React 19, Tailwind CSS 4, framer-motion and react-three-fiber (3D globe).
+
+## Run it locally
 
 ```bash
 npm install
-npm run dev
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+The first request creates `data/db.json` from `data/seed.json`. Delete `data/db.json` (and `data/uploads/`) to reset the demo to its seed state. `node scripts/build-seed.mjs` regenerates the seed itself.
 
-## Deploying to Netlify
+### Demo accounts
 
-This repo includes `netlify.toml` (build command `npm run build`, `@netlify/plugin-nextjs`). Connect the repo in Netlify and it should deploy with no extra config.
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@wholecare.com | admin123 |
+| Coordinator | care@wholecare.com | care123 |
+| Patient (has cases in every stage) | demo.patient@wholecare.com | demo123 |
+| Hospital (Apex Global, Bangalore) | apex@demo.com | demo123 |
 
-Two things behave differently in production vs. local dev:
+Other hospital logins follow the same pattern (`sunrise@demo.com`, `meridyen@demo.com`, `lykia@demo.com` — unverified — and so on). The login page has one-click demo buttons.
 
-1. **Data storage.** Locally, case/hospital/quotation data is stored in `data/db.json` (gitignored, seeded from `data/seed.json`) so it survives dev-server restarts. On Netlify, serverless functions can't write to the deployed project directory — `src/lib/db.js` detects this (`NETLIFY` / `AWS_LAMBDA_FUNCTION_NAME` env vars, which Netlify sets automatically) and falls back to `/tmp`. That keeps the demo functional, but data resets whenever the function container recycles — fine for a demo, not for anything that needs to persist.
+## What's in the product
 
-2. **AI features.** The AI Case Summary and "Ask the Doctor" question organizer call a local [Ollama](https://ollama.com) instance at `OLLAMA_URL` (default `http://localhost:11434`, model `qwen3:8b` via `OLLAMA_MODEL`). Netlify's servers can't reach your laptop's Ollama — those two features will show "AI assistant is unavailable" in production unless you point `OLLAMA_URL` (set as a Netlify environment variable) at a publicly reachable Ollama instance, or swap `src/lib/ai.js` for a hosted model API. Nothing else on the site depends on them.
+**Public site** — treatment price pages with charts and country comparison, verified hospital and doctor directories with side-by-side compare, destination guides, a true-cost calculator (treatment + flights + stay + food + visa + buffer, in 11 currencies, against self-pay prices at home), a hospital matcher that shows the reason behind every ranking, packages, patient guides, ⌘K search, an AI assistant, and a 3D globe of care corridors on the home page.
 
-## What's genuinely built vs. not (read before a real pilot)
+**Patients** — quote and second-opinion wizards with report upload (draft saved in the tab), a case room with overview, documents, quote comparison and acceptance (price-lock certificate), messages, video consultations with calendar invites, travel planning, hospital visa letter, recovery check-ins with charts, and a private family tracker link.
 
-This MVP has real working flows (auth, case lifecycle, hospital portal, messaging, notifications, admin oversight, hospital self-serve signup + approval, consultation booking, country guides, an audit log, and a consent checkbox on case creation). But two things are explicitly **not** production-grade and would be dishonest to claim as done:
+**Hospitals** (`/hospital`) — drag-and-drop case pipeline, a line-item quote builder with market-range guidance, a case workspace (documents, messages, internal notes, milestones, visa letters, travel and recovery after acceptance), consultation confirmation, response-time and acceptance analytics, and a self-serve profile editor with a verification request.
 
-- **Not encrypted at rest / no real access-control infrastructure.** The datastore is a JSON file (`db.json`, falling back to `/tmp` on Netlify). The audit log and consent timestamp are real records of what happened, but there is no actual encryption, key management, or database-level access control behind them. Handling real patient health data requires migrating to a proper database (e.g. Postgres with row-level security) with real encryption — that's infrastructure work, not a UI feature.
-- **No multilingual (i18n) support.** The UI is English-only. Multilingual coverage needs a translation pipeline and locale routing — a dedicated project, not a toggle.
+**Operations** (`/admin`) — funnel and demand charts, a "needs attention" queue, case assignment and stage control, the hospital verification checklist with publish/unpublish (admins only), consultations, inquiries inbox, review moderation, people, and the audit log.
 
-Everything else described in the UI (verification badges, consent, audit trail, notifications) reflects something that actually happens in the code — it's just not yet hardened for real PHI at scale.
+## Configuration
+
+Copy these into `.env.local` (or your host's environment settings). Everything is optional for a local demo.
+
+| Variable | What it does |
+|---|---|
+| `SESSION_SECRET` | Signs session cookies. **Set a long random value in every deployed environment.** |
+| `NEXT_PUBLIC_SITE_URL` | Public base URL — used in the sitemap, robots.txt, social previews and calendar invites. |
+| `ANTHROPIC_API_KEY` | Turns on Claude for the assistant, case summaries and question organizer. |
+| `ANTHROPIC_MODEL` | Optional model override (default `claude-opus-5-5`). |
+| `OLLAMA_URL`, `OLLAMA_MODEL` | Optional local-model fallback (only used when `OLLAMA_URL` is set; default model `qwen3:8b`). |
+| `NEXT_PUBLIC_VIDEO_BASE_URL` | Video-call server (default public Jitsi, `https://meet.jit.si`). |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Shows WhatsApp contact buttons (digits with country code). |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Contact address shown on the site. |
+
+**AI** falls back in order: Claude → Ollama (if configured) → a built-in rules engine. The site works fully with no AI configured; the admin console shows which engine is answering. Nothing in the product gives a diagnosis — AI output is limited to organizing what the patient wrote and pointing to pages.
+
+## Before real patients — read this
+
+These are deliberate MVP shortcuts, not hidden problems:
+
+- **Storage is a JSON file**, written atomically. On serverless hosts (Netlify, Vercel, Lambda) it lives in `/tmp` and resets whenever the instance recycles. Real patient data needs a proper database (e.g. Postgres with row-level security), encryption at rest, backups, and file storage for uploads (e.g. S3) with signed URLs.
+- **Rate limiting is in memory**, per server instance. Use a shared store (e.g. Redis) once there is more than one instance.
+- **Video** uses the public Jitsi server, which limits embedded calls. Point `NEXT_PUBLIC_VIDEO_BASE_URL` at a self-hosted Jitsi or a contracted video provider before clinical use.
+- **All hospitals, doctors, packages and reviews are sample data** and are labelled "Sample" in the UI. Prices are indicative ranges, labelled as such.
+- **Legal pages** (terms, privacy, medical disclaimer) are working drafts pending legal review.
+- **English only.** Multilingual support needs a translation pipeline and locale routing.
+- **Payments** are not processed on the platform; consultation and treatment fees are paid to hospitals.
+
+## Checks
+
+```bash
+npm run lint     # ESLint, including React's hook and compiler rules
+npm run build    # production build
+```
+
+## Project layout
+
+```
+src/app/            routes (pages, API route handlers, sitemap, robots, social images)
+src/components/     UI — ui/ (design-system primitives), case/, hospital/, admin/, home/, globe/
+src/content/        static content: treatments and prices, destinations, specialties, guides, FAQs
+src/lib/            data access, auth and sessions, access control, AI providers, scheduling, trip costs
+data/               seed.json (committed) and the runtime db.json (git-ignored)
+scripts/            seed generator
+```

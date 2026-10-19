@@ -1,622 +1,340 @@
-"use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { Stethoscope, FileSearch, Building2, ScrollText, Plane, HeartPulse, Star, ChevronDown } from "lucide-react";
-import Nav from "@/components/Nav";
+import { ArrowRight, Video, FileCheck, Users, LineChart, Building2, KanbanSquare, ReceiptText, ShieldCheck, Quote } from "lucide-react";
+import HomeHero from "@/components/home/HomeHero";
+import PriceExplorer from "@/components/home/PriceExplorer";
+import HowItWorks from "@/components/home/HowItWorks";
+import Accordion from "@/components/ui/Accordion";
+import { Reveal } from "@/components/ui/client";
+import { SectionHeading, Button, Stars, SampleBadge, formatDate } from "@/components/ui/core";
+import { HospitalCard, TreatmentCard, DestinationCard } from "@/components/cards";
+import { getPublicHospitals, getPublishedReviews } from "@/lib/data";
+import { readDb } from "@/lib/db";
+import { TREATMENTS } from "@/content/treatments";
+import { DESTINATIONS } from "@/content/destinations";
+import { FAQS } from "@/content/faqs";
 
-const JOURNEY_IMAGES = {
-  "Describe the need": "/images/journey/step_1_records.jpg",
-  "Review & route": "/images/journey/step_2_telehealth.jpg",
-  "Hospital responds": "/images/journey/step_3_hospital_match.jpg",
-  "Compare & decide": "/images/journey/step_4_compare_quotes.jpg",
-  "Coordinate travel": "/images/journey/step_5_travel_prep.jpg",
-  "Treat & follow up": "/images/journey/step_6_recovery_care.jpg",
-};
+export const dynamic = "force-dynamic";
 
-const REVIEW_AVATARS = ["/images/reviews/avatar_1.jpg", "/images/reviews/avatar_2.jpg", "/images/reviews/avatar_3.jpg", "/images/reviews/avatar_4.jpg", "/images/reviews/avatar_5.jpg", "/images/reviews/avatar_6.jpg"];
-
-const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-function Stars({ count }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} size={14} className={i < count ? "fill-[#D9A441] text-[#D9A441]" : "text-[#E3EAF2]"} />
-      ))}
-    </div>
-  );
-}
-
-function FaqItem({ q, a, defaultOpen }) {
-  const [open, setOpen] = useState(!!defaultOpen);
-  return (
-    <div className="wc-card rounded-xl px-6 py-5">
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between text-left">
-        <span className="font-semibold text-[#10243E]">{q}</span>
-        <ChevronDown size={18} className={`text-[#5B7184] shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
-      </button>
-      {open && <p className="text-[#5B7184] text-sm mt-3 leading-relaxed">{a}</p>}
-    </div>
-  );
-}
-
-function InquiryForm() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle");
-
-  async function submit(e) {
-    e.preventDefault();
-    setStatus("loading");
-    const res = await fetch("/api/inquiries", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    setStatus(res.ok ? "done" : "error");
-  }
-
-  if (status === "done") {
-    return (
-      <div className="wc-card rounded-2xl p-8 text-center">
-        <p className="font-bold text-lg mb-1">Thanks — we&rsquo;ll be in touch.</p>
-        <p className="text-[#5B7184] text-sm">A care coordinator will follow up at {form.email}.</p>
-      </div>
-    );
-  }
-
-  const inputClass =
-    "w-full bg-[#F7FAFD] border border-[#E3EAF2] rounded-xl px-4 py-3 text-[#10243E] placeholder:text-[#9AADBD] focus:outline-none focus:ring-2 focus:ring-[#2F6FED] focus:border-transparent transition";
-
-  return (
-    <form onSubmit={submit} className="wc-card rounded-2xl p-8 grid gap-4 max-w-xl mx-auto">
-      <div className="grid sm:grid-cols-2 gap-4">
-        <input required placeholder="Your name" className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-        <input required type="email" placeholder="Email" className={inputClass} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-      </div>
-      <textarea rows={3} placeholder="What do you need help with? (optional)" className={inputClass} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
-      {status === "error" && <p className="text-sm text-[#C23B5A] font-medium">Something went wrong — please try again.</p>}
-      <button disabled={status === "loading"} className="btn-grad py-3.5 rounded-xl font-bold disabled:opacity-50">
-        {status === "loading" ? "Sending..." : "Get a free consultation"}
-      </button>
-      <p className="text-[#9AADBD] text-xs text-center">No case commitment — just a quick way for our team to reach out.</p>
-    </form>
-  );
-}
+const HOME_TREATMENTS = ["total-knee-replacement", "coronary-bypass-cabg", "ivf", "gastric-sleeve", "hair-transplant", "spinal-fusion", "dental-implant", "cancer-treatment-plan"];
 
 export default function Home() {
-  const [reviews, setReviews] = useState([]);
-  const [faqs, setFaqs] = useState([]);
+  const db = readDb();
+  const hospitals = getPublicHospitals(db)
+    .slice()
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0) || (b.reviewCount || 0) - (a.reviewCount || 0))
+    .slice(0, 3);
+  const reviews = getPublishedReviews(db).slice(0, 6);
+  const hospitalName = Object.fromEntries(db.hospitals.map((h) => [h.id, h.name]));
+  const knee = TREATMENTS.find((t) => t.slug === "total-knee-replacement");
 
-  useEffect(() => {
-    fetch("/api/reviews").then((r) => r.json()).then(setReviews);
-    fetch("/api/faqs").then((r) => r.json()).then(setFaqs);
-  }, []);
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
 
   return (
-    <main className="bg-white text-[#10243E] overflow-hidden">
-      <Nav />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <HomeHero />
 
-      {/* HERO — asymmetric: text pinned left, globe bleeds off the right edge */}
-      <section className="relative min-h-screen w-full overflow-hidden bg-[#F8FAFD] border-b border-[#E3EAF2]">
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-[58%] opacity-[0.3]">
-          <Image src="/images/hero/hero_hospital_atrium.jpg" alt="" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#F8FAFD]/60 to-[#F8FAFD]" />
-        </div>
-        <div className="pointer-events-none absolute right-[-10%] top-[8%] h-[520px] w-[520px] rounded-full bg-[#2F6FED]/12 blur-[120px]" />
-
-        <div className="relative z-10 min-h-screen grid lg:grid-cols-[1.1fr_0.9fr] items-center">
-          <div className="px-6 sm:px-10 lg:pl-16 pt-32 pb-20">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 rounded-full border border-[#2F6FED]/25 bg-white px-4 py-1.5 font-eyebrow text-xs text-[#2F6FED] tracking-wider uppercase"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2F6FED]" /> Cross-border healthcare, coordinated
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display mt-7 text-5xl md:text-6xl lg:text-[4.6rem] leading-[1.04] max-w-xl text-[#10243E]"
-            >
-              Get the right care, <em className="italic text-grad">wherever</em> you need it.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-lg text-[#5B7184] max-w-lg mt-6"
-            >
-              One coordinated case &mdash; consultation, second opinion, hospital comparison, quotation, treatment and recovery &mdash; instead of a dozen disconnected agents and WhatsApp threads.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex gap-4 mt-10"
-            >
-              <Link href="/case/new" className="btn-grad px-7 py-3.5 rounded-full font-bold">
-                Start a Case
-              </Link>
-              <Link
-                href="/hospital"
-                className="border border-[#C8D6E8] text-[#10243E] px-7 py-3.5 rounded-full font-bold hover:bg-white transition"
-              >
-                Hospital Portal demo
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="flex items-center gap-8 mt-16 pt-8 border-t border-[#E3EAF2] max-w-lg"
-            >
-              <div>
-                <p className="font-display text-3xl text-[#10243E]">70&ndash;80%</p>
-                <p className="text-xs text-[#5B7184] mt-1">lower cost vs. US/UAE</p>
-              </div>
-              <div className="w-px h-10 bg-[#E3EAF2]" />
-              <div>
-                <p className="font-display text-3xl text-[#10243E]">$7.7B&rarr;$14.3B</p>
-                <p className="text-xs text-[#5B7184] mt-1">India inbound MVT, 2024&ndash;29</p>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="relative hidden lg:block h-[70vh]">
-            <GlobeHero />
-          </div>
+      {/* PRICE EXPLORER */}
+      <section className="relative bg-surface py-24">
+        <div className="container-wc">
+          <Reveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading eyebrow="Know the numbers first" title="What treatment really costs — across seven countries.">
+              Indicative ranges for planning, side by side. Switch currency at the top of the page.
+            </SectionHeading>
+            <Button href="/countries/compare" variant="outline">
+              Compare destinations in detail <ArrowRight size={16} aria-hidden />
+            </Button>
+          </Reveal>
+          <Reveal>
+            <PriceExplorer />
+          </Reveal>
         </div>
       </section>
 
-      {/* MARQUEE */}
-      <section aria-label="Platform capabilities" className="overflow-hidden border-y border-[#E3EAF2] bg-[#F3F7FC] py-4">
-        <div className="flex w-max animate-marquee gap-12 whitespace-nowrap font-eyebrow text-xs uppercase tracking-widest text-[#5B7184]">
-          {[...Array(2)].flatMap((_, rep) =>
-            ["Patient Case Room", "Hospital Portal", "Quotation Comparison", "Verified Directory", "AI Case Summaries", "AI Question Organizer", "Cost Calculator", "Open MVP"].map((t, i) => (
-              <span key={`${rep}-${t}`} className="flex items-center gap-12">
-                {t}<span style={{ color: ["#2F6FED", "#FF6B81", "#D9A441"][i % 3] }}>&#10022;</span>
-              </span>
-            ))
-          )}
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" className="bg-white py-24">
+        <div className="container-wc">
+          <Reveal className="mb-6">
+            <SectionHeading eyebrow="How it works" title="One case room, from first message to full recovery.">
+              Patients, hospitals and your coordinator work from the same record — nothing gets re-explained across WhatsApp threads.
+            </SectionHeading>
+          </Reveal>
+          <HowItWorks />
         </div>
       </section>
 
-      {/* MARKET */}
-      <section id="market" className="px-10 py-28 max-w-6xl mx-auto">
-        <motion.p
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="text-[#2F6FED] font-bold tracking-wide uppercase text-sm mb-3"
-        >
-          Market Opportunity
-        </motion.p>
-        <motion.h2
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="font-display text-4xl md:text-5xl mb-14 max-w-3xl text-[#10243E]"
-        >
-          A <span className="text-grad">trillion-dollar</span> global wellness economy, a fast-growing
-          cross-border wedge, and India as the entry point.
-        </motion.h2>
-        <div className="grid lg:grid-cols-[1.3fr_1fr] gap-6">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="rounded-3xl p-10 bg-[#0F2A52] text-white relative overflow-hidden flex flex-col justify-between"
-          >
-            <div className="pointer-events-none absolute right-[-15%] top-[-20%] h-[320px] w-[320px] rounded-full bg-[#2F6FED]/30 blur-[100px]" />
-            <div className="relative">
-              <p className="font-eyebrow text-sm tracking-widest mb-4 text-[#6FA8F5]">TAM</p>
-              <p className="text-6xl md:text-7xl font-extrabold font-display mb-3">$126.2B</p>
-              <p className="text-[#AFC3DB] text-sm leading-relaxed max-w-sm">Global medical tourism market by 2033, 14.1% CAGR from 2026 (Grand View Research) &mdash; inside a $6.8T global wellness economy (Global Wellness Institute, 2024)</p>
-            </div>
-          </motion.div>
-
-          <div className="grid gap-6">
-            {[
-              { tag: "SAM", title: "India medical value travel", value: "$7.7B → $14.3B", sub: "2024 → 2029 (FICCI). India holds ~18% of global MVT, ranked #10 worldwide", accent: "#D9A441" },
-              { tag: "SOM", title: "Annual inbound patient volume", value: "~480K", sub: "foreign medical-visa arrivals to India, 2024 — Bangladesh, Iraq, Somalia, Oman, Uzbekistan lead", accent: "#FF6B81" },
-            ].map((card, i) => (
-              <motion.div
-                key={card.tag}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                transition={{ delay: 0.1 + i * 0.1 }}
-                className="rounded-2xl p-7 border border-[#E3EAF2] bg-white flex items-center gap-5"
-              >
-                <div className="w-1.5 self-stretch rounded-full shrink-0" style={{ background: card.accent }} />
-                <div>
-                  <p className="font-eyebrow text-xs tracking-widest mb-2" style={{ color: card.accent }}>{card.tag} &middot; {card.title}</p>
-                  <p className="text-3xl font-extrabold text-[#10243E]">{card.value}</p>
-                  <p className="text-[#5B7184] text-xs leading-relaxed mt-2">{card.sub}</p>
-                </div>
-              </motion.div>
+      {/* TREATMENTS */}
+      <section className="bg-surface py-24">
+        <div className="container-wc">
+          <Reveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading eyebrow="Treatments" title="Popular procedures, with real planning detail.">
+              Price ranges, hospital stay, time in country and the questions to ask your surgeon.
+            </SectionHeading>
+            <Button href="/treatments" variant="outline">
+              All {TREATMENTS.length} treatments <ArrowRight size={16} aria-hidden />
+            </Button>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {HOME_TREATMENTS.map((slug, i) => (
+              <Reveal key={slug} delay={i * 0.04} className="h-full">
+                <TreatmentCard treatment={TREATMENTS.find((t) => t.slug === slug)} />
+              </Reveal>
             ))}
           </div>
         </div>
-        <p className="text-[#9AADBD] text-xs mt-6 max-w-3xl">
-          Sources: Grand View Research, Medical Tourism Market, 2026&ndash;2033; Global Wellness Institute, 2025 Global Wellness Economy Monitor; FICCI Medical Value Travel press release; Government of India visa-arrival data via Parliament replies, 2023&ndash;2025. Other research firms (SkyQuest, Coherent, IMARC) estimate materially higher TAM/SAM figures &mdash; the conservative, most defensible citations are used here.
-        </p>
       </section>
 
-      {/* FEATURE SHOWCASE — tinted section for rhythm */}
-      <section className="bg-[#F3F7FC] text-[#10243E] py-28">
-        <div className="px-10 max-w-6xl mx-auto">
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3"
-          >
-            Built for the whole journey
-          </motion.p>
-          <motion.h2
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="font-display text-4xl md:text-5xl mb-14 max-w-3xl"
-          >
-            Discovery, cost clarity and AI-assisted coordination &mdash; not just a lead form.
-          </motion.h2>
-          <div className="grid lg:grid-cols-5 gap-6">
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="lg:col-span-3 rounded-2xl bg-white p-9 flex flex-col justify-between min-h-[280px]"
-            >
-              <div>
-                <p className="text-[#2F6FED] font-eyebrow text-xs uppercase tracking-widest mb-3">AI, scoped to workflow</p>
-                <h3 className="font-display text-3xl mb-3 max-w-md">AI organizes the case &mdash; it never diagnoses.</h3>
-                <p className="text-[#5B7184] text-sm max-w-md">Structured intake summaries for care coordinators and a pre-consultation question organizer, running on a local model. AI assists; only a clinician decides.</p>
-              </div>
-              <Link href="/case/new" className="mt-8 text-[#2F6FED] font-semibold text-sm hover:underline w-fit">
-                Start a case &rarr;
-              </Link>
-            </motion.div>
-
-            <div className="lg:col-span-2 grid gap-6">
-              <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                transition={{ delay: 0.1 }}
-                className="rounded-2xl bg-white p-7"
-              >
-                <p className="text-[#D9A441] font-eyebrow text-xs uppercase tracking-widest mb-2">Directory</p>
-                <h3 className="font-bold text-lg mb-2">Verified hospitals &amp; specialists</h3>
-                <p className="text-[#5B7184] text-sm">Filterable by specialty, with accreditation and last-verified dates.</p>
-                <Link href="/directory" className="mt-4 inline-block text-[#2F6FED] font-semibold text-sm hover:underline">Browse &rarr;</Link>
-              </motion.div>
-              <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                transition={{ delay: 0.2 }}
-                className="rounded-2xl bg-white p-7"
-              >
-                <p className="text-[#FF6B81] font-eyebrow text-xs uppercase tracking-widest mb-2">Cost Calculator</p>
-                <h3 className="font-bold text-lg mb-2">The full journey cost, line by line</h3>
-                <p className="text-[#5B7184] text-sm">Medical + travel + companion costs, not one opaque number.</p>
-                <Link href="/calculator" className="mt-4 inline-block text-[#2F6FED] font-semibold text-sm hover:underline">Estimate &rarr;</Link>
-              </motion.div>
-            </div>
+      {/* DESTINATIONS */}
+      <section className="bg-white py-24">
+        <div className="container-wc">
+          <Reveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading eyebrow="Destinations" title="Choose where — with the trade-offs spelled out.">
+              Honest guides covering strengths, visas, flight times, accreditation bodies and what to watch out for.
+            </SectionHeading>
+            <Button href="/countries" variant="outline">
+              All destinations <ArrowRight size={16} aria-hidden />
+            </Button>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {DESTINATIONS.map((d, i) => (
+              <Reveal key={d.slug} delay={i * 0.04} className={i === 0 ? "h-full lg:col-span-2" : "h-full"}>
+                <DestinationCard destination={d} from={knee.prices[d.country]?.[0]} />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* COMPETITORS / WHY US */}
-      <section id="competitors" className="px-10 py-28 max-w-6xl mx-auto">
-        <motion.p
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="text-[#2F6FED] font-bold tracking-wide uppercase text-sm mb-3"
-        >
-          Competitive Landscape
-        </motion.p>
-        <motion.h2
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="font-display text-4xl md:text-5xl mb-14 max-w-3xl"
-        >
-          Most players are lead-gen marketplaces. We built the <span className="text-grad">operating system</span> underneath.
-        </motion.h2>
-        <div className="grid md:grid-cols-2 gap-5">
-          {[
-            { name: "Vaidam Health", gap: "500+ hospitals, 100K+ patients claimed — but pure lead-gen marketplace, no hospital-side operational product" },
-            { name: "HealthTrip", gap: "$5M raised, ~500 patients/month — monetizes on travel/hospital commissions, not case infrastructure" },
-            { name: "Bookimed / PlacidWay", gap: "1M+ cumulative \"requests\" (not treated patients) — directories and CRM-for-marketing, not case lifecycle tools" },
-            { name: "Medigo", gap: "Shut down its medical-travel platform in 2020 after pure facilitation didn't scale; raised $25M in 2024 to rebuild — the clearest proof the lead-gen/concierge model alone fails" },
-          ].map((c, i) => (
-            <motion.div
-              key={c.name}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ delay: i * 0.08 }}
-              className="rounded-xl p-6 wc-card wc-card-hover flex items-start justify-between gap-4"
-            >
-              <div>
-                <p className="font-bold text-[#10243E]">{c.name}</p>
-                <p className="text-[#5B7184] text-sm mt-1.5 leading-relaxed">{c.gap}</p>
+      {/* SPECIALIST BAND */}
+      <section className="hero-night relative overflow-hidden py-24 text-white">
+        <div aria-hidden className="grid-fade pointer-events-none absolute inset-0" />
+        <div className="container-wc relative">
+          <Reveal className="mb-12">
+            <SectionHeading dark eyebrow="Before you book anything" title="Talk to a specialist first. Decide with confidence.">
+              The cheapest decision is the one you don&rsquo;t regret. Start with an expert view of your case.
+            </SectionHeading>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <Reveal>
+              <div className="group h-full rounded-[28px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur transition hover:border-glow/40 hover:bg-white/[0.07]">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-glow/15 text-glow">
+                  <Video size={22} aria-hidden />
+                </span>
+                <h3 className="mt-6 text-2xl font-bold">Video consultation</h3>
+                <p className="mt-3 text-ink-300">A live call with a surgeon or specialist — fee shown before you book, your questions organised in advance, and a link that works in your browser.</p>
+                <Button href="/consult" variant="accent" className="mt-8">
+                  Book a consult <ArrowRight size={16} aria-hidden />
+                </Button>
               </div>
-              <span className="text-xs font-bold whitespace-nowrap bg-[#FF6B81]/10 text-[#E0506A] border border-[#FF6B81]/25 px-2.5 py-1 rounded-full">GAP</span>
-            </motion.div>
-          ))}
-        </div>
-        <p className="text-[#9AADBD] text-xs mt-6 max-w-3xl">
-          Industry analysis independently confirms both gaps: lead-gen marketplaces generate &ldquo;thousands of inquiries that lack seriousness... high drop-off, rising cost per acquisition&rdquo;; and hospital international-patient teams &ldquo;lack specialized software&rdquo; to track visas, pre-op tests, travel dates and discharge &mdash; coordinated manually across disconnected systems. Nearly the entire competitive set is thinly funded (Vaidam, Bookimed, Mozocare all under $1M disclosed) &mdash; a weak field for a product-led, well-capitalized entrant to out-build on operational depth.
-        </p>
-      </section>
-
-      {/* TRUST / TRACTION BAND */}
-      <section className="relative px-10 py-20 overflow-hidden border-y border-[#E3EAF2] bg-[#0F2A52]">
-        <div className="pointer-events-none absolute left-1/4 top-0 h-[300px] w-[500px] -translate-x-1/2 rounded-full bg-[#2F6FED]/25 blur-[110px]" />
-        <div className="relative max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
-          {[
-            { value: "15", label: "architecture levels mapped, P0 build live" },
-            { value: "6", label: "working product surfaces in this MVP" },
-            { value: "70–80%", label: "lower cost vs. US/UAE for comparable care" },
-            { value: "$0", label: "raised from a thinly-funded competitive field" },
-          ].map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              transition={{ delay: i * 0.08 }}
-            >
-              <p className="font-display text-4xl md:text-5xl text-grad">{s.value}</p>
-              <p className="text-[#AFC3DB] text-sm mt-2 leading-relaxed">{s.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* PIPELINE — how a case moves */}
-      <section id="how" className="bg-white text-[#10243E] py-28">
-        <div className="px-10 max-w-6xl mx-auto">
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3"
-          >
-            How a case moves
-          </motion.p>
-          <motion.h2
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="font-display text-4xl md:text-5xl mb-6 max-w-3xl"
-          >
-            One case, one thread, from first message to full recovery.
-          </motion.h2>
-          <motion.p
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-[#5B7184] max-w-2xl mb-16"
-          >
-            Every stage hands off cleanly to the next — nothing gets re-explained over WhatsApp, and the hospital, the patient and the care coordinator are always looking at the same record.
-          </motion.p>
-
-          <div className="mb-20">
-            {[
-              { icon: Stethoscope, step: "01", title: "Describe the need", body: "Patient submits condition, existing diagnosis, budget and timeline — a Case ID is created.", color: "#2F6FED" },
-              { icon: FileSearch, step: "02", title: "Review & route", body: "Care team reviews the case, AI organizes it into a structured summary, and it's sent to matched hospitals.", color: "#D9A441" },
-              { icon: Building2, step: "03", title: "Hospital responds", body: "Hospitals accept the case in their portal and submit a structured quotation — procedure, doctor, stay, cost.", color: "#FF6B81" },
-              { icon: ScrollText, step: "04", title: "Compare & decide", body: "Patient compares quotations side by side on cost, stay length, and provider — not a single opaque number.", color: "#6FA8F5" },
-              { icon: Plane, step: "05", title: "Coordinate travel", body: "Visa, flights, hotel and hospital transport line up around the confirmed treatment date.", color: "#D9A441" },
-              { icon: HeartPulse, step: "06", title: "Treat & follow up", body: "Treatment, discharge and a structured recovery plan — the relationship continues past the hospital stay.", color: "#2F6FED" },
-            ].map((s, i) => {
-              const reverse = i % 2 === 1;
-              return (
-                <motion.div
-                  key={s.step}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  transition={{ delay: i * 0.05 }}
-                  className={`grid md:grid-cols-2 gap-8 items-center py-10 ${i !== 0 ? "border-t border-[#E3EAF2]" : ""}`}
-                >
-                  <div className={reverse ? "md:order-2" : ""}>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: s.color }}>
-                        <s.icon size={16} className="text-white" />
-                      </div>
-                      <span className="font-eyebrow text-xs text-[#9AADBD] tracking-widest">STEP {s.step}</span>
-                    </div>
-                    <h3 className="font-display text-2xl mb-2">{s.title}</h3>
-                    <p className="text-[#5B7184] text-sm leading-relaxed max-w-sm">{s.body}</p>
-                  </div>
-                  {JOURNEY_IMAGES[s.title] && (
-                    <div className={`relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#F3F7FC] ${reverse ? "md:order-1" : ""}`}>
-                      <Image src={JOURNEY_IMAGES[s.title]} alt="" fill className="object-contain p-4" />
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
+            </Reveal>
+            <Reveal delay={0.08}>
+              <div className="group h-full rounded-[28px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur transition hover:border-glow/40 hover:bg-white/[0.07]">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sun-400/15 text-sun-400">
+                  <FileCheck size={22} aria-hidden />
+                </span>
+                <h3 className="mt-6 text-2xl font-bold">Written second opinion</h3>
+                <p className="mt-3 text-ink-300">Upload your reports and questions. A specialist reviews them and replies in writing — whether they agree with the plan, and what else they&rsquo;d consider.</p>
+                <Button href="/second-opinion" variant="ghostDark" className="mt-8">
+                  Request a second opinion <ArrowRight size={16} aria-hidden />
+                </Button>
+              </div>
+            </Reveal>
           </div>
+        </div>
+      </section>
 
-          <div className="flex flex-wrap gap-3">
-            {["Submitted", "Under Review", "Sent to Hospitals", "Quotation Received", "Confirmed", "Completed"].map(
-              (s, i, arr) => (
-                <motion.div
-                  key={s}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  transition={{ delay: i * 0.06 }}
-                  className="flex items-center gap-3"
-                >
-                  <span className="px-5 py-2.5 rounded-full bg-[#EAF2FF] text-[#2F6FED] text-sm font-semibold">
-                    {s}
+      {/* HOSPITALS */}
+      <section className="bg-surface py-24">
+        <div className="container-wc">
+          <Reveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <SectionHeading eyebrow="Verified hospitals" title="Every profile shows what was checked, and when.">
+              Licence, accreditation, international desk and site visit — hospitals that haven&rsquo;t completed checks aren&rsquo;t listed.
+            </SectionHeading>
+            <Button href="/hospitals" variant="outline">
+              Browse hospitals <ArrowRight size={16} aria-hidden />
+            </Button>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {hospitals.map((h, i) => (
+              <Reveal key={h.id} delay={i * 0.06} className="h-full">
+                <HospitalCard hospital={h} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AFTERCARE */}
+      <section className="bg-white py-24">
+        <div className="container-wc grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <Reveal>
+            <SectionHeading eyebrow="Aftercare" title="Your case doesn't close when you fly home.">
+              The biggest gap in medical travel is what happens after discharge. Whole Care keeps the loop open.
+            </SectionHeading>
+            <ul className="mt-8 space-y-5">
+              {[
+                { icon: LineChart, t: "Recovery tracker", d: "Log pain and mobility in seconds; your surgeon sees the trend at follow-ups." },
+                { icon: Video, t: "Video follow-ups", d: "Scheduled check-ins with the team that treated you." },
+                { icon: Users, t: "Private family link", d: "Relatives follow progress and updates — without seeing medical records." },
+              ].map((f) => (
+                <li key={f.t} className="flex gap-4">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-700">
+                    <f.icon size={20} aria-hidden />
                   </span>
-                  {i < arr.length - 1 && <span className="text-[#9AADBD]">&rarr;</span>}
-                </motion.div>
-              )
-            )}
-          </div>
+                  <div>
+                    <p className="font-semibold text-ink-900">{f.t}</p>
+                    <p className="text-ink-500">{f.d}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="relative">
+              <div aria-hidden className="absolute -inset-4 rounded-[40px] bg-gradient-to-br from-brand-100 via-white to-sun-50 sm:-inset-6" />
+              <div className="relative rounded-[28px] border border-line bg-white p-6 shadow-lift">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="eyebrow text-brand-700">Family tracker</p>
+                    <p className="mt-1 font-display text-xl font-bold text-ink-900">Fatima&rsquo;s knee replacement</p>
+                  </div>
+                  <span className="rounded-full bg-ok-50 px-3 py-1 text-xs font-semibold text-ok-700">Recovering well</span>
+                </div>
+                <ol className="mt-6 space-y-4 border-l-2 border-brand-100 pl-5">
+                  {[
+                    ["Surgery completed successfully", "20 Aug · Apex Global Hospital"],
+                    ["Discharged to partner hotel", "25 Aug"],
+                    ["Flew home — recovery plan active", "1 Sep"],
+                    ["6-week follow-up complete", "2 Oct"],
+                  ].map(([t, d], i) => (
+                    <li key={t} className="relative">
+                      <span aria-hidden className={`absolute -left-[27px] top-1 h-3 w-3 rounded-full ring-4 ring-white ${i === 3 ? "bg-brand-600" : "bg-brand-300"}`} />
+                      <p className="text-sm font-semibold text-ink-900">{t}</p>
+                      <p className="text-xs text-ink-500">{d}</p>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-6 rounded-2xl bg-ink-50 px-4 py-3 text-xs text-ink-500">Example from the demo case. Relatives see milestones only — never reports or messages.</p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* REVIEWS */}
-      <section className="bg-[#F3F7FC] px-10 py-28">
-        <div className="max-w-6xl mx-auto">
-          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3">
-            Patient Reviews
-          </motion.p>
-          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-5xl mb-4 max-w-3xl">
-            What patients say after their case closes.
-          </motion.h2>
-          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#9AADBD] text-xs mb-14 max-w-2xl">
-            Illustrative demo reviews for this build — not yet collected from live patients.
-          </motion.p>
-          <div className="grid md:grid-cols-3 gap-5">
-            {reviews.slice(0, 6).map((r, i) => (
-              <motion.div key={r.id} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.07 }} className="rounded-2xl wc-card wc-card-hover p-6">
-                <Stars count={r.rating} />
-                <p className="text-[#344A61] text-sm mt-3 leading-relaxed">&ldquo;{r.text}&rdquo;</p>
-                <div className="flex items-center gap-3 mt-4">
-                  {REVIEW_AVATARS[i % REVIEW_AVATARS.length] && (
-                    <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-[#E3EAF2]">
-                      <Image src={REVIEW_AVATARS[i % REVIEW_AVATARS.length]} alt={r.author} fill className="object-cover" />
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-[#10243E] text-sm font-bold">{r.author}</p>
-                    <p className="text-[#9AADBD] text-xs">{r.country} &middot; {r.procedure}</p>
+      <section className="bg-surface py-24">
+        <div className="container-wc">
+          <Reveal className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <SectionHeading eyebrow="Patient reviews" title="What patients say after their case closes." />
+            <p className="max-w-sm text-sm text-ink-500">
+              The reviews below are <span className="font-semibold text-ink-700">sample content</span> for this demo. Live reviews can only be written by patients with a completed case and carry a &ldquo;Verified patient&rdquo; badge.
+            </p>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {reviews.map((r, i) => (
+              <Reveal key={r.id} delay={i * 0.04} className="h-full">
+                <figure className="card flex h-full flex-col p-6">
+                  <div className="flex items-center justify-between">
+                    <Stars rating={r.rating} />
+                    {r.sample ? <SampleBadge /> : null}
                   </div>
-                </div>
-              </motion.div>
+                  <Quote size={22} className="mt-4 text-brand-200" aria-hidden />
+                  <blockquote className="mt-2 flex-1 text-[15px] leading-relaxed text-ink-700">{r.text}</blockquote>
+                  <figcaption className="mt-5 border-t border-line pt-4 text-sm">
+                    <p className="font-semibold text-ink-900">
+                      {r.author} <span className="font-normal text-ink-400">· {r.country}</span>
+                    </p>
+                    <p className="text-xs text-ink-500">
+                      {r.procedure} at {hospitalName[r.hospitalId]} · {formatDate(r.date, { month: "short", year: "numeric" })}
+                    </p>
+                  </figcaption>
+                </figure>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="px-10 py-28 max-w-4xl mx-auto">
-        <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3 text-center">
-          FAQ
-        </motion.p>
-        <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-4xl md:text-5xl mb-14 text-center">
-          Common questions
-        </motion.h2>
-        <div className="grid gap-4">
-          {faqs.map((f, i) => (
-            <motion.div key={f.q} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.05 }}>
-              <FaqItem q={f.q} a={f.a} defaultOpen={i === 0} />
-            </motion.div>
-          ))}
+      {/* FOR HOSPITALS */}
+      <section className="bg-white py-20">
+        <div className="container-wc">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-[32px] bg-ink-900 p-8 text-white md:p-12">
+              <div aria-hidden className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-500/20 blur-3xl" />
+              <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+                <div>
+                  <p className="eyebrow text-glow">For hospitals</p>
+                  <h2 className="mt-3 text-3xl font-bold md:text-4xl">Run your international patient desk on Whole Care.</h2>
+                  <p className="mt-4 max-w-xl text-ink-300">A pipeline for every inbound case, itemized quote builder, visa-letter generation, patient messaging and response-time analytics — instead of WhatsApp groups and spreadsheets.</p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Button href="/for-hospitals" variant="accent">
+                      See the hospital portal <ArrowRight size={16} aria-hidden />
+                    </Button>
+                    <Button href="/signup/hospital" variant="ghostDark">
+                      List your hospital
+                    </Button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: KanbanSquare, t: "Case pipeline" },
+                    { icon: ReceiptText, t: "Quote builder" },
+                    { icon: ShieldCheck, t: "Verification profile" },
+                    { icon: Building2, t: "Response analytics" },
+                  ].map((f) => (
+                    <div key={f.t} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                      <f.icon size={20} className="text-glow" aria-hidden />
+                      <p className="mt-3 text-sm font-semibold">{f.t}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* LEAD CAPTURE */}
-      <section className="bg-[#F3F7FC] px-10 py-28">
-        <div className="max-w-xl mx-auto text-center mb-10">
-          <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="text-[#2F6FED] font-eyebrow uppercase text-xs tracking-widest mb-3">
-            Not ready for a full case yet?
-          </motion.p>
-          <motion.h2 initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-display text-3xl md:text-4xl">
-            Talk to a care coordinator first.
-          </motion.h2>
+      {/* FAQ */}
+      <section className="bg-surface py-24">
+        <div className="container-wc grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <Reveal>
+            <SectionHeading eyebrow="FAQ" title="Questions patients ask us most.">
+              Still unsure? Ask the assistant in the corner, or talk to a coordinator.
+            </SectionHeading>
+            <Button href="/contact" variant="outline" className="mt-8">
+              Contact a coordinator
+            </Button>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <Accordion items={FAQS} />
+          </Reveal>
         </div>
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
-          <InquiryForm />
-        </motion.div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative px-10 py-32 overflow-hidden text-center bg-[#0F2A52] text-white">
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-[0.25]">
-          <Image src="/images/journey/step_6_recovery_care.jpg" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#0F2A52]" />
+      <section className="hero-night relative overflow-hidden py-24 text-center text-white">
+        <div aria-hidden className="grid-fade pointer-events-none absolute inset-0" />
+        <div className="container-wc relative">
+          <Reveal>
+            <h2 className="mx-auto max-w-3xl text-4xl font-bold leading-tight md:text-5xl">
+              Tell us what you need. Get <span className="font-serif font-normal italic text-gradient">itemized</span> quotes in days.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg text-ink-300">Free for patients. Share your reports once, compare verified hospitals, and decide with a specialist&rsquo;s input.</p>
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <Button href="/get-quote" variant="accent" size="lg">
+                Get a free quote <ArrowRight size={18} aria-hidden />
+              </Button>
+              <Button href="/consult" variant="ghostDark" size="lg">
+                Book a video consult
+              </Button>
+            </div>
+          </Reveal>
         </div>
-        <motion.h2
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="relative font-display text-4xl md:text-6xl max-w-3xl mx-auto mb-6 text-white"
-        >
-          Built to <span className="text-grad italic">launch</span>, not just to pitch.
-        </motion.h2>
-        <motion.p
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          transition={{ delay: 0.1 }}
-          className="relative text-[#AFC3DB] max-w-xl mx-auto mb-10"
-        >
-          Every flow on this site is a working MVP, not a mockup. Try the patient case flow or the hospital portal yourself.
-        </motion.p>
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          transition={{ delay: 0.2 }}
-          className="relative flex flex-wrap gap-4 justify-center"
-        >
-          <Link href="/case/new" className="btn-grad px-7 py-3.5 rounded-full font-bold">
-            Start a Case
-          </Link>
-          <Link href="/hospital" className="border border-white/30 text-white px-7 py-3.5 rounded-full font-bold hover:bg-white/10 transition">
-            Hospital Portal demo
-          </Link>
-        </motion.div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-[#E3EAF2] px-10 py-10 bg-white">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md wc-gradient" />
-            <span className="font-bold text-sm tracking-wide text-[#10243E]">WHOLE CARE</span>
-          </div>
-          <p className="text-[#9AADBD] text-xs text-center">
-            Figures labeled illustrative/indicative are planning estimates, not audited or forecast numbers.
-          </p>
-        </div>
-      </footer>
-    </main>
+    </>
   );
 }

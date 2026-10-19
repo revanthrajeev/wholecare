@@ -1,22 +1,62 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
+import crypto from "crypto";
 
-const SEED_PATH = path.join(process.cwd(), "data", "seed.json");
+// Serverless hosts (Netlify, Lambda, Vercel) only allow writes under /tmp, which
+// can be wiped between cold starts — fine for a demo, not for real patient data.
+const IS_SERVERLESS = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.VERCEL);
+const DATA_DIR = path.join(process.cwd(), "data");
+const SEED_PATH = path.join(DATA_DIR, "seed.json");
+const SEED_UPLOADS = path.join(DATA_DIR, "seed-uploads");
+const RUNTIME_DIR = IS_SERVERLESS ? path.join(os.tmpdir(), "wholecare") : DATA_DIR;
+const DB_PATH = path.join(RUNTIME_DIR, "db.json");
+export const UPLOAD_DIR = path.join(RUNTIME_DIR, "uploads");
 
-// On Netlify (and most serverless hosts) the deployed project directory is
-// read-only — only /tmp is writable, and it may be wiped between cold
-// starts. Writing to /tmp keeps the demo functional there; it just means
-// data resets whenever the function container recycles. Local dev keeps
-// using data/db.json so state survives `npm run dev` restarts.
-const DB_PATH = process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME
-  ? path.join(os.tmpdir(), "wholecare-db.json")
-  : path.join(process.cwd(), "data", "db.json");
+let checkedVersion = false;
+
+function writeAtomic(file, contents) {
+  const tmp = `${file}.${process.pid}.${crypto.randomBytes(4).toString("hex")}.tmp`;
+  fs.writeFileSync(tmp, contents);
+  fs.renameSync(tmp, file);
+}
+
+function copySeedUploads() {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  if (!fs.existsSync(SEED_UPLOADS)) return;
+  for (const f of fs.readdirSync(SEED_UPLOADS)) {
+    const dest = path.join(UPLOAD_DIR, f);
+    if (!fs.existsSync(dest)) fs.copyFileSync(path.join(SEED_UPLOADS, f), dest);
+  }
+}
+
+function seedFresh() {
+  fs.mkdirSync(RUNTIME_DIR, { recursive: true });
+  writeAtomic(DB_PATH, fs.readFileSync(SEED_PATH, "utf-8"));
+  copySeedUploads();
+}
 
 function ensureDb() {
   if (!fs.existsSync(DB_PATH)) {
-    const seed = fs.readFileSync(SEED_PATH, "utf-8");
-    fs.writeFileSync(DB_PATH, seed);
+    seedFresh();
+    checkedVersion = true;
+    return;
+  }
+  if (checkedVersion) return;
+  checkedVersion = true;
+  // A db.json written by an older build is backed up, then replaced by the new seed.
+  const seedVersion = JSON.parse(fs.readFileSync(SEED_PATH, "utf-8")).meta?.schemaVersion;
+  let current;
+  try {
+    current = JSON.parse(fs.readFileSync(DB_PATH, "utf-8")).meta?.schemaVersion;
+  } catch {
+    current = null;
+  }
+  if (current !== seedVersion) {
+    fs.copyFileSync(DB_PATH, path.join(RUNTIME_DIR, `db.backup-${Date.now()}.json`));
+    seedFresh();
+  } else {
+    copySeedUploads();
   }
 }
 
@@ -26,18 +66,24 @@ export function readDb() {
 }
 
 export function writeDb(db) {
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  writeAtomic(DB_PATH, JSON.stringify(db, null, 2));
+}
+
+// Read-modify-write with no await in between, so concurrent requests in this
+// process can't interleave and lose each other's updates.
+export function mutateDb(fn) {
+  const db = readDb();
+  const result = fn(db);
+  writeDb(db);
+  return result;
 }
 
 export function newId(prefix) {
-  return `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+  return `${prefix}_${Date.now().toString(36)}${crypto.randomBytes(3).toString("hex")}`;
 }
 
-export const CASE_STAGES = [
-  "Submitted",
-  "Under Review",
-  "Sent to Hospitals",
-  "Quotation Received",
-  "Confirmed",
-  "Completed",
-];
+export function randomToken(bytes = 12) {
+  return crypto.randomBytes(bytes).toString("base64url");
+}
+
+export { CASE_STAGES, HOSPITAL_PIPELINE } from "@/lib/constants";

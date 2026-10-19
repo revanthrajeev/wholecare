@@ -1,36 +1,51 @@
-import { NextResponse } from "next/server";
-import { askOllamaJSON } from "@/lib/ai";
+import { ok, fail, readJson, rateLimit } from "@/lib/http";
+import { mutateDb, readDb } from "@/lib/db";
+import { getCurrentUser } from "@/lib/auth";
+import { canViewCase } from "@/lib/access";
+import { generateJSON } from "@/lib/ai";
+import { caseSummaryRules } from "@/lib/ai-rules";
+
+const SCHEMA = {
+  type: "object",
+  properties: {
+    structuredSummary: { type: "string" },
+    suggestedSpecialty: { type: "string" },
+    triagePriority: { type: "string", enum: ["Routine", "Priority", "Urgent — recommend immediate coordinator review"] },
+    missingInformation: { type: "array", items: { type: "string" } },
+    suggestedQuestionsForDoctor: { type: "array", items: { type: "string" } },
+  },
+  required: ["structuredSummary", "suggestedSpecialty", "triagePriority", "missingInformation", "suggestedQuestionsForDoctor"],
+  additionalProperties: false,
+};
 
 export async function POST(request) {
-  const body = await request.json();
-  const { patientName, condition, existingTreatment, budgetRange, timeline, countryOfResidence } = body;
+  const user = await getCurrentUser();
+  if (!user) return fail("Not signed in.", 401);
+  if (!(await rateLimit("ai-summary", { limit: 20, windowMs: 60 * 60 * 1000 }))) return fail("Too many requests — try again later.", 429);
+  const { caseId } = await readJson(request);
+  const db = readDb();
+  const c = db.cases.find((x) => x.id === caseId);
+  if (!c || !canViewCase(user, c)) return fail("Case not found.", 404);
+  const files = (db.files || []).filter((f) => f.caseId === c.id);
 
-  const prompt = `You are a clinical case-intake assistant for a medical-tourism coordination platform. You organize information for the care team to review — you are NOT a doctor and must NEVER diagnose, prescribe, or recommend a treatment decision.
+  const system = `You are an intake assistant for a medical-travel coordination platform. You organise what a patient has reported so a care coordinator can act on it. You are not a clinician: never diagnose, never interpret results, never recommend a treatment decision. Write neutrally, in English, for a coordinator.`;
+  const prompt = `Patient intake (patient-reported):
+- Request type: ${c.type === "second_opinion" ? "Written second opinion" : "Treatment quote"}
+- Patient: ${c.patientName}${c.patientAge ? `, age ${c.patientAge}` : ""}, from ${c.countryOfResidence || "not stated"}
+- Condition as described: ${c.condition}
+- Care so far: ${c.existingTreatment || "not provided"}
+${c.questions ? `- Questions for the specialist: ${c.questions}\n` : ""}- Preferred destination: ${c.preferredDestination || "not stated"}
+- Budget: ${c.budgetRange || "not stated"}; timeline: ${c.timeline || "not stated"}
+- Documents uploaded: ${files.length ? files.map((f) => `${f.name} (${f.category})`).join(", ") : "none"}
 
-Patient intake:
-- Name: ${patientName}
-- Country of residence: ${countryOfResidence}
-- Stated condition/diagnosis (as the patient understands it): ${condition}
-- Existing treatment/diagnosis from their own doctor: ${existingTreatment || "not provided"}
-- Budget range: ${budgetRange || "not provided"}
-- Timeline: ${timeline || "not provided"}
+Produce: a 2–3 sentence neutral summary; the most relevant specialty; a triage priority (Urgent only if the description suggests possible emergency symptoms); a list of specific missing documents or details to request; and 3–5 questions the patient may want to ask a specialist.`;
 
-Return ONLY a JSON object with this exact shape, no other text:
-{
-  "structuredSummary": "2-3 sentence neutral clinical-administrative summary of what the patient has reported, written for a care coordinator (not a diagnosis)",
-  "suggestedSpecialty": "most likely relevant medical specialty based on the stated condition, as a single short string",
-  "triagePriority": "Routine" | "Priority" | "Urgent — recommend immediate coordinator review",
-  "missingInformation": ["list", "of", "specific missing fields or documents the coordinator should request from the patient"],
-  "suggestedQuestionsForDoctor": ["3-5 clear questions the patient should ask a specialist about this condition"]
-}`;
-
-  try {
-    const result = await askOllamaJSON(prompt);
-    return NextResponse.json({ ...result, aiGenerated: true, model: process.env.OLLAMA_MODEL || "qwen3:8b" });
-  } catch (err) {
-    return NextResponse.json(
-      { error: "AI assistant unavailable", detail: String(err?.message || err) },
-      { status: 503 }
-    );
-  }
+  const result = await generateJSON({ system, messages: [{ role: "user", content: prompt }], schema: SCHEMA, effort: "low" });
+  const data = result?.data?.structuredSummary ? result.data : caseSummaryRules(c, files.length);
+  const summary = { ...data, provider: result?.data?.structuredSummary ? result.provider : "rules", model: result?.model || null, generatedAt: new Date().toISOString() };
+  mutateDb((d) => {
+    const kase = d.cases.find((x) => x.id === c.id);
+    kase.aiSummary = summary;
+  });
+  return ok(summary);
 }
