@@ -1,7 +1,7 @@
 {
   "meta": {
-    "schemaVersion": 2,
-    "generatedAt": "2026-10-19T15:05:05.641Z"
+    "schemaVersion": 3,
+    "generatedAt": "2026-10-20T19:42:51.820Z"
   },
   "users": [
     {
@@ -9,7 +9,7 @@
       "role": "admin",
       "name": "Whole Care Admin",
       "email": "admin@wholecare.com",
-      "passwordHash": "d3b0cddb1ffe13457b115321cce11bc1:57617923b0123dd996f23a4715f87831d90707530cca859bf9b286bfcd13c28ba77d3583da97e75a54ee901d29e0eb662c1974fce936d8953bf3b516c645589c",
+      "passwordHash": "77d203e59e5587040cb841a3d116e7f4:4201f6ef4a05a8b53293ca3e9f30688d101002b93670b9d7d600f5810eee03614394c8d9b58a2968ab35ab038992cae6ec463751e40f17c57cc56516d1d2ef42",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -18,7 +18,7 @@
       "name": "Nadia Rahman",
       "email": "care@wholecare.com",
       "phone": "+971 4 000 0000",
-      "passwordHash": "7f64ba647a83e0a80ff0617404d8d243:7813b7909aed8c1b2f0a47e91b6090eddf9254d160c0f178b0d61d4063e4c224ba70880bb36eeb42e7eb24a2e4333290fa30ef4d54611dd7a782601138394c3f",
+      "passwordHash": "793c519e4f4ad41f290ead9ba2d64088:21c30fe7672c216612df7c68bd33df3be26fece7dda147b34b283c5d00b0a4da8bfd1fb95cf8084649a61bf85257e26d9e0d8ae196818c6657da0ce419bcb61e",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -28,7 +28,7 @@
       "email": "demo.patient@wholecare.com",
       "country": "UAE",
       "phone": "+971 50 000 0000",
-      "passwordHash": "ce51e0d19a85cefcdddddbc447992f7e:61da0de3c799ffa3c7a20f88a342a61240c70a9e196671f246fc15929c8dbb36acf281089dc14e2b968a9dfc873b950ff3b69e5c84b7418d96a9a2cd531ccbce",
+      "passwordHash": "fc14ddabbb5ae673776be756daf91e09:73e137b3445e6a2b66ad55fd6fbadefb3b28799c03941371706c2fb4e08e109d183bb9b7f4cb8f5f68fadc439bcd1a690c45f7b20c26b88c3fa541b1e36d1973",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -37,7 +37,7 @@
       "name": "Daniel Okafor",
       "email": "daniel.okafor@example.com",
       "country": "Nigeria",
-      "passwordHash": "b0d6ddbd7b4b1dc9bd909784b67b4c48:01511905c794ab9f9efabe56141cefff4a0aa00e9432276a8d26d6321ce33e4538fd575841216c377f7ab822145ef8fbe50207edc9a97d292cf4d3c33517476b",
+      "passwordHash": "1d3c995b11986b3794f13ef168feb981:cec0143e565c7d4036b48b63778f9436fce8acd0872a20debed201740fe2f6cd2eb7c2449ea994bbf6a1436153e43f59bef6d129d96717ad77e55a0512d2842c",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -46,7 +46,7 @@
       "name": "Margaret Hughes",
       "email": "margaret.hughes@example.com",
       "country": "United Kingdom",
-      "passwordHash": "47814fb43676cc02b24a2af26cb14bed:465853f4257e5d07695b57fa2bed0bcb6188a983bbf052ebf7ec795da752d56970f788703c96542863b0d5060b7ec0f5111898e288b308e07557aa04ee8b6247",
+      "passwordHash": "eeb9fffc5e37b3ad3e637ab643f0e4f6:2ce46235435e74be216e7f09efa321861d454a4d8a1289dc089f734509b29f24f1359493c904433bc436f7e4e1f064a7a43f18cdcef0a2c4a435af581d7da5a2",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -55,7 +55,7 @@
       "name": "Nasreen Uddin",
       "email": "nasreen.uddin@example.com",
       "country": "Bangladesh",
-      "passwordHash": "1aaa17ef5e79933f93ecbcdd3e11dcbb:48ca9703ce581e1b430e95a5edbac4cbfec6c1dc7cda3d5f0ff4b32ee8aa5400c271efd332c5a220c62d75a361e3657ef8eba21bddfaf9f52a02ba0ac0e1a24e",
+      "passwordHash": "011ce9dca7ed8d7c193cb19be68e0f68:281ca72dd1af4cf26f87b238f8a0259a8378c68d351da386c61f9abbe30803554d12f9e5e74eee7bb22758de53a57a14f5d62c9cbdffa032a0d4b6680d75b46e",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -64,7 +64,7 @@
       "hospitalId": "h1",
       "name": "Apex Global Hospital",
       "email": "apex@demo.com",
-      "passwordHash": "acda2392a7cac1dd66af3b2f3b7356ec:bfb4a2d4ac5328fd8f4b447540496db4100413138e35447e4f04e411bc8452ed4e3ac2a5204ce47cea308fe35581b3635c80dde961e88dfd983cdca5b1a90d5b",
+      "passwordHash": "3715b4ceacac98672f9fc4fb35ae197c:62e1b08e6bc7d1dc3a0d9645f79239d6035d06419e0634f7fd14a9a2f02e59e346cc1ad9a8f3e6fb39adcbb2bcf895a03940e49a399d7fcf74f24387de031360",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -73,7 +73,7 @@
       "hospitalId": "h2",
       "name": "Sunrise Medicity",
       "email": "sunrise@demo.com",
-      "passwordHash": "2e443f9407baad78b88dc815a7846ed9:2c72a33dfce0d61076039d310838af0fc9d8702588170f5c2614bb917d46ff9e4af9814fb6590d557f2d61ed1e675e1bac6be125af317ae387998bcd2ed1839e",
+      "passwordHash": "063e6c56c8a53028eac274c37d7c179a:6faa3e23aa515989a516472b9beaacc15874ba8aafbf1f28df7c8c9ead05421e2f21f93af0ce8efd8355702abfd31a7f84dce35c504f7c2442e4d84cfcb41bc6",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -82,7 +82,7 @@
       "hospitalId": "h3",
       "name": "Horizon Speciality Centre",
       "email": "horizon@demo.com",
-      "passwordHash": "f03369db7945e3ee07312b9b51cbdf6f:e205450bec6df391d2f5deb29c48238c5865840cce9683b92ab32c0ab8fa8465a4981aa74ac86cae3d163aa58054429c5cb4f8801bacec79b92e180262200e49",
+      "passwordHash": "1a00e120d1dc8ef75bf5a275f5cc4f60:6120a5cde1f73e8abb571040743f4c15d72b88bdaf2887e94c1bc06a2481034601e0023bdf69a50b98d2da1936fd88f8a9955dc649e289bef2977266c7953772",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -91,7 +91,7 @@
       "hospitalId": "h4",
       "name": "Northstar Heart & Joint Institute",
       "email": "northstar@demo.com",
-      "passwordHash": "12706716872460d426312bec1d1c95d6:6cf003f4245e6fc4ee71a9e2f3a33bddd4aaf417174e3840e150a676accb0a2921354565834527de938ce7b26dab7e100fb0b585d2de334b772b211f371169d4",
+      "passwordHash": "fa5dd10f7b8f0e2aa2e213469f51296c:356cfd71ae93b607c8e62b2b618bf9089dae89ce09d51b06859af684543cbb26f5fc535be7027a29d71458d6865543536cd189359f218265b3a1302120725a14",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -100,7 +100,7 @@
       "hospitalId": "h5",
       "name": "Meridyen Istanbul Hospital",
       "email": "meridyen@demo.com",
-      "passwordHash": "170c70c8c0f46000f10eec1d75853087:65a682782a221c8dce0a64f4202b821264e1331b0e3b8be27a36031795650f24f0080e5e46c37357b5747a149274f5f971b09710e89fb92ea5fba41230b433a3",
+      "passwordHash": "50b87fda8798f032ef6d79e34b92fa78:953abb63fbb1b27ed753b0122619b1cc3feed86e0e152c368b37816369fa662cb5e2b2d7e30b04e748a891125d151025fd84f1bb0d8258d5ea914c268defa51f",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -109,7 +109,7 @@
       "hospitalId": "h6",
       "name": "Lykia Coast Medical",
       "email": "lykia@demo.com",
-      "passwordHash": "33ad446d7288e658f9c132516e3abe93:91a3d5f59b0518071bd01b591a329387becf9c19bdbc176647ab381e739257170f85368f5654ab852fd1b775103296ad8126141f4aaf7c9b72d20cb9e2901482",
+      "passwordHash": "454d33f345c559990a19163ddf3569be:9927480a078b62597424c5f703c8c3527b1dec1a5fbb6dec740d23d78c32d2460c6844517eb80b0a8b26b1098931cb71b8094bea22eac8f64bab10733497a60b",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -118,7 +118,7 @@
       "hospitalId": "h7",
       "name": "Lotus River International Hospital",
       "email": "lotusriver@demo.com",
-      "passwordHash": "3cdba753490aebe1da7c5ada70a30595:7ce498e6047859ab7c1bc0120c8f04691e8e0aa3e5051d5b376e8ce9179520b377a4f18d088d156bd16ebdd9346406cb0c83f08079b5ce05bea2bbb7c5ba5940",
+      "passwordHash": "fd3e25358a134502f41ea0e831620790:c0d708a99424eb80750eda4635ebdfcc5037bbc668df4f4f8720737fa5e4963793b2a9795005053135b408caf7e51566b189fcd48eae8e55e671dd6a4df5f3ea",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -127,7 +127,7 @@
       "hospitalId": "h8",
       "name": "Lumen Bay Medical Centre",
       "email": "lumenbay@demo.com",
-      "passwordHash": "21404917777b18d70ac152f997b73bff:46205b9ca36fc0f88db7ecc2ea06b8ad9bde05247b3969bc0db7a8b384ff6a22bf08fed5b0abf55cdb825c2bef1091ef3628bd025b25f4f3cbeeb25a21c0aa4a",
+      "passwordHash": "52bd934626be83a758741ef030cbd612:674bc064241b31de80bf97c815fe3a5ad2fc440146497ae3b873df313fbe7f45a70dcef61a9b81be66989720eee85c185bfd01a4b614307799450526a30a3b27",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -136,7 +136,7 @@
       "hospitalId": "h9",
       "name": "Pacifica Frontera Medical",
       "email": "pacifica@demo.com",
-      "passwordHash": "3a468dff1b4973addf20eabb8ab1c48f:ff736cb51be3778cd53bc00602396c89869b912bbc1e84b24b15b4328ca7e765289384400a01dc3237db6416d1ad8fdd46120a97be11a9a147ce4e59690bcb8c",
+      "passwordHash": "095ee7f9120a5f25bd56809b7a925950:352dbb1e77553f9c476d03b18fbf01375c99603a9f96e7bd90c0d4bc6f2526ddf21358f5390e6c8be9c7f76692683f4d085cfd08155c41e7c68739bf54c9d217",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -145,7 +145,7 @@
       "hospitalId": "h10",
       "name": "Crescent Palm Hospital",
       "email": "crescentpalm@demo.com",
-      "passwordHash": "591ac78ef255d5fe5e820f84d444ba58:4aeaa0e759c918c8c59bf1ee27596d9021d040ab3119189255b9c7a1ce7bca47bd6869bf09a8858a5c2d4741853b6de20880e57c6a51c0f0f0bac59b48d1a0de",
+      "passwordHash": "3455634df94434f14630fc1212d34efb:49fd8e192109244e2cbab68cda2c6da5468061acaf7d8f46cb31b9e4f9221701073057a3950a83fa2ee5aca1d53cfbbe9f09ff2e2caccc4483b7d8fa2c8ca0f0",
       "createdAt": "2026-09-01T00:00:00.000Z"
     },
     {
@@ -154,7 +154,7 @@
       "hospitalId": "h11",
       "name": "Seri Kenanga Specialist Hospital",
       "email": "serikenanga@demo.com",
-      "passwordHash": "c190654759cf72294e27eac33e4eb859:e76b2d6849d6a74164b565f9297e3f0908c9582f140cafeba02ed4ce2cf64c549724969f7b7e4c531f03539f0beeb045299c7af78342f61b9e8aa5f1250f7056",
+      "passwordHash": "4f093ddbf7ba691ad0c621691465d7fa:4bf9f3ef5d61faa11afe21dfa10146fac45e525f2f9b86336d756495edadf636bc6d942d47676790414b3188d6941b29f15dff770211edbd20d561c6f4cf8456",
       "createdAt": "2026-09-01T00:00:00.000Z"
     }
   ],
@@ -366,7 +366,7 @@
         "Off-pump bypass programme",
         "Minimally invasive spine unit"
       ],
-      "image": null,
+      "image": "/images/hospitals/northstar-gurugram.jpg",
       "verified": true,
       "lastVerified": "2026-10-02",
       "verification": {
@@ -422,7 +422,7 @@
         "In-house dental lab",
         "Bundled hotel and transfers"
       ],
-      "image": null,
+      "image": "/images/hospitals/meridyen-istanbul.jpg",
       "verified": true,
       "lastVerified": "2026-09-18",
       "verification": {
@@ -473,7 +473,7 @@
         "Seaside recovery residence",
         "Same-week cataract scheduling"
       ],
-      "image": null,
+      "image": "/images/hospitals/lykia-antalya.jpg",
       "verified": false,
       "lastVerified": null,
       "verification": {
@@ -531,7 +531,7 @@
         "Hotel-style inpatient floors",
         "Dedicated Arabic-speaking team"
       ],
-      "image": null,
+      "image": "/images/hospitals/lotus-river-bangkok.jpg",
       "verified": true,
       "lastVerified": "2026-09-21",
       "verification": {
@@ -585,7 +585,7 @@
         "Image-guided neurosurgery suites",
         "Remote records review before travel"
       ],
-      "image": null,
+      "image": "/images/hospitals/lumen-bay-singapore.jpg",
       "verified": true,
       "lastVerified": "2026-09-29",
       "verification": {
@@ -636,7 +636,7 @@
         "Six-month dietitian follow-up",
         "Same-time-zone care for the US West Coast"
       ],
-      "image": null,
+      "image": "/images/hospitals/pacifica-tijuana.jpg",
       "verified": true,
       "lastVerified": "2026-09-24",
       "verification": {
@@ -691,7 +691,7 @@
         "Sports medicine and joint unit",
         "Medical visa sponsorship"
       ],
-      "image": null,
+      "image": "/images/hospitals/crescent-palm-dubai.jpg",
       "verified": true,
       "lastVerified": "2026-10-05",
       "verification": {
@@ -747,7 +747,7 @@
         "Muslim-friendly facilities",
         "Cardiac rehab gym"
       ],
-      "image": null,
+      "image": "/images/hospitals/seri-kenanga-kuala-lumpur.jpg",
       "verified": true,
       "lastVerified": "2026-09-27",
       "verification": {
@@ -771,7 +771,7 @@
       "slug": "dr-arvind-rao",
       "name": "Dr. Arvind Rao",
       "gender": "male",
-      "image": "/images/doctors/doctor_2.jpg",
+      "image": "/images/doctors/arvind-rao.jpg",
       "title": "MBBS, MS, MCh (Cardiothoracic Surgery)",
       "specialty": "Cardiac Surgery",
       "hospitalId": "h1",
@@ -809,7 +809,7 @@
       "slug": "dr-priya-menon",
       "name": "Dr. Priya Menon",
       "gender": "female",
-      "image": "/images/doctors/doctor_1.jpg",
+      "image": "/images/doctors/priya-menon.jpg",
       "title": "MBBS, MS, MCh (Surgical Gastroenterology)",
       "specialty": "Transplant Surgery",
       "hospitalId": "h2",
@@ -848,7 +848,7 @@
       "slug": "dr-sanjay-kapoor",
       "name": "Dr. Sanjay Kapoor",
       "gender": "male",
-      "image": "/images/doctors/doctor_4.jpg",
+      "image": "/images/doctors/sanjay-kapoor.jpg",
       "title": "MBBS, MS (Orthopaedics), Fellowship in Arthroplasty",
       "specialty": "Orthopedics",
       "hospitalId": "h1",
@@ -884,7 +884,7 @@
       "slug": "dr-leila-haddad",
       "name": "Dr. Leila Haddad",
       "gender": "female",
-      "image": "/images/doctors/doctor_3.jpg",
+      "image": "/images/doctors/leila-haddad.jpg",
       "title": "MBBS, MD (Obstetrics & Gynaecology), Fellowship in Reproductive Medicine",
       "specialty": "Fertility (IVF)",
       "hospitalId": "h3",
@@ -922,7 +922,7 @@
       "slug": "dr-ramesh-iyer",
       "name": "Dr. Ramesh Iyer",
       "gender": "male",
-      "image": "/images/doctors/doctor_6.jpg",
+      "image": "/images/doctors/ramesh-iyer.jpg",
       "title": "MBBS, MS, MCh (Neurosurgery)",
       "specialty": "Neurosurgery",
       "hospitalId": "h2",
@@ -961,7 +961,7 @@
       "slug": "dr-neha-shah",
       "name": "Dr. Neha Shah",
       "gender": "female",
-      "image": "/images/doctors/doctor_5.jpg",
+      "image": "/images/doctors/neha-shah.jpg",
       "title": "MBBS, MS, MCh (Plastic Surgery)",
       "specialty": "Cosmetic Surgery",
       "hospitalId": "h3",
@@ -998,7 +998,7 @@
       "slug": "dr-meera-krishnan",
       "name": "Dr. Meera Krishnan",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/meera-krishnan.jpg",
       "title": "MBBS, MD, DM (Medical Oncology)",
       "specialty": "Oncology",
       "hospitalId": "h1",
@@ -1036,7 +1036,7 @@
       "slug": "dr-kunal-desai",
       "name": "Dr. Kunal Desai",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/kunal-desai.jpg",
       "title": "MBBS, MS, FMAS (Minimal Access Surgery)",
       "specialty": "Bariatric Surgery",
       "hospitalId": "h3",
@@ -1074,7 +1074,7 @@
       "slug": "dr-vikram-sethi",
       "name": "Dr. Vikram Sethi",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/vikram-sethi.jpg",
       "title": "MBBS, MS, MCh (CTVS)",
       "specialty": "Cardiac Surgery",
       "hospitalId": "h4",
@@ -1111,7 +1111,7 @@
       "slug": "dr-ananya-bose",
       "name": "Dr. Ananya Bose",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/ananya-bose.jpg",
       "title": "MBBS, MS (Orthopaedics), Fellowship in Joint Replacement",
       "specialty": "Orthopedics",
       "hospitalId": "h4",
@@ -1148,7 +1148,7 @@
       "slug": "dr-emre-y-ld-z",
       "name": "Dr. Emre Yıldız",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/emre-yildiz.jpg",
       "title": "MD (Dermatology), Hair Restoration Fellowship",
       "specialty": "Hair Restoration",
       "hospitalId": "h5",
@@ -1187,7 +1187,7 @@
       "slug": "dr-selin-ayd-n",
       "name": "Dr. Selin Aydın",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/selin-aydin.jpg",
       "title": "DDS, PhD (Prosthodontics)",
       "specialty": "Dental",
       "hospitalId": "h5",
@@ -1224,7 +1224,7 @@
       "slug": "dr-murat-kaya",
       "name": "Dr. Murat Kaya",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/murat-kaya.jpg",
       "title": "MD (Orthopaedics & Traumatology)",
       "specialty": "Orthopedics",
       "hospitalId": "h6",
@@ -1262,7 +1262,7 @@
       "slug": "dr-deniz-arslan",
       "name": "Dr. Deniz Arslan",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/deniz-arslan.jpg",
       "title": "MD (Ophthalmology)",
       "specialty": "Ophthalmology",
       "hospitalId": "h6",
@@ -1301,7 +1301,7 @@
       "slug": "dr-somchai-rattanakorn",
       "name": "Dr. Somchai Rattanakorn",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/somchai-rattanakorn.jpg",
       "title": "MD, Board-certified Cardiothoracic Surgeon",
       "specialty": "Cardiac Surgery",
       "hospitalId": "h7",
@@ -1336,7 +1336,7 @@
       "slug": "dr-nattaya-srisuk",
       "name": "Dr. Nattaya Srisuk",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/nattaya-srisuk.jpg",
       "title": "MD, Board-certified Plastic Surgeon",
       "specialty": "Cosmetic Surgery",
       "hospitalId": "h7",
@@ -1374,7 +1374,7 @@
       "slug": "dr-rachel-tan",
       "name": "Dr. Rachel Tan",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/rachel-tan.jpg",
       "title": "MBBS, MRCP, FAMS (Medical Oncology)",
       "specialty": "Oncology",
       "hospitalId": "h8",
@@ -1412,7 +1412,7 @@
       "slug": "dr-daniel-lim",
       "name": "Dr. Daniel Lim",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/daniel-lim.jpg",
       "title": "MBBS, FRCS (Neurosurgery)",
       "specialty": "Neurosurgery",
       "hospitalId": "h8",
@@ -1448,7 +1448,7 @@
       "slug": "dr-alejandro-ruiz",
       "name": "Dr. Alejandro Ruiz",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/alejandro-ruiz.jpg",
       "title": "MD, Board-certified General & Bariatric Surgeon",
       "specialty": "Bariatric Surgery",
       "hospitalId": "h9",
@@ -1485,7 +1485,7 @@
       "slug": "dr-sofia-morales",
       "name": "Dr. Sofía Morales",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/sofia-morales.jpg",
       "title": "DDS (Implantology)",
       "specialty": "Dental",
       "hospitalId": "h9",
@@ -1523,7 +1523,7 @@
       "slug": "dr-omar-al-farsi",
       "name": "Dr. Omar Al-Farsi",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/omar-al-farsi.jpg",
       "title": "MBBS, FRCS (Trauma & Orthopaedics)",
       "specialty": "Orthopedics",
       "hospitalId": "h10",
@@ -1559,7 +1559,7 @@
       "slug": "dr-hana-nasser",
       "name": "Dr. Hana Nasser",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/hana-nasser.jpg",
       "title": "MBBS, MRCOG, Subspecialty in Reproductive Medicine",
       "specialty": "Fertility (IVF)",
       "hospitalId": "h10",
@@ -1597,7 +1597,7 @@
       "slug": "dr-aziz-rahman",
       "name": "Dr. Aziz Rahman",
       "gender": "male",
-      "image": null,
+      "image": "/images/doctors/aziz-rahman.jpg",
       "title": "MBBS, MS, FRCS (Cardiothoracic)",
       "specialty": "Cardiac Surgery",
       "hospitalId": "h11",
@@ -1636,7 +1636,7 @@
       "slug": "dr-mei-ling-wong",
       "name": "Dr. Mei Ling Wong",
       "gender": "female",
-      "image": null,
+      "image": "/images/doctors/mei-ling-wong.jpg",
       "title": "MBBS, MOG, Fellowship in Reproductive Medicine",
       "specialty": "Fertility (IVF)",
       "hospitalId": "h11",
@@ -2896,7 +2896,7 @@
       "reason": "Bypass vs. stents, timing, and recovery before flying home.",
       "status": "confirmed",
       "feeUSD": 70,
-      "roomId": "wholecare-a751e7f038090a9330",
+      "roomId": "wholecare-f29b895a138abc00b9",
       "createdAt": "2026-10-10T16:00:00.000Z",
       "confirmedAt": "2026-10-11T07:30:00.000Z"
     },
@@ -2916,7 +2916,7 @@
       "reason": "Six-week follow-up for Fatima.",
       "status": "completed",
       "feeUSD": 0,
-      "roomId": "wholecare-28e33f345689089f40",
+      "roomId": "wholecare-9a567871f3361a3e6b",
       "createdAt": "2026-09-20T10:00:00.000Z",
       "confirmedAt": "2026-09-20T12:00:00.000Z"
     },
@@ -2936,7 +2936,7 @@
       "reason": "Implant options and recovery time.",
       "status": "requested",
       "feeUSD": 110,
-      "roomId": "wholecare-6666649e6c3c2c43c9",
+      "roomId": "wholecare-122ff49449cfaafa00",
       "createdAt": "2026-10-14T09:00:00.000Z"
     }
   ],

@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, ArrowRight, ShieldCheck, ReceiptText, LockKeyhole, HeartPulse, Plane, MapPin } from "lucide-react";
@@ -119,8 +120,14 @@ function DestinationCard({ slug, onClose }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8, scale: 0.98 }}
       transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-      className="w-[min(340px,86vw)] rounded-3xl border border-white/15 bg-ink-950/70 p-5 text-white shadow-lift backdrop-blur-xl"
+      className="w-[min(340px,86vw)] overflow-hidden rounded-3xl border border-white/15 bg-ink-950/70 p-5 text-white shadow-lift backdrop-blur-xl"
     >
+      {d.image && (
+        <div className="relative -mx-5 -mt-5 mb-4 h-28 overflow-hidden">
+          <Image src={d.image} alt="" fill sizes="340px" className="object-cover object-[72%_50%]" />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-950/90 to-transparent" />
+        </div>
+      )}
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="eyebrow text-glow">Destination</p>

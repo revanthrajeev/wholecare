@@ -3,6 +3,7 @@
 export const DESTINATIONS = [
   {
     slug: "india",
+    image: "/images/destinations/india.jpg",
     country: "India",
     code: "IN",
     hub: { city: "New Delhi", lat: 28.6139, lng: 77.209 },
@@ -50,6 +51,7 @@ export const DESTINATIONS = [
   },
   {
     slug: "turkey",
+    image: "/images/destinations/turkey.jpg",
     country: "Turkey",
     code: "TR",
     hub: { city: "Istanbul", lat: 41.0082, lng: 28.9784 },
@@ -94,6 +96,7 @@ export const DESTINATIONS = [
   },
   {
     slug: "thailand",
+    image: "/images/destinations/thailand.jpg",
     country: "Thailand",
     code: "TH",
     hub: { city: "Bangkok", lat: 13.7563, lng: 100.5018 },
@@ -133,6 +136,7 @@ export const DESTINATIONS = [
   },
   {
     slug: "singapore",
+    image: "/images/destinations/singapore.jpg",
     country: "Singapore",
     code: "SG",
     hub: { city: "Singapore", lat: 1.3521, lng: 103.8198 },
@@ -172,6 +176,7 @@ export const DESTINATIONS = [
   },
   {
     slug: "mexico",
+    image: "/images/destinations/mexico.jpg",
     country: "Mexico",
     code: "MX",
     hub: { city: "Tijuana", lat: 32.5149, lng: -117.0382 },
@@ -211,6 +216,7 @@ export const DESTINATIONS = [
   },
   {
     slug: "uae",
+    image: "/images/destinations/uae.jpg",
     country: "UAE",
     code: "AE",
     hub: { city: "Dubai", lat: 25.2048, lng: 55.2708 },
@@ -249,6 +255,7 @@ export const DESTINATIONS = [
   },
   {
     slug: "malaysia",
+    image: "/images/destinations/malaysia.jpg",
     country: "Malaysia",
     code: "MY",
     hub: { city: "Kuala Lumpur", lat: 3.139, lng: 101.6869 },

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Check, AlertCircle, Plane, Landmark, Coins, Languages, Clock, Sun, ShieldCheck, ArrowRight } from "lucide-react";
 import { Breadcrumbs, Button, SectionHeading } from "@/components/ui/core";
 import { PriceRange } from "@/components/ui/client";
@@ -27,8 +28,11 @@ export default async function CountryGuide({ params }) {
 
   return (
     <>
-      <section className="relative overflow-hidden text-white" style={{ background: `radial-gradient(900px 500px at 85% 20%, ${d.accent[0]}55, transparent 60%), linear-gradient(180deg, #061a33, #04142a)` }}>
-        <div aria-hidden className="grid-fade pointer-events-none absolute inset-0" />
+      <section className="relative overflow-hidden bg-ink-950 text-white">
+        <Image src={d.image} alt={`${d.country} at dusk`} fill priority sizes="100vw" className="object-cover object-[70%_50%]" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/80 to-ink-950/10" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-transparent to-ink-950/50" />
+        <div aria-hidden className="absolute inset-0 bg-ink-950/45 md:hidden" />
         <div className="container-wc relative pb-16 pt-28 md:pt-32">
           <Breadcrumbs dark items={[{ label: "Home", href: "/" }, { label: "Destinations", href: "/countries" }, { label: d.country }]} />
           <p className="eyebrow mt-8 text-glow">Destination guide</p>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BadgeCheck, MapPin, Clock, Languages, Video, ArrowUpRight, Plane, BedDouble, HeartPulse, Bone, Activity, Ribbon, HandHeart, Brain, Baby, Scale, Eye, Smile, Sparkles, Scissors } from "lucide-react";
 import { Avatar, Badge, HospitalCover, RatingPill, SampleBadge, cn } from "@/components/ui/core";
 import { Price } from "@/components/ui/client";
@@ -144,11 +145,11 @@ export function TreatmentCard({ treatment: t }) {
 export function DestinationCard({ destination: d, from }) {
   return (
     <article className="card card-hover group relative flex h-full flex-col overflow-hidden">
-      <div className="relative h-32 overflow-hidden" style={{ background: `linear-gradient(135deg, #0b2545 0%, ${d.accent[0]} 140%)` }}>
-        <div aria-hidden className="absolute -right-8 -top-10 h-40 w-40 rounded-full border-[18px] border-white/10" />
-        <div aria-hidden className="absolute -bottom-14 left-10 h-32 w-32 rounded-full bg-white/5" />
+      <div className="relative h-40 overflow-hidden bg-ink-900" style={d.image ? undefined : { background: `linear-gradient(135deg, #0b2545 0%, ${d.accent[0]} 140%)` }}>
+        {d.image && <Image src={d.image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" className="object-cover object-[72%_50%] transition duration-500 group-hover:scale-[1.04]" />}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/20 to-transparent" />
         <p className="absolute bottom-3 left-5 font-display text-2xl font-bold text-white">{d.country}</p>
-        <span className="absolute right-4 top-4 rounded-full bg-white/15 px-2 py-0.5 text-xs font-bold tracking-widest text-white ring-1 ring-white/25">{d.code}</span>
+        <span className="absolute right-4 top-4 rounded-full bg-ink-950/40 px-2 py-0.5 text-xs font-bold tracking-widest text-white ring-1 ring-white/25 backdrop-blur">{d.code}</span>
       </div>
       <div className="flex flex-1 flex-col p-5">
         <p className="text-sm leading-relaxed text-ink-600">{d.tagline}</p>

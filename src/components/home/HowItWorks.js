@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { FileText, CheckCircle2, Video, ReceiptText, LockKeyhole, Plane, Hotel, Car, FileCheck, HeartPulse, Users, UploadCloud, Clock } from "lucide-react";
 import { cn } from "@/components/ui/core";
@@ -53,7 +54,7 @@ function Screen({ step }) {
       <div className="space-y-3">
         <div className="rounded-2xl bg-ink-900 p-4 text-white">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-ink-700 font-display font-bold">AR</span>
+            <Image src="/images/doctors/arvind-rao.jpg" alt="Dr. Arvind Rao" width={44} height={44} className="h-11 w-11 rounded-full object-cover ring-2 ring-white/20" />
             <div>
               <p className="font-semibold">Dr. Arvind Rao</p>
               <p className="text-xs text-ink-300">Cardiac Surgery · Apex Global Hospital</p>

@@ -3,6 +3,7 @@
 export const GUIDES = [
   {
     slug: "how-medical-travel-works",
+    image: "/images/guides/how-medical-travel-works.jpg",
     title: "How medical travel works, step by step",
     excerpt: "From sending your reports to flying home — what actually happens, and where things usually go wrong.",
     category: "Planning",
@@ -27,6 +28,7 @@ export const GUIDES = [
   },
   {
     slug: "questions-to-ask-before-surgery-abroad",
+    image: "/images/guides/questions-to-ask-before-surgery-abroad.jpg",
     title: "15 questions to ask before surgery abroad",
     excerpt: "A practical checklist for your consultation — about the surgeon, the price, and what happens if something goes wrong.",
     category: "Safety",
@@ -63,6 +65,7 @@ export const GUIDES = [
   },
   {
     slug: "understanding-hospital-accreditation",
+    image: "/images/guides/understanding-hospital-accreditation.jpg",
     title: "What hospital accreditation actually tells you",
     excerpt: "JCI, NABH, HA Thailand, MSQH — what these badges mean, and what they don't.",
     category: "Safety",
@@ -88,6 +91,7 @@ export const GUIDES = [
   },
   {
     slug: "reading-a-hospital-quote",
+    image: "/images/guides/reading-a-hospital-quote.jpg",
     title: "How to read and compare a hospital quote",
     excerpt: "Line items, exclusions and validity — the three things that decide whether a quote is actually cheaper.",
     category: "Costs",
@@ -111,6 +115,7 @@ export const GUIDES = [
   },
   {
     slug: "flying-after-surgery",
+    image: "/images/guides/flying-after-surgery.jpg",
     title: "Flying home after surgery: timing and precautions",
     excerpt: "Why your surgeon decides when you fly, and what helps on a long journey home.",
     category: "Recovery",
@@ -136,6 +141,7 @@ export const GUIDES = [
   },
   {
     slug: "medical-visa-basics",
+    image: "/images/guides/medical-visa-basics.jpg",
     title: "Medical visas explained: letters, companions and timelines",
     excerpt: "What an invitation letter is, who needs a medical visa, and how long to allow.",
     category: "Travel",
@@ -158,6 +164,7 @@ export const GUIDES = [
   },
   {
     slug: "when-to-get-a-second-opinion",
+    image: "/images/guides/when-to-get-a-second-opinion.jpg",
     title: "When (and how) to get a second opinion",
     excerpt: "Major surgery, a cancer diagnosis or an unclear plan? A second opinion is normal practice, not a vote of no confidence.",
     category: "Planning",

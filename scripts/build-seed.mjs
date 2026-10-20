@@ -7,7 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 3;
 
 function hash(password) {
   const salt = crypto.randomBytes(16).toString("hex");
@@ -53,7 +53,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Visa invitation letter", "Fast-track pre-op assessment", "Accommodation help"],
     description: "Heart and joint institute near Delhi's international airport, with fast-track pre-operative assessment for international patients.",
     highlights: ["Pre-op tests within 48 hours of arrival", "Off-pump bypass programme", "Minimally invasive spine unit"],
-    image: null, verified: true, lastVerified: "2026-10-02", verification: { ...ALL_CHECKS }, responseHours: 10,
+    image: "/images/hospitals/northstar-gurugram.jpg", verified: true, lastVerified: "2026-10-02", verification: { ...ALL_CHECKS }, responseHours: 10,
   },
   {
     id: "h5", name: "Meridyen Istanbul Hospital", city: "Istanbul", country: "Turkey", lat: 41.0082, lng: 28.9784,
@@ -62,7 +62,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Hotel desk", "Visa invitation letter"],
     description: "Aesthetic, dental and bariatric hospital on Istanbul's European side with an in-house transfer and hotel desk.",
     highlights: ["Surgeon-led hairline design", "In-house dental lab", "Bundled hotel and transfers"],
-    image: null, verified: true, lastVerified: "2026-09-18", verification: { ...ALL_CHECKS }, responseHours: 6,
+    image: "/images/hospitals/meridyen-istanbul.jpg", verified: true, lastVerified: "2026-09-18", verification: { ...ALL_CHECKS }, responseHours: 6,
   },
   {
     id: "h6", name: "Lykia Coast Medical", city: "Antalya", country: "Turkey", lat: 36.8969, lng: 30.7133,
@@ -71,7 +71,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Seaside recovery stays"],
     description: "Coastal hospital combining elective orthopaedic, eye and dental care with seaside recovery stays.",
     highlights: ["Seaside recovery residence", "Same-week cataract scheduling"],
-    image: null, verified: false, lastVerified: null, verification: { license: true, accreditation: false, intlDesk: true, siteVisit: false, notes: "Awaiting accreditation certificate upload." }, responseHours: null,
+    image: "/images/hospitals/lykia-antalya.jpg", verified: false, lastVerified: null, verification: { license: true, accreditation: false, intlDesk: true, siteVisit: false, notes: "Awaiting accreditation certificate upload." }, responseHours: null,
   },
   {
     id: "h7", name: "Lotus River International Hospital", city: "Bangkok", country: "Thailand", lat: 13.7563, lng: 100.5018,
@@ -80,7 +80,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Embassy liaison", "Visa invitation letter", "Halal meals"],
     description: "Bangkok international hospital with interpreters in more than a dozen languages and an embassy liaison desk.",
     highlights: ["Embassy liaison desk", "Hotel-style inpatient floors", "Dedicated Arabic-speaking team"],
-    image: null, verified: true, lastVerified: "2026-09-21", verification: { ...ALL_CHECKS }, responseHours: 14,
+    image: "/images/hospitals/lotus-river-bangkok.jpg", verified: true, lastVerified: "2026-09-21", verification: { ...ALL_CHECKS }, responseHours: 14,
   },
   {
     id: "h8", name: "Lumen Bay Medical Centre", city: "Singapore", country: "Singapore", lat: 1.2903, lng: 103.8519,
@@ -89,7 +89,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Tumour board reviews", "Visa support letter"],
     description: "Tertiary referral centre for complex oncology, neurosurgery and transplant, with weekly multidisciplinary tumour boards.",
     highlights: ["Weekly multidisciplinary tumour board", "Image-guided neurosurgery suites", "Remote records review before travel"],
-    image: null, verified: true, lastVerified: "2026-09-29", verification: { ...ALL_CHECKS }, responseHours: 20,
+    image: "/images/hospitals/lumen-bay-singapore.jpg", verified: true, lastVerified: "2026-09-29", verification: { ...ALL_CHECKS }, responseHours: 20,
   },
   {
     id: "h9", name: "Pacifica Frontera Medical", city: "Tijuana", country: "Mexico", lat: 32.5149, lng: -117.0382,
@@ -98,7 +98,7 @@ const hospitals = [
     services: ["San Diego airport shuttle", "Interpreters", "Recovery hotel", "Dietitian follow-up"],
     description: "Border-city hospital about 20 minutes from San Diego, with bariatric, dental and aesthetic programmes and a cross-border shuttle.",
     highlights: ["Cross-border shuttle from San Diego", "Six-month dietitian follow-up", "Same-time-zone care for the US West Coast"],
-    image: null, verified: true, lastVerified: "2026-09-24", verification: { ...ALL_CHECKS }, responseHours: 8,
+    image: "/images/hospitals/pacifica-tijuana.jpg", verified: true, lastVerified: "2026-09-24", verification: { ...ALL_CHECKS }, responseHours: 8,
   },
   {
     id: "h10", name: "Crescent Palm Hospital", city: "Dubai", country: "UAE", lat: 25.2048, lng: 55.2708,
@@ -107,7 +107,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Medical visa sponsorship", "Family suites"],
     description: "Premium Dubai hospital for patients who want international-standard care closer to home in the GCC.",
     highlights: ["Family suites", "Sports medicine and joint unit", "Medical visa sponsorship"],
-    image: null, verified: true, lastVerified: "2026-10-05", verification: { ...ALL_CHECKS }, responseHours: 9,
+    image: "/images/hospitals/crescent-palm-dubai.jpg", verified: true, lastVerified: "2026-10-05", verification: { ...ALL_CHECKS }, responseHours: 9,
   },
   {
     id: "h11", name: "Seri Kenanga Specialist Hospital", city: "Kuala Lumpur", country: "Malaysia", lat: 3.139, lng: 101.6869,
@@ -116,7 +116,7 @@ const hospitals = [
     services: ["Airport pickup", "Interpreters", "Visa support letter", "Halal meals", "Prayer room"],
     description: "Kuala Lumpur specialist hospital known for fertility and cardiac care, popular with Indonesian and Middle Eastern patients.",
     highlights: ["Fertility monitoring can start at home", "Muslim-friendly facilities", "Cardiac rehab gym"],
-    image: null, verified: true, lastVerified: "2026-09-27", verification: { ...ALL_CHECKS }, responseHours: 16,
+    image: "/images/hospitals/seri-kenanga-kuala-lumpur.jpg", verified: true, lastVerified: "2026-09-27", verification: { ...ALL_CHECKS }, responseHours: 16,
   },
 ].map((h) => ({ ...h, slug: slugify(h.name), accreditation: h.accreditations.join(" · "), sample: true, intlPatientDept: true, contactEmail: null, createdAt: "2026-09-01T00:00:00.000Z" }));
 
@@ -125,30 +125,30 @@ hospitals.forEach((h) => (h.contactEmail = `${HOSPITAL_LOGIN[h.id]}@demo.com`));
 
 const WEEKDAYS = [1, 2, 3, 4, 5];
 const doctors = [
-  ["d1", "Dr. Arvind Rao", "male", "/images/doctors/doctor_2.jpg", "MBBS, MS, MCh (Cardiothoracic Surgery)", "Cardiac Surgery", "h1", 22, ["English", "Hindi", "Arabic"], ["Coronary Artery Bypass (CABG)", "Heart Valve Replacement", "Minimally invasive cardiac surgery"], 70, "Cardiothoracic surgeon focused on adult bypass and valve surgery, including minimally invasive approaches."],
-  ["d2", "Dr. Priya Menon", "female", "/images/doctors/doctor_1.jpg", "MBBS, MS, MCh (Surgical Gastroenterology)", "Transplant Surgery", "h2", 18, ["English", "Tamil", "Malayalam"], ["Living-Donor Liver Transplant", "Kidney Transplant", "Hepatobiliary surgery"], 90, "Transplant surgeon who leads the living-donor programme and its donor-assessment pathway."],
-  ["d3", "Dr. Sanjay Kapoor", "male", "/images/doctors/doctor_4.jpg", "MBBS, MS (Orthopaedics), Fellowship in Arthroplasty", "Orthopedics", "h1", 16, ["English", "Hindi"], ["Total Knee Replacement", "Total Hip Replacement", "Revision arthroplasty"], 50, "Joint-replacement surgeon with a particular interest in getting patients walking early and safely."],
-  ["d4", "Dr. Leila Haddad", "female", "/images/doctors/doctor_3.jpg", "MBBS, MD (Obstetrics & Gynaecology), Fellowship in Reproductive Medicine", "Fertility (IVF)", "h3", 14, ["English", "Arabic", "French"], ["IVF (one cycle)", "ICSI", "Egg freezing"], 60, "Fertility specialist who designs split-cycle plans so part of the monitoring can happen at home."],
-  ["d5", "Dr. Ramesh Iyer", "male", "/images/doctors/doctor_6.jpg", "MBBS, MS, MCh (Neurosurgery)", "Neurosurgery", "h2", 20, ["English", "Tamil", "Hindi"], ["Brain Tumour Surgery", "Spinal decompression", "Deep brain stimulation evaluation"], 80, "Neurosurgeon working with neuro-navigation and intraoperative imaging for tumour and spine surgery."],
-  ["d6", "Dr. Neha Shah", "female", "/images/doctors/doctor_5.jpg", "MBBS, MS, MCh (Plastic Surgery)", "Cosmetic Surgery", "h3", 12, ["English", "Hindi", "Gujarati"], ["Rhinoplasty", "Liposuction", "Abdominoplasty"], 55, "Plastic surgeon focused on natural-looking facial and body contouring results."],
-  ["d7", "Dr. Meera Krishnan", "female", null, "MBBS, MD, DM (Medical Oncology)", "Oncology", "h1", 15, ["English", "Hindi", "Kannada"], ["Cancer Treatment Planning", "Immunotherapy", "Tumour board review"], 75, "Medical oncologist who chairs the hospital's weekly tumour board for international referrals."],
-  ["d8", "Dr. Kunal Desai", "male", null, "MBBS, MS, FMAS (Minimal Access Surgery)", "Bariatric Surgery", "h3", 13, ["English", "Hindi", "Marathi"], ["Gastric Sleeve (Sleeve Gastrectomy)", "Gastric Bypass"], 50, "Bariatric surgeon who pairs every operation with a structured dietitian programme."],
-  ["d9", "Dr. Vikram Sethi", "male", null, "MBBS, MS, MCh (CTVS)", "Cardiac Surgery", "h4", 24, ["English", "Hindi", "Punjabi"], ["Coronary Artery Bypass (CABG)", "Off-pump bypass", "Heart Valve Replacement"], 80, "Cardiac surgeon with a large off-pump bypass practice."],
-  ["d10", "Dr. Ananya Bose", "female", null, "MBBS, MS (Orthopaedics), Fellowship in Joint Replacement", "Orthopedics", "h4", 11, ["English", "Hindi", "Bengali"], ["Total Knee Replacement", "ACL Reconstruction"], 45, "Orthopaedic surgeon specialising in knee replacement and sports injuries."],
-  ["d11", "Dr. Emre Yıldız", "male", null, "MD (Dermatology), Hair Restoration Fellowship", "Hair Restoration", "h5", 12, ["Turkish", "English", "Arabic"], ["Hair Transplant (FUE, ~3,000 grafts)", "DHI", "Beard transplant"], 40, "Dermatologist who personally designs each hairline and supervises graft placement."],
-  ["d12", "Dr. Selin Aydın", "female", null, "DDS, PhD (Prosthodontics)", "Dental", "h5", 10, ["Turkish", "English", "German"], ["Dental Implant (single, with crown)", "All-on-4 Full-Arch Implants (per arch)", "Veneers"], 35, "Prosthodontist focused on full-arch rehabilitation and implant planning."],
-  ["d13", "Dr. Murat Kaya", "male", null, "MD (Orthopaedics & Traumatology)", "Orthopedics", "h6", 17, ["Turkish", "English", "German"], ["Total Hip Replacement", "Total Knee Replacement", "Arthroscopy"], 50, "Orthopaedic surgeon with a coastal recovery programme for joint patients."],
-  ["d14", "Dr. Deniz Arslan", "female", null, "MD (Ophthalmology)", "Ophthalmology", "h6", 13, ["Turkish", "English", "Russian"], ["Cataract Surgery (per eye)", "LASIK", "Refractive lens exchange"], 40, "Eye surgeon offering same-week cataract scheduling."],
-  ["d15", "Dr. Somchai Rattanakorn", "male", null, "MD, Board-certified Cardiothoracic Surgeon", "Cardiac Surgery", "h7", 21, ["Thai", "English"], ["Coronary Artery Bypass (CABG)", "Heart Valve Replacement"], 90, "Cardiothoracic surgeon leading the hospital's international cardiac programme."],
-  ["d16", "Dr. Nattaya Srisuk", "female", null, "MD, Board-certified Plastic Surgeon", "Cosmetic Surgery", "h7", 14, ["Thai", "English", "Japanese"], ["Rhinoplasty", "Facelift", "Blepharoplasty"], 70, "Plastic surgeon known for conservative facial surgery."],
-  ["d17", "Dr. Rachel Tan", "female", null, "MBBS, MRCP, FAMS (Medical Oncology)", "Oncology", "h8", 16, ["English", "Mandarin"], ["Cancer Treatment Planning", "Targeted therapy", "Second opinions"], 120, "Medical oncologist who reviews international referrals at the weekly tumour board."],
-  ["d18", "Dr. Daniel Lim", "male", null, "MBBS, FRCS (Neurosurgery)", "Neurosurgery", "h8", 19, ["English", "Mandarin", "Malay"], ["Brain Tumour Surgery", "Endoscopic spine surgery"], 120, "Neurosurgeon specialising in image-guided tumour surgery."],
-  ["d19", "Dr. Alejandro Ruiz", "male", null, "MD, Board-certified General & Bariatric Surgeon", "Bariatric Surgery", "h9", 15, ["Spanish", "English"], ["Gastric Sleeve (Sleeve Gastrectomy)", "Gastric Bypass", "Revision bariatric surgery"], 45, "Bariatric surgeon running a cross-border programme for US and Canadian patients."],
-  ["d20", "Dr. Sofía Morales", "female", null, "DDS (Implantology)", "Dental", "h9", 11, ["Spanish", "English"], ["Dental Implant (single, with crown)", "All-on-4 Full-Arch Implants (per arch)", "Crowns"], 30, "Implant dentist focused on two-visit full-arch treatment."],
-  ["d21", "Dr. Omar Al-Farsi", "male", null, "MBBS, FRCS (Trauma & Orthopaedics)", "Orthopedics", "h10", 18, ["Arabic", "English"], ["Total Knee Replacement", "ACL Reconstruction", "Total Hip Replacement"], 110, "Orthopaedic surgeon covering joint replacement and sports injuries for GCC patients."],
-  ["d22", "Dr. Hana Nasser", "female", null, "MBBS, MRCOG, Subspecialty in Reproductive Medicine", "Fertility (IVF)", "h10", 13, ["Arabic", "English", "French"], ["IVF (one cycle)", "ICSI", "Fertility preservation"], 100, "Reproductive medicine specialist with an Arabic-speaking fertility team."],
-  ["d23", "Dr. Aziz Rahman", "male", null, "MBBS, MS, FRCS (Cardiothoracic)", "Cardiac Surgery", "h11", 20, ["Malay", "English", "Arabic"], ["Coronary Artery Bypass (CABG)", "Heart Valve Replacement", "Coronary Angioplasty (PCI with stent)"], 70, "Cardiac surgeon leading the cardiac rehab programme for international patients."],
-  ["d24", "Dr. Mei Ling Wong", "female", null, "MBBS, MOG, Fellowship in Reproductive Medicine", "Fertility (IVF)", "h11", 12, ["English", "Mandarin", "Malay"], ["IVF (one cycle)", "ICSI", "Egg freezing"], 65, "Fertility specialist who starts monitoring remotely before patients travel."],
+  ["d1", "Dr. Arvind Rao", "male", "/images/doctors/arvind-rao.jpg", "MBBS, MS, MCh (Cardiothoracic Surgery)", "Cardiac Surgery", "h1", 22, ["English", "Hindi", "Arabic"], ["Coronary Artery Bypass (CABG)", "Heart Valve Replacement", "Minimally invasive cardiac surgery"], 70, "Cardiothoracic surgeon focused on adult bypass and valve surgery, including minimally invasive approaches."],
+  ["d2", "Dr. Priya Menon", "female", "/images/doctors/priya-menon.jpg", "MBBS, MS, MCh (Surgical Gastroenterology)", "Transplant Surgery", "h2", 18, ["English", "Tamil", "Malayalam"], ["Living-Donor Liver Transplant", "Kidney Transplant", "Hepatobiliary surgery"], 90, "Transplant surgeon who leads the living-donor programme and its donor-assessment pathway."],
+  ["d3", "Dr. Sanjay Kapoor", "male", "/images/doctors/sanjay-kapoor.jpg", "MBBS, MS (Orthopaedics), Fellowship in Arthroplasty", "Orthopedics", "h1", 16, ["English", "Hindi"], ["Total Knee Replacement", "Total Hip Replacement", "Revision arthroplasty"], 50, "Joint-replacement surgeon with a particular interest in getting patients walking early and safely."],
+  ["d4", "Dr. Leila Haddad", "female", "/images/doctors/leila-haddad.jpg", "MBBS, MD (Obstetrics & Gynaecology), Fellowship in Reproductive Medicine", "Fertility (IVF)", "h3", 14, ["English", "Arabic", "French"], ["IVF (one cycle)", "ICSI", "Egg freezing"], 60, "Fertility specialist who designs split-cycle plans so part of the monitoring can happen at home."],
+  ["d5", "Dr. Ramesh Iyer", "male", "/images/doctors/ramesh-iyer.jpg", "MBBS, MS, MCh (Neurosurgery)", "Neurosurgery", "h2", 20, ["English", "Tamil", "Hindi"], ["Brain Tumour Surgery", "Spinal decompression", "Deep brain stimulation evaluation"], 80, "Neurosurgeon working with neuro-navigation and intraoperative imaging for tumour and spine surgery."],
+  ["d6", "Dr. Neha Shah", "female", "/images/doctors/neha-shah.jpg", "MBBS, MS, MCh (Plastic Surgery)", "Cosmetic Surgery", "h3", 12, ["English", "Hindi", "Gujarati"], ["Rhinoplasty", "Liposuction", "Abdominoplasty"], 55, "Plastic surgeon focused on natural-looking facial and body contouring results."],
+  ["d7", "Dr. Meera Krishnan", "female", "/images/doctors/meera-krishnan.jpg", "MBBS, MD, DM (Medical Oncology)", "Oncology", "h1", 15, ["English", "Hindi", "Kannada"], ["Cancer Treatment Planning", "Immunotherapy", "Tumour board review"], 75, "Medical oncologist who chairs the hospital's weekly tumour board for international referrals."],
+  ["d8", "Dr. Kunal Desai", "male", "/images/doctors/kunal-desai.jpg", "MBBS, MS, FMAS (Minimal Access Surgery)", "Bariatric Surgery", "h3", 13, ["English", "Hindi", "Marathi"], ["Gastric Sleeve (Sleeve Gastrectomy)", "Gastric Bypass"], 50, "Bariatric surgeon who pairs every operation with a structured dietitian programme."],
+  ["d9", "Dr. Vikram Sethi", "male", "/images/doctors/vikram-sethi.jpg", "MBBS, MS, MCh (CTVS)", "Cardiac Surgery", "h4", 24, ["English", "Hindi", "Punjabi"], ["Coronary Artery Bypass (CABG)", "Off-pump bypass", "Heart Valve Replacement"], 80, "Cardiac surgeon with a large off-pump bypass practice."],
+  ["d10", "Dr. Ananya Bose", "female", "/images/doctors/ananya-bose.jpg", "MBBS, MS (Orthopaedics), Fellowship in Joint Replacement", "Orthopedics", "h4", 11, ["English", "Hindi", "Bengali"], ["Total Knee Replacement", "ACL Reconstruction"], 45, "Orthopaedic surgeon specialising in knee replacement and sports injuries."],
+  ["d11", "Dr. Emre Yıldız", "male", "/images/doctors/emre-yildiz.jpg", "MD (Dermatology), Hair Restoration Fellowship", "Hair Restoration", "h5", 12, ["Turkish", "English", "Arabic"], ["Hair Transplant (FUE, ~3,000 grafts)", "DHI", "Beard transplant"], 40, "Dermatologist who personally designs each hairline and supervises graft placement."],
+  ["d12", "Dr. Selin Aydın", "female", "/images/doctors/selin-aydin.jpg", "DDS, PhD (Prosthodontics)", "Dental", "h5", 10, ["Turkish", "English", "German"], ["Dental Implant (single, with crown)", "All-on-4 Full-Arch Implants (per arch)", "Veneers"], 35, "Prosthodontist focused on full-arch rehabilitation and implant planning."],
+  ["d13", "Dr. Murat Kaya", "male", "/images/doctors/murat-kaya.jpg", "MD (Orthopaedics & Traumatology)", "Orthopedics", "h6", 17, ["Turkish", "English", "German"], ["Total Hip Replacement", "Total Knee Replacement", "Arthroscopy"], 50, "Orthopaedic surgeon with a coastal recovery programme for joint patients."],
+  ["d14", "Dr. Deniz Arslan", "female", "/images/doctors/deniz-arslan.jpg", "MD (Ophthalmology)", "Ophthalmology", "h6", 13, ["Turkish", "English", "Russian"], ["Cataract Surgery (per eye)", "LASIK", "Refractive lens exchange"], 40, "Eye surgeon offering same-week cataract scheduling."],
+  ["d15", "Dr. Somchai Rattanakorn", "male", "/images/doctors/somchai-rattanakorn.jpg", "MD, Board-certified Cardiothoracic Surgeon", "Cardiac Surgery", "h7", 21, ["Thai", "English"], ["Coronary Artery Bypass (CABG)", "Heart Valve Replacement"], 90, "Cardiothoracic surgeon leading the hospital's international cardiac programme."],
+  ["d16", "Dr. Nattaya Srisuk", "female", "/images/doctors/nattaya-srisuk.jpg", "MD, Board-certified Plastic Surgeon", "Cosmetic Surgery", "h7", 14, ["Thai", "English", "Japanese"], ["Rhinoplasty", "Facelift", "Blepharoplasty"], 70, "Plastic surgeon known for conservative facial surgery."],
+  ["d17", "Dr. Rachel Tan", "female", "/images/doctors/rachel-tan.jpg", "MBBS, MRCP, FAMS (Medical Oncology)", "Oncology", "h8", 16, ["English", "Mandarin"], ["Cancer Treatment Planning", "Targeted therapy", "Second opinions"], 120, "Medical oncologist who reviews international referrals at the weekly tumour board."],
+  ["d18", "Dr. Daniel Lim", "male", "/images/doctors/daniel-lim.jpg", "MBBS, FRCS (Neurosurgery)", "Neurosurgery", "h8", 19, ["English", "Mandarin", "Malay"], ["Brain Tumour Surgery", "Endoscopic spine surgery"], 120, "Neurosurgeon specialising in image-guided tumour surgery."],
+  ["d19", "Dr. Alejandro Ruiz", "male", "/images/doctors/alejandro-ruiz.jpg", "MD, Board-certified General & Bariatric Surgeon", "Bariatric Surgery", "h9", 15, ["Spanish", "English"], ["Gastric Sleeve (Sleeve Gastrectomy)", "Gastric Bypass", "Revision bariatric surgery"], 45, "Bariatric surgeon running a cross-border programme for US and Canadian patients."],
+  ["d20", "Dr. Sofía Morales", "female", "/images/doctors/sofia-morales.jpg", "DDS (Implantology)", "Dental", "h9", 11, ["Spanish", "English"], ["Dental Implant (single, with crown)", "All-on-4 Full-Arch Implants (per arch)", "Crowns"], 30, "Implant dentist focused on two-visit full-arch treatment."],
+  ["d21", "Dr. Omar Al-Farsi", "male", "/images/doctors/omar-al-farsi.jpg", "MBBS, FRCS (Trauma & Orthopaedics)", "Orthopedics", "h10", 18, ["Arabic", "English"], ["Total Knee Replacement", "ACL Reconstruction", "Total Hip Replacement"], 110, "Orthopaedic surgeon covering joint replacement and sports injuries for GCC patients."],
+  ["d22", "Dr. Hana Nasser", "female", "/images/doctors/hana-nasser.jpg", "MBBS, MRCOG, Subspecialty in Reproductive Medicine", "Fertility (IVF)", "h10", 13, ["Arabic", "English", "French"], ["IVF (one cycle)", "ICSI", "Fertility preservation"], 100, "Reproductive medicine specialist with an Arabic-speaking fertility team."],
+  ["d23", "Dr. Aziz Rahman", "male", "/images/doctors/aziz-rahman.jpg", "MBBS, MS, FRCS (Cardiothoracic)", "Cardiac Surgery", "h11", 20, ["Malay", "English", "Arabic"], ["Coronary Artery Bypass (CABG)", "Heart Valve Replacement", "Coronary Angioplasty (PCI with stent)"], 70, "Cardiac surgeon leading the cardiac rehab programme for international patients."],
+  ["d24", "Dr. Mei Ling Wong", "female", "/images/doctors/mei-ling-wong.jpg", "MBBS, MOG, Fellowship in Reproductive Medicine", "Fertility (IVF)", "h11", 12, ["English", "Mandarin", "Malay"], ["IVF (one cycle)", "ICSI", "Egg freezing"], 65, "Fertility specialist who starts monitoring remotely before patients travel."],
 ].map(([id, name, gender, image, title, specialty, hospitalId, experienceYears, languages, procedures, consultFeeUSD, bio], i) => ({
   id, slug: slugify(name.replace(/^Dr\.\s*/, "dr ")), name, gender, image, title, specialty, hospitalId, experienceYears, languages, procedures, consultFeeUSD, bio,
   availability: { days: i % 3 === 0 ? [1, 2, 4, 5] : i % 3 === 1 ? WEEKDAYS : [1, 3, 5], slots: i % 2 === 0 ? ["09:00", "10:30", "14:00", "16:30"] : ["10:00", "11:30", "15:00", "17:00"] },
